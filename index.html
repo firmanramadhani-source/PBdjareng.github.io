@@ -4,7 +4,7 @@
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <title>
-   PB Djarem &mdash; Membentuk Juara, Membangun Bangsa
+   PB Djarum &mdash; Membentuk Juara, Membangun Bangsa
   </title>
   <link href="https://fonts.googleapis.com" rel="preconnect"/>
   <link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Oswald:wght@400;500;600&amp;family=Work+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
@@ -264,7 +264,15 @@
     transition:opacity 0.25s, color 0.25s; padding-bottom:4px; border-bottom:1px solid transparent;
   }
   .nav-links a:hover{ opacity:1; border-color: var(--accent); color: var(--accent-light); }
-  .nav-toggle{ display:none; color: var(--text); font-size:24px; cursor:pointer; background:none; border:none; }
+  .nav-toggle{
+    display:none; align-items:center; justify-content:center;
+    width:40px; height:40px; color: var(--text);
+    cursor:pointer; background:none; border:none; flex-shrink:0;
+  }
+  .nav-toggle svg line{ transition: transform 0.3s ease, opacity 0.3s ease; transform-origin: center; }
+  .nav-toggle.open #navIconTop{ transform: translateY(6px) rotate(45deg); }
+  .nav-toggle.open #navIconMid{ opacity:0; }
+  .nav-toggle.open #navIconBot{ transform: translateY(-6px) rotate(-45deg); }
 
   /* ---------- HERO ---------- */
   .hero{
@@ -1342,19 +1350,56 @@
   footer span{ color: var(--accent-light); }
 
   @media (max-width:900px){
-    .nav-links{ display:none; }
-    .nav-toggle{ display:block; }
+    nav{ padding:16px 5vw; }
+    .brand-name span{ display:none; }
+    .nav-links{
+      display:flex;
+      flex-direction:column;
+      gap:0;
+      position:absolute;
+      top:100%; left:0; right:0;
+      background: var(--card-bg);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--border);
+      box-shadow: 0 12px 30px var(--shadow);
+      max-height:0;
+      overflow:hidden;
+      opacity:0;
+      transition: max-height 0.35s ease, opacity 0.3s ease;
+    }
+    .nav-links.open{ max-height:520px; opacity:1; }
+    .nav-links a{
+      width:100%; box-sizing:border-box;
+      padding:16px 6vw;
+      border-bottom:1px solid var(--border);
+      opacity:1;
+    }
+    .nav-toggle{ display:flex; }
     .about-grid, .contact-grid, .join-box{ grid-template-columns:1fr; gap:40px; }
     .athlete-grid{ grid-template-columns:repeat(2,1fr); }
     .coach-grid{ grid-template-columns:1fr; }
     .sponsor-row{ grid-template-columns:repeat(2,1fr); }
-    section{ padding:80px 6vw; }
+    section{ padding:80px 6vw; overflow:hidden; }
+  }
+  @media (max-width:760px){
+    .hero{
+      flex-direction:column;
+      justify-content:center;
+      text-align:center;
+      padding:130px 6vw 60px;
+      min-height:auto;
+    }
+    .hero-inner{ padding-top:0; max-width:100%; }
+    .hero p{ margin-left:auto; margin-right:auto; }
+    .hero-cta{ justify-content:center; }
+    .join-box{ padding:28px 20px; }
   }
   @media (max-width:520px){
     .athlete-grid{ grid-template-columns:1fr; }
     .sponsor-row{ grid-template-columns:1fr; }
     .program-item{ grid-template-columns:1fr; }
     .theme-toggle{ bottom:16px; right:16px; width:40px; height:40px; }
+    .hero h1{ font-size:clamp(34px, 11vw, 56px); }
   }
   </style>
   <base target="_blank"/>
@@ -1373,7 +1418,7 @@
    </div>
    <div class="preloader-glow"></div>
    <div class="preloader-logo-ring">
-    <img src="logo.png" alt="Logo PB Djarem" onerror="this.style.display='none'"/>
+    <img src="logo.png" alt="Logo PB Djarum" onerror="this.style.display='none'"/>
    </div>
    <div class="preloader-title" id="preloaderTitle"></div>
    <div class="preloader-sub">Malang &middot; Jawa Timur &middot; Indonesia</div>
@@ -1395,7 +1440,7 @@
   </div>
 
   <div class="brand-name">
-    DJAREM
+    DJARUM
     <span>
       BADMINTON
     </span>
@@ -1404,12 +1449,12 @@
   <!-- LOGO -->
   <img 
     src="logo.png" 
-    alt="Logo PB Djarem"
+    alt="Logo PB Djarum"
     class="brand-logo"
   >
 
 </div>
-   <div class="nav-links">
+   <div class="nav-links" id="navLinks">
     <a href="#tentang">
      Tentang
     </a>
@@ -1432,6 +1477,13 @@
      Kontak
     </a>
    </div>
+   <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+     <line id="navIconTop" x1="3" y1="6" x2="21" y2="6"></line>
+     <line id="navIconMid" x1="3" y1="12" x2="21" y2="12"></line>
+     <line id="navIconBot" x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+   </button>
   </nav>
   <!-- HERO -->
   <header class="hero">
@@ -1447,7 +1499,7 @@
    </div>
    <!-- LOGO BESAR DI SEBELAH KANAN -->
    <div class="hero-logo-wrapper">
-    <img alt="Logo PB Djarem" class="hero-logo" src="logo.png"/>
+    <img alt="Logo PB Djarum" class="hero-logo" src="logo.png"/>
    </div>
    <div class="shuttle" style="top:16%; right:9%; width:70px;">
     <svg height="105" style="transform:rotate(18deg);" viewbox="0 0 60 90" width="70" xmlns="http://www.w3.org/2000/svg">
@@ -1478,7 +1530,7 @@
      "Bakat Diasah, Mental Ditempa, Prestasi Diraih."
     </p>
     <p>
-     PB Djarem merupakan rumah bagi lahirnya generasi atlet bulutangkis Indonesia. Melalui pembinaan yang 
+     PB Djarum merupakan rumah bagi lahirnya generasi atlet bulutangkis Indonesia. Melalui pembinaan yang 
 konsisten, disiplin, dan berorientasi pada prestasi, kami mencari dan mengembangkan talenta-talenta muda 
 untuk menjadi atlet berkarakter, bermental juara, serta siap bersaing di tingkat nasional hingga dunia.
     </p>
@@ -1506,10 +1558,10 @@ untuk menjadi atlet berkarakter, bermental juara, serta siap bersaing di tingkat
      </div>
      <div class="about-text">
       <p>
-       PB Djarem merupakan klub bulutangkis yang telah menjadi bagian dari perjalanan panjang prestasi olahraga Indonesia. Berawal dari Malang, Jawa Timur, Indonesia, PB Djarem tumbuh menjadi salah satu pusat pembinaan bulutangkis yang konsisten mencari, mengembangkan, dan melahirkan talenta-talenta terbaik bangsa dari generasi ke generasi.
+       PB Djarum merupakan klub bulutangkis yang telah menjadi bagian dari perjalanan panjang prestasi olahraga Indonesia. Berawal dari Malang, Jawa Timur, Indonesia, PB Djarum tumbuh menjadi salah satu pusat pembinaan bulutangkis yang konsisten mencari, mengembangkan, dan melahirkan talenta-talenta terbaik bangsa dari generasi ke generasi.
       </p>
       <p>
-       Dengan sistem pembinaan yang terstruktur, perjalanan seorang atlet dimulai dari pencarian bakat sejak usia dini, pengembangan kemampuan teknik dan fisik, hingga pembentukan mental serta karakter seorang juara. Lebih dari sekadar mencetak atlet berprestasi, PB Djarem berkomitmen membentuk generasi yang disiplin, tangguh, berintegritas, dan siap membawa nama Indonesia bersaing di panggung dunia.
+       Dengan sistem pembinaan yang terstruktur, perjalanan seorang atlet dimulai dari pencarian bakat sejak usia dini, pengembangan kemampuan teknik dan fisik, hingga pembentukan mental serta karakter seorang juara. Lebih dari sekadar mencetak atlet berprestasi, PB Djarum berkomitmen membentuk generasi yang disiplin, tangguh, berintegritas, dan siap membawa nama Indonesia bersaing di panggung dunia.
       </p>
       <div class="stat-row">
        <div class="stat">
@@ -1541,10 +1593,10 @@ untuk menjadi atlet berkarakter, bermental juara, serta siap bersaing di tingkat
       02 &mdash; Atlet PB Djarem
      </span>
      <h2>
-      Mengenal Para Atlet PB Djarem
+      Mengenal Para Atlet PB Djarum
      </h2>
      <p>
-      Berikut adalah para atlet yang menjadi bagian dari keluarga besar PB Djarem Dengan semangat, disiplin, dan kerja keras, mereka terus mengembangkan kemampuan serta berjuang meraih prestasi di berbagai ajang bulutangkis.
+      Berikut adalah para atlet yang menjadi bagian dari keluarga besar PB Djarum. Dengan semangat, disiplin, dan kerja keras, mereka terus mengembangkan kemampuan serta berjuang meraih prestasi di berbagai ajang bulutangkis.
      </p>
     </div>
     <div class="athlete-grid">
@@ -2043,7 +2095,7 @@ untuk menjadi atlet berkarakter, bermental juara, serta siap bersaing di tingkat
         <span>NP</span>
 
         <!-- Jika sudah ada foto, gunakan ini:
-        <img src="pelatih.jpg" alt="Pelatih PB Djarem Malang">
+        <img src="pelatih.jpg" alt="Pelatih PB Djarum Malang">
         -->
       </div>
 
@@ -2052,7 +2104,7 @@ untuk menjadi atlet berkarakter, bermental juara, serta siap bersaing di tingkat
       <div class="coach-info-single">
 
         <span class="coach-label">
-          PELATIH PB DJAREM MALANG
+          PELATIH PB DJARUM MALANG
         </span>
 
         <h3>
@@ -2113,7 +2165,7 @@ untuk menjadi atlet berkarakter, bermental juara, serta siap bersaing di tingkat
       Sponsor &amp; Mitra
      </h2>
      <p>
-      PB Djarem menjalankan program pembinaannya bersama dukungan
+      PB Djarum menjalankan program pembinaannya bersama dukungan
         berbagai sponsor dan mitra terkait.
      </p>
     </div>
@@ -2175,7 +2227,7 @@ untuk menjadi atlet berkarakter, bermental juara, serta siap bersaing di tingkat
       Bergabung Bersama Kami
      </h2>
      <p>
-      Ingin menjadi bagian dari keluarga PB Djarem Malang?
+      Ingin menjadi bagian dari keluarga PB Djarum Malang?
         Bergabunglah bersama kami untuk bermain, berlatih,
         berkembang, dan bertemu dengan sesama pecinta bulutangkis.
      </p>
@@ -2189,7 +2241,7 @@ untuk menjadi atlet berkarakter, bermental juara, serta siap bersaing di tingkat
       <div class="qr-placeholder">
        <!-- GANTI qr-whatsapp.png
                DENGAN FILE QR ANDA -->
-       <img alt="QR Code Grup WhatsApp PB Djarem Malang" src="qr-whatsapp.png"/>
+       <img alt="QR Code Grup WhatsApp PB Djarum Malang" src="qr-whatsapp.png"/>
       </div>
       <p class="qr-text">
        Scan QR Code untuk bergabung
@@ -2200,7 +2252,7 @@ untuk menjadi atlet berkarakter, bermental juara, serta siap bersaing di tingkat
       ====================== -->
      <div class="join-info">
       <span class="join-label">
-       PB DJAREM MALANG
+       PB DJARUM MALANG
       </span>
       <h3>
        Langkah Mudah Bergabung
@@ -2208,7 +2260,7 @@ untuk menjadi atlet berkarakter, bermental juara, serta siap bersaing di tingkat
       <p>
        Bergabung dengan komunitas kami sangat mudah.
           Pilih salah satu cara di bawah ini untuk masuk
-          ke grup WhatsApp PB Djarem Malang.
+          ke grup WhatsApp PB Djarum Malang.
       </p>
       <!-- LANGKAH -->
       <div class="join-steps">
@@ -2242,7 +2294,7 @@ untuk menjadi atlet berkarakter, bermental juara, serta siap bersaing di tingkat
        </div>
       </div>
       <!-- TOMBOL WHATSAPP -->
-      <a class="wa-btn" href="LINK_GRUP_WHATSAPP_ANDA" rel="noopener noreferrer" target="_blank">
+      <a class="wa-btn" href="https://chat.whatsapp.com/EF3sdLU9jHmD4upPcmNzP6" rel="noopener noreferrer" target="_blank">
        <!-- ICON WHATSAPP -->
        <svg fill="currentColor" height="21" viewbox="0 0 24 24" width="21" xmlns="http://www.w3.org/2000/svg">
         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z">
@@ -2297,7 +2349,7 @@ Jl. Papakuning, Malang, Jawa Timur, Indonesia
         Email
        </span>
        <span class="value">
-        info@pbdjarem.example
+        info@pbdjarum.example
        </span>
       </li>
       <li>
@@ -2314,7 +2366,7 @@ Jl. Papakuning, Malang, Jawa Timur, Indonesia
       </iframe>
      </div>
      <footer>
-      &copy; 2026 PB DJAREM &mdash;
+      &copy; 2026 PB DJARUM &mdash;
       <span>
        Bakat Diasah, Prestasi Diraih
       </span>
@@ -2331,7 +2383,7 @@ Jl. Papakuning, Malang, Jawa Timur, Indonesia
      const titleEl = document.getElementById('preloaderTitle');
      const words = [
        { text: 'PB', accent: false },
-       { text: 'DJAREM', accent: true },
+       { text: 'DJARUM', accent: true },
        { text: 'MALANG', accent: false }
      ];
      let delay = 0.2;
@@ -2377,6 +2429,34 @@ Jl. Papakuning, Malang, Jawa Timur, Indonesia
        // fallback in case 'load' never fires (missing images etc.)
        setTimeout(reveal, 4500);
      }
+   })();
+
+   // ---- Mobile nav menu toggle ----
+   (function(){
+     const navToggle = document.getElementById('navToggle');
+     const navLinks = document.getElementById('navLinks');
+     if (!navToggle || !navLinks) return;
+
+     function closeMenu(){
+       navLinks.classList.remove('open');
+       navToggle.classList.remove('open');
+       navToggle.setAttribute('aria-expanded', 'false');
+     }
+     function toggleMenu(){
+       const isOpen = navLinks.classList.toggle('open');
+       navToggle.classList.toggle('open', isOpen);
+       navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+     }
+
+     navToggle.addEventListener('click', toggleMenu);
+     navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+     document.addEventListener('click', (e) => {
+       if (!navLinks.classList.contains('open')) return;
+       if (!navLinks.contains(e.target) && !navToggle.contains(e.target)) closeMenu();
+     });
+     window.addEventListener('resize', () => {
+       if (window.innerWidth > 900) closeMenu();
+     });
    })();
 
    // ---- Theme toggle (unchanged behaviour) ----
