@@ -287,7 +287,6 @@
   .court-lines{
     position:absolute; inset:0; pointer-events:none; opacity:0.3;
   }
-  .hero-inner{ position:relative; z-index:2; max-width:760px; padding-top:70px; }
   .hero .eyebrow{ color: var(--accent-light); }
   .hero h1{
     font-size:clamp(44px, 8vw, 96px);
@@ -295,83 +294,66 @@
     margin:18px 0 22px;
     color: var(--text-heading);
   }
-  .hero {
-  position: relative;
-  overflow: hidden;
-}
 
-/* LOGO DI SEBELAH KANAN */
-.hero-logo-wrapper {
-  position: absolute;
-  right: 8%;
-  top: 50%;
-  transform: translateY(-50%);
-
-  width: 360px;
-  height: 360px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  z-index: 2;
-}
-
-/* GAMBAR LOGO */
-.hero-logo {
-  width: 100%;
-  height: 100%;
-
-  object-fit: contain;
-
-  filter:
-    drop-shadow(0 15px 30px rgba(124, 58, 237, 0.25));
-}
-.hero-inner {
-  position: relative;
-  z-index: 3;
-
-  width: 55%;
-  max-width: 750px;
-}
-@media (max-width: 900px) {
-
-  .hero-logo-wrapper {
-    right: 5%;
-    top: 55%;
-    width: 250px;
-    height: 250px;
-
-    opacity: 0.45;
+  /* LOGO DI SEBELAH KANAN (desktop) */
+  .hero-logo-wrapper{
+    position:absolute;
+    right:8%; top:50%;
+    transform:translateY(-50%);
+    width:340px; height:340px;
+    display:flex; align-items:center; justify-content:center;
+    z-index:1;
+  }
+  .hero-logo{
+    width:100%; height:100%;
+    object-fit:contain;
+    filter: drop-shadow(0 15px 30px rgba(124,58,237,0.25));
+  }
+  .hero-inner{
+    position:relative; z-index:2;
+    width:55%; max-width:720px;
+    padding-top:70px;
   }
 
-  .hero-inner {
-    width: 75%;
-  }
-}
-
-@media (max-width: 600px) {
-
-  .hero-logo-wrapper {
-    position: relative;
-
-    right: auto;
-    top: auto;
-
-    transform: none;
-
-    width: 180px;
-    height: 180px;
-
-    margin: 30px auto 20px;
-
-    opacity: 1;
+  @media (max-width:900px){
+    .hero-logo-wrapper{
+      right:4%; top:55%;
+      width:220px; height:220px;
+      opacity:0.4;
+    }
+    .hero-inner{ width:68%; }
   }
 
-  .hero-inner {
-    width: 100%;
+  @media (max-width:760px){
+    .hero{
+      flex-direction:column;
+      justify-content:center;
+      text-align:center;
+      padding:130px 6vw 60px;
+      min-height:auto;
+      gap:8px;
+    }
+    .hero-logo-wrapper{
+      position:relative;
+      inset:auto; right:auto; top:auto; transform:none;
+      width:150px; height:150px;
+      opacity:1;
+      margin:0 auto 22px;
+      z-index:2;
+    }
+    .hero-inner{
+      width:100%; max-width:100%;
+      padding-top:0;
+    }
+    .hero p{ margin-left:auto; margin-right:auto; }
+    .hero-cta{ justify-content:center; }
   }
-}
+
+  @media (max-width:420px){
+    .hero{ padding:120px 6vw 50px; }
+    .hero-logo-wrapper{ width:120px; height:120px; margin-bottom:16px; }
+    .hero h1{ font-size:clamp(32px, 11vw, 48px); }
+  }
   .hero h1 em{ font-style:normal; color: var(--accent); text-shadow: 0 0 40px rgba(124,58,237,0.4); }
   .slogan{
     font-family:'Oswald', sans-serif; font-weight:500; font-size:19px;
@@ -433,33 +415,81 @@
   /* ---------- ATLET ---------- */
   .athletes{ background: var(--bg); }
   .athletes .sec-head p{ color: var(--muted); }
-  .athlete-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:2px; background: var(--border); }
+  .athlete-grid{
+    display:grid; grid-template-columns:repeat(4,1fr);
+    gap:20px;
+  }
   .athlete-card{
-    background: var(--surface);
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
     padding:0; overflow:hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position:relative;
+    transition: transform 0.4s cubic-bezier(.2,.8,.2,1), box-shadow 0.4s ease, border-color 0.4s ease;
   }
   .athlete-card:hover{
-    transform: translateY(-4px);
-    box-shadow: 0 8px 30px var(--shadow-accent);
+    transform: translateY(-8px) scale(1.015);
+    box-shadow: 0 16px 40px var(--shadow-accent);
+    border-color: var(--border-hover);
     z-index: 2;
   }
   .athlete-photo{
     aspect-ratio:3/4; width:100%;
     display:flex; align-items:center; justify-content:center;
-    font-family:'Anton'; font-size:32px; color: var(--border);
+    font-family:'Anton'; font-size:38px; letter-spacing:1px; color:#fff;
     position:relative;
+    overflow:hidden;
+    background: linear-gradient(155deg, rgba(124,58,237,0.55) 0%, rgba(10,10,15,0.9) 78%);
+  }
+  .athlete-photo::before{
+    content:'';
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(255,255,255,0.035) 0 2px, transparent 2px 14px);
+    opacity:0.6;
   }
   .athlete-photo::after{
-    content:''; position:absolute; inset:0;
-    background:linear-gradient(160deg, rgba(124,58,237,0.2) 0%, var(--surface) 75%);
-    opacity:0.5;
+    content:'';
+    position:absolute; left:50%; bottom:-40%;
+    width:140%; height:140%;
+    transform: translateX(-50%);
+    background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 65%);
+    transition: bottom 0.5s ease;
   }
-  .athlete-photo span{ position:relative; z-index:1; }
-  .athlete-info{ padding:14px 16px 18px; }
-  .athlete-info h4{ font-family:'Oswald'; font-weight:600; font-size:14px; letter-spacing:0.5px; color: var(--text-heading); }
-  .athlete-info .class{ color: var(--accent-light); font-family:'Oswald'; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; margin-top:4px; }
+  .athlete-card:hover .athlete-photo::after{ bottom:-15%; }
+  .athlete-photo span{
+    position:relative; z-index:1;
+    text-shadow: 0 4px 18px rgba(0,0,0,0.4);
+    transition: transform 0.4s ease;
+  }
+  .athlete-card:hover .athlete-photo span{ transform: scale(1.08); }
+  .athlete-shine{
+    position:absolute; top:0; left:-60%;
+    width:40%; height:100%;
+    background: linear-gradient(115deg, transparent 0%, rgba(255,255,255,0.25) 50%, transparent 100%);
+    transform: skewX(-18deg);
+    transition: left 0.7s ease;
+    pointer-events:none;
+  }
+  .athlete-card:hover .athlete-shine{ left:130%; }
+  .athlete-info{ padding:16px 18px 20px; position:relative; }
+  .athlete-info h4{ font-family:'Oswald'; font-weight:600; font-size:14.5px; letter-spacing:0.5px; color: var(--text-heading); }
+  .athlete-info .class{
+    display:inline-block;
+    margin-top:8px;
+    padding:4px 10px;
+    border-radius:20px;
+    background: rgba(124,58,237,0.12);
+    color: var(--accent-light);
+    font-family:'Oswald'; font-size:10.5px; letter-spacing:1.5px; text-transform:uppercase;
+  }
   .placeholder-note{ margin-top:30px; font-size:13px; color: var(--muted-light); font-style:italic; }
+  @media (max-width:760px){
+    .athlete-grid{ grid-template-columns:repeat(2,1fr); gap:14px; }
+  }
+  @media (max-width:420px){
+    .athlete-grid{ grid-template-columns:1fr; }
+  }
 
   /* ---------- PROGRAM ---------- */
   .program{ background: var(--surface); }
@@ -1376,30 +1406,17 @@
     }
     .nav-toggle{ display:flex; }
     .about-grid, .contact-grid, .join-box{ grid-template-columns:1fr; gap:40px; }
-    .athlete-grid{ grid-template-columns:repeat(2,1fr); }
     .coach-grid{ grid-template-columns:1fr; }
     .sponsor-row{ grid-template-columns:repeat(2,1fr); }
     section{ padding:80px 6vw; overflow:hidden; }
   }
   @media (max-width:760px){
-    .hero{
-      flex-direction:column;
-      justify-content:center;
-      text-align:center;
-      padding:130px 6vw 60px;
-      min-height:auto;
-    }
-    .hero-inner{ padding-top:0; max-width:100%; }
-    .hero p{ margin-left:auto; margin-right:auto; }
-    .hero-cta{ justify-content:center; }
     .join-box{ padding:28px 20px; }
   }
   @media (max-width:520px){
-    .athlete-grid{ grid-template-columns:1fr; }
     .sponsor-row{ grid-template-columns:1fr; }
     .program-item{ grid-template-columns:1fr; }
     .theme-toggle{ bottom:16px; right:16px; width:40px; height:40px; }
-    .hero h1{ font-size:clamp(34px, 11vw, 56px); }
   }
   </style>
   <base target="_blank"/>
@@ -1596,7 +1613,7 @@ untuk menjadi atlet berkarakter, bermental juara, serta siap bersaing di tingkat
       Mengenal Para Atlet PB Djarum
      </h2>
      <p>
-      Berikut adalah para atlet yang menjadi bagian dari keluarga besar PB Djarum. Dengan semangat, disiplin, dan kerja keras, mereka terus mengembangkan kemampuan serta berjuang meraih prestasi di berbagai ajang bulutangkis.
+      Berikut adalah beberapa atlet yang menjadi bagian dari keluarga besar PB Djarum. Dengan semangat, disiplin, dan kerja keras, mereka terus mengembangkan kemampuan serta berjuang meraih prestasi di berbagai ajang bulutangkis.
      </p>
     </div>
     <div class="athlete-grid">
@@ -1605,6 +1622,7 @@ untuk menjadi atlet berkarakter, bermental juara, serta siap bersaing di tingkat
        <span>
         AR
        </span>
+       <div class="athlete-shine"></div>
       </div>
       <div class="athlete-info">
        <h4>
@@ -1620,6 +1638,7 @@ untuk menjadi atlet berkarakter, bermental juara, serta siap bersaing di tingkat
        <span>
         BS
        </span>
+       <div class="athlete-shine"></div>
       </div>
       <div class="athlete-info">
        <h4>
@@ -1635,6 +1654,7 @@ untuk menjadi atlet berkarakter, bermental juara, serta siap bersaing di tingkat
        <span>
         CD
        </span>
+       <div class="athlete-shine"></div>
       </div>
       <div class="athlete-info">
        <h4>
@@ -1650,190 +1670,11 @@ untuk menjadi atlet berkarakter, bermental juara, serta siap bersaing di tingkat
        <span>
         EF
        </span>
+       <div class="athlete-shine"></div>
       </div>
       <div class="athlete-info">
        <h4>
         Nama Atlet 4
-       </h4>
-       <div class="class">
-        Kelas Utama
-       </div>
-      </div>
-     </div>
-     <div class="athlete-card">
-      <div class="athlete-photo">
-       <span>
-        GH
-       </span>
-      </div>
-      <div class="athlete-info">
-       <h4>
-        Nama Atlet 5
-       </h4>
-       <div class="class">
-        Kelas Pemula
-       </div>
-      </div>
-     </div>
-     <div class="athlete-card">
-      <div class="athlete-photo">
-       <span>
-        IJ
-       </span>
-      </div>
-      <div class="athlete-info">
-       <h4>
-        Nama Atlet 6
-       </h4>
-       <div class="class">
-        Kelas Remaja
-       </div>
-      </div>
-     </div>
-     <div class="athlete-card">
-      <div class="athlete-photo">
-       <span>
-        KL
-       </span>
-      </div>
-      <div class="athlete-info">
-       <h4>
-        Nama Atlet 7
-       </h4>
-       <div class="class">
-        Kelas Taruna
-       </div>
-      </div>
-     </div>
-     <div class="athlete-card">
-      <div class="athlete-photo">
-       <span>
-        MN
-       </span>
-      </div>
-      <div class="athlete-info">
-       <h4>
-        Nama Atlet 8
-       </h4>
-       <div class="class">
-        Kelas Utama
-       </div>
-      </div>
-     </div>
-     <div class="athlete-card">
-      <div class="athlete-photo">
-       <span>
-        OP
-       </span>
-      </div>
-      <div class="athlete-info">
-       <h4>
-        Nama Atlet 9
-       </h4>
-       <div class="class">
-        Kelas Pemula
-       </div>
-      </div>
-     </div>
-     <div class="athlete-card">
-      <div class="athlete-photo">
-       <span>
-        QR
-       </span>
-      </div>
-      <div class="athlete-info">
-       <h4>
-        Nama Atlet 10
-       </h4>
-       <div class="class">
-        Kelas Remaja
-       </div>
-      </div>
-     </div>
-     <div class="athlete-card">
-      <div class="athlete-photo">
-       <span>
-        ST
-       </span>
-      </div>
-      <div class="athlete-info">
-       <h4>
-        Nama Atlet 11
-       </h4>
-       <div class="class">
-        Kelas Taruna
-       </div>
-      </div>
-     </div>
-     <div class="athlete-card">
-      <div class="athlete-photo">
-       <span>
-        UV
-       </span>
-      </div>
-      <div class="athlete-info">
-       <h4>
-        Nama Atlet 12
-       </h4>
-       <div class="class">
-        Kelas Utama
-       </div>
-      </div>
-     </div>
-     <div class="athlete-card">
-      <div class="athlete-photo">
-       <span>
-        WX
-       </span>
-      </div>
-      <div class="athlete-info">
-       <h4>
-        Nama Atlet 13
-       </h4>
-       <div class="class">
-        Kelas Pemula
-       </div>
-      </div>
-     </div>
-     <div class="athlete-card">
-      <div class="athlete-photo">
-       <span>
-        YZ
-       </span>
-      </div>
-      <div class="athlete-info">
-       <h4>
-        Nama Atlet 14
-       </h4>
-       <div class="class">
-        Kelas Remaja
-       </div>
-      </div>
-     </div>
-     <div class="athlete-card">
-      <div class="athlete-photo">
-       <span>
-        AB
-       </span>
-      </div>
-      <div class="athlete-info">
-       <h4>
-        Nama Atlet 15
-       </h4>
-       <div class="class">
-        Kelas Taruna
-       </div>
-      </div>
-     </div>
-     <div class="athlete-card">
-      <div class="athlete-photo">
-       <span>
-        CD
-       </span>
-      </div>
-      <div class="athlete-info">
-       <h4>
-        Nama Atlet 16
        </h4>
        <div class="class">
         Kelas Utama
