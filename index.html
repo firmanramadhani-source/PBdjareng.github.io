@@ -261,6 +261,12 @@
   }
   .brand-name{ color: var(--text-heading); font-family:'Oswald'; font-weight:600; letter-spacing:1.5px; font-size:15px; }
   .brand-name span{ color: var(--accent-light); }
+  .brand-logo{
+    width:38px; height:38px;
+    object-fit:contain;
+    display:block;
+    flex-shrink:0;
+  }
   .nav-links{ display:flex; gap:34px; }
   .nav-links a{
     color: var(--text); font-family:'Oswald'; font-size:12.5px;
@@ -363,8 +369,17 @@
     font-family:'Oswald', sans-serif; font-weight:500; font-size:19px;
     letter-spacing:1px; color: var(--accent-light); margin-bottom:26px;
   }
-  .hero p{ color: var(--muted); font-size:16.5px; max-width:560px; margin-bottom:38px; }
-  .hero-cta{ display:flex; gap:16px; flex-wrap:wrap; }
+  .hero p{ color: var(--muted); font-size:16.5px; max-width:560px; margin-bottom:22px; }
+  .hero-subhead{
+    font-family:'Oswald', sans-serif;
+    font-weight:600;
+    font-size:15.5px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color: var(--text-heading);
+    margin:26px 0 10px;
+  }
+  .hero-cta{ display:flex; gap:16px; flex-wrap:wrap; margin-top:16px; }
   .btn{
     display:inline-block; padding:15px 30px;
     font-family:'Oswald'; letter-spacing:2px; font-size:12.5px; text-transform:uppercase;
@@ -416,86 +431,85 @@
   .stat b{ font-family:'Anton'; font-size:38px; display:block; color: var(--accent); }
   .stat span{ font-family:'Oswald'; font-size:12px; letter-spacing:1.5px; text-transform:uppercase; color: var(--muted-light); }
 
-  /* ---------- ATLET ---------- */
+  /* ---------- ATLET / FOTO BERSAMA ---------- */
   .athletes{ background: var(--bg); }
   .athletes .sec-head p{ color: var(--muted); }
-  .athlete-grid{
-    display:grid; grid-template-columns:repeat(6,1fr);
-    gap:14px;
-    max-width:760px;
-  }
-  .athlete-card{
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding:0; overflow:hidden;
+  .team-photo-wrap{
     position:relative;
-    transition: transform 0.4s cubic-bezier(.2,.8,.2,1), box-shadow 0.4s ease, border-color 0.4s ease;
-  }
-  .athlete-card:hover{
-    transform: translateY(-6px) scale(1.02);
-    box-shadow: 0 12px 28px var(--shadow-accent);
-    border-color: var(--border-hover);
-    z-index: 2;
-  }
-  .athlete-photo{
-    aspect-ratio:1/1; width:100%;
-    display:flex; align-items:center; justify-content:center;
-    font-family:'Anton'; font-size:20px; letter-spacing:0.5px; color:#fff;
-    position:relative;
+    width:100%;
+    max-width:1180px;
+    margin:0 auto;
+    border-radius:18px;
     overflow:hidden;
-    background: linear-gradient(155deg, rgba(124,58,237,0.55) 0%, rgba(10,10,15,0.9) 78%);
+    border:1px solid var(--border);
+    box-shadow: 0 25px 60px var(--shadow);
+    background: var(--surface);
   }
-  .athlete-photo::before{
+  .team-photo-frame{
+    position:relative;
+    width:100%;
+    aspect-ratio:16/8;
+    overflow:hidden;
+  }
+  .team-photo-frame img{
+    width:100%; height:100%;
+    object-fit:cover;
+    display:block;
+    transition: transform 0.7s cubic-bezier(.2,.8,.2,1);
+  }
+  .team-photo-wrap:hover .team-photo-frame img{
+    transform: scale(1.045);
+  }
+  .team-photo-frame::after{
     content:'';
     position:absolute; inset:0;
-    background-image:
-      repeating-linear-gradient(45deg, rgba(255,255,255,0.035) 0 2px, transparent 2px 14px);
-    opacity:0.6;
-  }
-  .athlete-photo::after{
-    content:'';
-    position:absolute; left:50%; bottom:-40%;
-    width:140%; height:140%;
-    transform: translateX(-50%);
-    background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 65%);
-    transition: bottom 0.5s ease;
-  }
-  .athlete-card:hover .athlete-photo::after{ bottom:-15%; }
-  .athlete-photo span{
-    position:relative; z-index:1;
-    text-shadow: 0 4px 18px rgba(0,0,0,0.4);
-    transition: transform 0.4s ease;
-  }
-  .athlete-card:hover .athlete-photo span{ transform: scale(1.08); }
-  .athlete-shine{
-    position:absolute; top:0; left:-60%;
-    width:40%; height:100%;
-    background: linear-gradient(115deg, transparent 0%, rgba(255,255,255,0.25) 50%, transparent 100%);
-    transform: skewX(-18deg);
-    transition: left 0.7s ease;
+    background: linear-gradient(180deg, transparent 55%, rgba(0,0,0,0.55) 100%);
     pointer-events:none;
   }
-  .athlete-card:hover .athlete-shine{ left:130%; }
-  .athlete-info{ padding:8px 8px 10px; position:relative; text-align:center; }
-  .athlete-info h4{ font-family:'Oswald'; font-weight:600; font-size:11px; letter-spacing:0.3px; color: var(--text-heading); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .athlete-info .class{
-    display:inline-block;
-    margin-top:5px;
-    padding:2px 7px;
+  .team-photo-glow{
+    position:absolute; inset:-2px;
     border-radius:20px;
-    background: rgba(124,58,237,0.12);
-    color: var(--accent-light);
-    font-family:'Oswald'; font-size:8.5px; letter-spacing:1px; text-transform:uppercase;
+    padding:2px;
+    background: linear-gradient(120deg, rgba(124,58,237,0.6), transparent 35%, transparent 65%, rgba(167,139,250,0.5));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events:none;
+    opacity:0.7;
   }
-  .placeholder-note{ margin-top:30px; font-size:13px; color: var(--muted-light); font-style:italic; }
+  .team-photo-caption{
+    position:absolute; left:0; right:0; bottom:0;
+    padding:22px 28px;
+    display:flex; align-items:flex-end; justify-content:space-between; gap:16px;
+    flex-wrap:wrap;
+    z-index:2;
+  }
+  .team-photo-caption h4{
+    font-family:'Oswald'; font-weight:600; letter-spacing:1px;
+    font-size:15px; text-transform:uppercase; color:#f8fafc;
+  }
+  .team-photo-caption span{
+    font-family:'Oswald'; font-size:11.5px; letter-spacing:1.5px;
+    text-transform:uppercase; color: rgba(255,255,255,0.75);
+  }
+  .team-photo-badge{
+    display:inline-flex; align-items:center; gap:6px;
+    padding:7px 14px;
+    border-radius:30px;
+    background: rgba(124,58,237,0.25);
+    border:1px solid rgba(167,139,250,0.4);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    font-family:'Oswald'; font-size:11px; letter-spacing:1.5px;
+    text-transform:uppercase; color:#e9e3ff;
+  }
+  .team-photo-badge::before{
+    content:''; width:6px; height:6px; border-radius:50%;
+    background: #a78bfa; box-shadow:0 0 8px #a78bfa;
+  }
   @media (max-width:760px){
-    .athlete-grid{ grid-template-columns:repeat(4,1fr); gap:10px; max-width:100%; }
-  }
-  @media (max-width:420px){
-    .athlete-grid{ grid-template-columns:repeat(4,1fr); gap:8px; }
-    .athlete-info h4{ font-size:9.5px; }
-    .athlete-info .class{ display:none; }
+    .team-photo-frame{ aspect-ratio:4/3; }
+    .team-photo-caption{ padding:16px 18px; }
   }
 
   /* ---------- PROGRAM ---------- */
@@ -520,7 +534,94 @@
   .program-item p{ color: var(--muted); font-size:15.5px; max-width:600px; }
   .program-coach{ margin-top:10px; font-family:'Oswald'; font-size:12px; letter-spacing:1.5px; text-transform:uppercase; color: var(--accent-light); }
 
-  /* ---------- PELATIH ---------- */
+  /* ---------- FAQ ---------- */
+  .faq{ background: var(--bg); }
+  .faq .sec-head p{ color: var(--muted); }
+  .faq-list{
+    max-width:820px;
+    margin:0 auto;
+    display:flex; flex-direction:column;
+    gap:14px;
+  }
+  .faq-item{
+    border:1px solid var(--border);
+    border-radius:14px;
+    background: var(--card-bg);
+    overflow:hidden;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  }
+  .faq-item:hover{
+    border-color: var(--border-hover);
+    box-shadow: 0 10px 30px var(--shadow-accent);
+  }
+  .faq-item.active{
+    border-color: var(--accent);
+    box-shadow: 0 10px 34px var(--shadow-accent);
+  }
+  .faq-question{
+    display:flex; align-items:center; gap:20px;
+    width:100%;
+    padding:22px 24px;
+    background:none; border:none; cursor:pointer;
+    text-align:left;
+    color: var(--text-heading);
+    font-family:'Work Sans', sans-serif;
+  }
+  .faq-num{
+    flex-shrink:0;
+    width:38px; height:38px;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background: rgba(124,58,237,0.12);
+    border:1px solid rgba(167,139,250,0.35);
+    color: var(--accent-light);
+    font-family:'Oswald'; font-weight:600; font-size:13px;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  }
+  .faq-item.active .faq-num{
+    background: var(--accent);
+    color:#fff;
+    transform: scale(1.08);
+  }
+  .faq-question span.faq-q-text{
+    flex:1;
+    font-size:17px; font-weight:600;
+    letter-spacing:0.2px;
+  }
+  .faq-icon{
+    flex-shrink:0;
+    width:28px; height:28px;
+    display:flex; align-items:center; justify-content:center;
+    border-radius:50%;
+    border:1px solid var(--border);
+    color: var(--accent-light);
+    transition: transform 0.35s cubic-bezier(.2,.8,.2,1), background 0.3s ease, border-color 0.3s ease;
+  }
+  .faq-item.active .faq-icon{
+    transform: rotate(135deg);
+    background: var(--accent);
+    color:#fff;
+    border-color: var(--accent);
+  }
+  .faq-answer{
+    max-height:0;
+    overflow:hidden;
+    transition: max-height 0.4s cubic-bezier(.2,.8,.2,1);
+  }
+  .faq-answer-inner{
+    padding:0 24px 24px 82px;
+    color: var(--muted);
+    font-size:15px;
+    line-height:1.75;
+  }
+  @media (max-width:600px){
+    .faq-question{ padding:18px; gap:14px; }
+    .faq-question span.faq-q-text{ font-size:15.5px; }
+    .faq-answer-inner{ padding:0 18px 20px 62px; font-size:14px; }
+    .faq-num{ width:32px; height:32px; font-size:12px; }
+  }
+
+  /* ---------- PELATIH (legacy, tidak dipakai lagi) ---------- */
   .coaches{ background: var(--bg); }
   .coach-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:36px; }
   .coach-card{
@@ -1051,226 +1152,6 @@
   margin-bottom: 6px;
 }
 
-
-/* =========================================
-   TIM KEPELATIHAN
-========================================= */
-
-.coaches {
-  padding: 70px 0;
-}
-
-.coaches .sec-head {
-  max-width: 750px;
-  margin: 0 auto 34px;
-}
-
-/* BOX PELATIH */
-.coach-single {
-  max-width: 560px;
-  margin: 0 auto;
-
-  padding: 28px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  text-align: center;
-
-  border-radius: 16px;
-
-  background: rgba(255, 255, 255, 0.03);
-
-  border: 1px solid rgba(167, 139, 250, 0.2);
-}
-
-/* FOTO */
-.coach-photo-large {
-  width: 110px;
-  height: 110px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  margin-bottom: 16px;
-
-  border-radius: 50%;
-
-  overflow: hidden;
-
-  background: rgba(124, 58, 237, 0.12);
-
-  border: 2px solid rgba(167, 139, 250, 0.4);
-}
-
-.coach-photo-large img {
-  width: 100%;
-  height: 100%;
-
-  object-fit: cover;
-}
-
-.coach-photo-large span {
-  font-size: 26px;
-  font-weight: 700;
-
-  color: #c4b5fd;
-}
-
-/* INFO */
-.coach-info-single {
-  width: 100%;
-  max-width: 460px;
-}
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.brand-logo {
-  width: 38px;
-  height: 38px;
-
-  object-fit: contain;
-
-  display: block;
-}
-
-.coach-label {
-  display: inline-block;
-
-  margin-bottom: 8px;
-
-  font-size: 10px;
-  font-weight: 700;
-
-  letter-spacing: 2px;
-
-  color: #a78bfa;
-}
-
-.coach-info-single h3 {
-  margin: 0 0 6px;
-
-  font-size: 20px;
-}
-
-.role {
-  display: inline-block;
-
-  padding: 5px 12px;
-
-  margin-bottom: 12px;
-
-  border-radius: 20px;
-
-  background: rgba(124, 58, 237, 0.12);
-
-  color: #c4b5fd;
-
-  font-size: 11px;
-  font-weight: 600;
-}
-
-.coach-info-single p {
-  margin: 0 auto 16px;
-
-  font-size: 14px;
-  line-height: 1.7;
-
-  color: var(--muted-light);
-}
-
-/* KEAHLIAN */
-.coach-skills {
-  display: grid;
-
-  grid-template-columns: repeat(2, 1fr);
-
-  gap: 8px;
-
-  margin-top: 10px;
-
-  text-align: left;
-}
-
-.skill-item {
-  display: flex;
-
-  align-items: center;
-
-  gap: 8px;
-
-  padding: 10px;
-
-  border-radius: 8px;
-
-  background: rgba(124, 58, 237, 0.06);
-
-  border: 1px solid rgba(167, 139, 250, 0.1);
-}
-
-.skill-item strong {
-  color: #a78bfa;
-  font-size: 12px;
-}
-
-.skill-item span {
-  font-size: 12px;
-}
-@media (max-width: 600px) {
-
-  .coach-single {
-    padding: 22px 16px;
-  }
-
-  .coach-skills {
-    grid-template-columns: 1fr;
-  }
-
-  .coach-photo-large {
-    width: 90px;
-    height: 150px;
-  }
-
-  .coach-info-single h3 {
-    font-size: 25px;
-  }
-
-}
-
-/* =========================================
-   RESPONSIVE
-========================================= */
-
-@media (max-width: 800px) {
-
-  .coach-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .program-item {
-    grid-template-columns: 1fr;
-
-    gap: 20px;
-  }
-
-}
-
-@media (max-width: 500px) {
-
-  .program-item {
-    padding: 25px 20px;
-  }
-
-  .program-content h3 {
-    font-size: 20px;
-  }
-
-}
   .wa-btn:hover{
     background: #6d28d9;
     transform: translateY(-2px);
@@ -1319,6 +1200,54 @@
     transform: translateY(-2px);
   }
   .back-to-top svg{ flex-shrink:0; }
+
+  /* ---------- SCROLL REVEAL ---------- */
+  .reveal-on-scroll{
+    opacity:0;
+    transform: translateY(28px);
+    transition: opacity 0.8s cubic-bezier(.2,.8,.2,1), transform 0.8s cubic-bezier(.2,.8,.2,1);
+  }
+  .reveal-on-scroll.in-view{
+    opacity:1;
+    transform: translateY(0);
+  }
+  .reveal-on-scroll.delay-1{ transition-delay: 0.08s; }
+  .reveal-on-scroll.delay-2{ transition-delay: 0.16s; }
+  .reveal-on-scroll.delay-3{ transition-delay: 0.24s; }
+  .reveal-on-scroll.delay-4{ transition-delay: 0.32s; }
+
+  /* ---------- CURSOR GLOW (desktop) ---------- */
+  .cursor-glow{
+    position:fixed;
+    top:0; left:0;
+    width:420px; height:420px;
+    border-radius:50%;
+    background: radial-gradient(circle, rgba(124,58,237,0.10) 0%, transparent 70%);
+    pointer-events:none;
+    z-index:1;
+    transform: translate(-50%,-50%);
+    transition: opacity 0.3s ease;
+    opacity:0;
+  }
+  @media (max-width:900px){ .cursor-glow{ display:none; } }
+
+  /* ---------- BUTTON RIPPLE ---------- */
+  .btn, .wa-btn{ position:relative; overflow:hidden; }
+  .ripple{
+    position:absolute;
+    border-radius:50%;
+    background: rgba(255,255,255,0.5);
+    transform: scale(0);
+    animation: rippleAnim 0.6s ease-out;
+    pointer-events:none;
+  }
+  @keyframes rippleAnim{
+    to{ transform: scale(2.6); opacity:0; }
+  }
+
+  /* ---------- STAT COUNTER GLOW ---------- */
+  .stat b{ transition: text-shadow 0.4s ease; }
+  .stat.counted b{ text-shadow: 0 0 22px rgba(124,58,237,0.55); }
 
   @media (max-width:900px){
     nav{ padding:16px 5vw; }
@@ -1385,6 +1314,8 @@
    </div>
   </div>
 
+  <div class="cursor-glow" id="cursorGlow"></div>
+
   <div id="main-content">
 
   <button class="theme-toggle" id="themeToggle" title="Ganti Tema">
@@ -1423,7 +1354,7 @@
      Program
     </a>
     <a href="#pelatih">
-     Pelatih
+     FAQ
     </a>
     <a href="#sponsor">
      Sponsor
@@ -1483,26 +1414,34 @@
      Malang 
     </h1>
     <p class="slogan">
-     "​Awal Langkah dan Dedikasi"
+     "Awal Langkah dan Dedikasi"
     </p>
+
     <p>
      PB Djarem Malang lahir dari sebuah alur cerita yang sederhana namun bermakna: arena bulu tangkis yang menjadi titik temu bagi masyarakat dari pelbagai latar belakang. Di balik riuh tepukan kok dan ayunan raket, perkumpulan ini berdiri atas dasar semangat kebersamaan para pecinta tepok bulu di Malang. Tanpa memandang batas usia, tingkat kemahiran, maupun profesi sehari-hari, setiap individu menyatu dalam satu ritme permainan yang penuh energi.
-      <p>
+    </p>
 
-​Lebih Dari Sekadar Komunitas Olahraga
-      <p>
-
-Bagi kami, bulu tangkis bukan sekadar mengejar skor di atas lapangan atau menjaga stamina tubuh. PB Djarem hadir sebagai wadah inklusif untuk mempererat tali silaturahmi, merawat jiwa sportivitas, dan menjunjung tinggi rasa saling menghargai. Di sinilah tempat di mana pemula yang baru belajar memegang raket dapat berlatih tanpa canggung, sementara pemain yang lebih berpengalaman terus mengasah keahlian dan berbagi ilmu. Atmosfer yang hangat dan ramah memastikan setiap anggota merasa memiliki rumah kedua untuk menyalurkan hobi mereka.
-<p>
-​Visi & Semangat Ke Depan
-<p>
-Menatap masa depan, PB Djarem Malang terus berkomitmen untuk membudayakan gaya hidup sehat serta melahirkan ruang interaksi yang positif bagi warga Malang dan sekitarnya. Kami percaya bahwa kebugaran fisik dan kehangatan komunitas adalah kunci menuju kualitas hidup yang lebih baik.
-<p>
-​Bergabung Bersama Kami
-<p>
-<p>
-Apakah Anda ingin kembali aktif berolahraga, melatih kemampuan teknis, atau sekadar mencari lingkaran pertemanan baru yang positif? Lapangan kami selalu terbuka lebar. Mari mengayunkan raket, berkeringat bersama, dan menjadi bagian dari keluarga besar PB Djarem Malang!
+    <p class="hero-subhead">
+     Lebih Dari Sekadar Komunitas Olahraga
+    </p>
     <p>
+     Bagi kami, bulu tangkis bukan sekadar mengejar skor di atas lapangan atau menjaga stamina tubuh. PB Djarem hadir sebagai wadah inklusif untuk mempererat tali silaturahmi, merawat jiwa sportivitas, dan menjunjung tinggi rasa saling menghargai. Di sinilah tempat di mana pemula yang baru belajar memegang raket dapat berlatih tanpa canggung, sementara pemain yang lebih berpengalaman terus mengasah keahlian dan berbagi ilmu. Atmosfer yang hangat dan ramah memastikan setiap anggota merasa memiliki rumah kedua untuk menyalurkan hobi mereka.
+    </p>
+
+    <p class="hero-subhead">
+     Visi &amp; Semangat Ke Depan
+    </p>
+    <p>
+     Menatap masa depan, PB Djarem Malang terus berkomitmen untuk membudayakan gaya hidup sehat serta melahirkan ruang interaksi yang positif bagi warga Malang dan sekitarnya. Kami percaya bahwa kebugaran fisik dan kehangatan komunitas adalah kunci menuju kualitas hidup yang lebih baik.
+    </p>
+
+    <p class="hero-subhead">
+     Bergabung Bersama Kami
+    </p>
+    <p>
+     Apakah Anda ingin kembali aktif berolahraga, melatih kemampuan teknis, atau sekadar mencari lingkaran pertemanan baru yang positif? Lapangan kami selalu terbuka lebar. Mari mengayunkan raket, berkeringat bersama, dan menjadi bagian dari keluarga besar PB Djarem Malang!
+    </p>
+
     <div class="hero-cta">
      <a class="btn btn-solid" href="#gabung">
       Cara Bergabung
@@ -1517,7 +1456,7 @@ Apakah Anda ingin kembali aktif berolahraga, melatih kemampuan teknis, atau seka
   <section class="about" id="tentang">
    <div class="container">
     <div class="about-grid">
-     <div class="sec-head">
+     <div class="sec-head reveal-on-scroll">
       <span class="eyebrow">
        01 &mdash; Tentang Kami
       </span>
@@ -1525,7 +1464,7 @@ Apakah Anda ingin kembali aktif berolahraga, melatih kemampuan teknis, atau seka
        Rumah Bagi Lahirnya Generasi Juara Indonesia
       </h2>
      </div>
-     <div class="about-text">
+     <div class="about-text reveal-on-scroll delay-1">
       <p>
        Berawal dari sebuah komitmen sederhana di atas lapangan, PB Djarem Malang tumbuh dari wadah berkumpulnya para pecinta bulu tangkis dari berbagai latar belakang, profesi, dan kelompok usia. Berbasis di kota Malang, komunitas ini hadir sebagai tempat di mana kecintaan pada raket dan kok menyatukan siapa saja—mulai dari pemula yang ingin menjaga kebugaran hingga pemain berpengalaman yang mengasah keahlian.
       </p>
@@ -1553,83 +1492,32 @@ Apakah Anda ingin kembali aktif berolahraga, melatih kemampuan teknis, atau seka
     </div>
    </div>
   </section>
-  <!-- ATLET -->
+  <!-- ATLET / FOTO BERSAMA -->
   <section class="athletes" id="atlet">
    <div class="container">
-    <div class="sec-head">
+    <div class="sec-head reveal-on-scroll">
      <span class="eyebrow">
-      02 &mdash; Atlet PB Djarem
+      02 &mdash; Keluarga PB Djarem
      </span>
      <h2>
-      Mengenal Para Atlet PB Djarum
+      Kebersamaan Kami di Lapangan
      </h2>
      <p>
-      Berikut adalah beberapa atlet yang menjadi bagian dari keluarga besar PB Djarum. Dengan semangat, disiplin, dan kerja keras, mereka terus mengembangkan kemampuan serta berjuang meraih prestasi di berbagai ajang bulutangkis.
+      Lebih dari sekadar berlatih, PB Djarem Malang adalah keluarga besar yang tumbuh bersama di setiap sesi latihan dan pertandingan.
      </p>
     </div>
-    <div class="athlete-grid">
-     <div class="athlete-card">
-      <div class="athlete-photo">
-       <span>
-        AR
-       </span>
-       <div class="athlete-shine"></div>
-      </div>
-      <div class="athlete-info">
-       <h4>
-        Nama Atlet 1
-       </h4>
-       <div class="class">
-        Kelas Pemula
+
+    <div class="team-photo-wrap reveal-on-scroll delay-1">
+     <div class="team-photo-glow"></div>
+     <div class="team-photo-frame">
+      <!-- GANTI foto-bersama.jpg DENGAN FOTO TIM ANDA -->
+      <img src="fotobersama.png" alt="Foto Bersama Anggota PB Djarum Malang" onerror="this.src='logo.png'; this.style.objectFit='contain'; this.style.background='#111118'; this.style.padding='40px';"/>
+      <div class="team-photo-caption">
+       <div>
+        <h4>PB Djarum Malang</h4>
+        <span>Bersama, Bertumbuh, Berprestasi</span>
        </div>
-      </div>
-     </div>
-     <div class="athlete-card">
-      <div class="athlete-photo">
-       <span>
-        BS
-       </span>
-       <div class="athlete-shine"></div>
-      </div>
-      <div class="athlete-info">
-       <h4>
-        Nama Atlet 2
-       </h4>
-       <div class="class">
-        Kelas Remaja
-       </div>
-      </div>
-     </div>
-     <div class="athlete-card">
-      <div class="athlete-photo">
-       <span>
-        CD
-       </span>
-       <div class="athlete-shine"></div>
-      </div>
-      <div class="athlete-info">
-       <h4>
-        Nama Atlet 3
-       </h4>
-       <div class="class">
-        Kelas Taruna
-       </div>
-      </div>
-     </div>
-     <div class="athlete-card">
-      <div class="athlete-photo">
-       <span>
-        EF
-       </span>
-       <div class="athlete-shine"></div>
-      </div>
-      <div class="athlete-info">
-       <h4>
-        Nama Atlet 4
-       </h4>
-       <div class="class">
-        Kelas Utama
-       </div>
+       <div class="team-photo-badge">Keluarga Besar Kami</div>
       </div>
      </div>
     </div>
@@ -1642,7 +1530,7 @@ Apakah Anda ingin kembali aktif berolahraga, melatih kemampuan teknis, atau seka
 
   <div class="container">
 
-    <div class="sec-head">
+    <div class="sec-head reveal-on-scroll">
       <span class="eyebrow">
         03 — Program Latihan
       </span>
@@ -1664,7 +1552,7 @@ Apakah Anda ingin kembali aktif berolahraga, melatih kemampuan teknis, atau seka
     <div class="program-list">
 
       <!-- 01 -->
-      <div class="program-item">
+      <div class="program-item reveal-on-scroll">
 
         <div class="program-num">
           01
@@ -1707,7 +1595,7 @@ Apakah Anda ingin kembali aktif berolahraga, melatih kemampuan teknis, atau seka
 
 
       <!-- 02 -->
-      <div class="program-item">
+      <div class="program-item reveal-on-scroll">
 
         <div class="program-num">
           02
@@ -1763,7 +1651,7 @@ Apakah Anda ingin kembali aktif berolahraga, melatih kemampuan teknis, atau seka
 
 
       <!-- 03 -->
-      <div class="program-item">
+      <div class="program-item reveal-on-scroll">
 
         <div class="program-num">
           03
@@ -1806,7 +1694,7 @@ Apakah Anda ingin kembali aktif berolahraga, melatih kemampuan teknis, atau seka
 
 
       <!-- 04 -->
-      <div class="program-item">
+      <div class="program-item reveal-on-scroll">
 
         <div class="program-num">
           04
@@ -1853,90 +1741,84 @@ Apakah Anda ingin kembali aktif berolahraga, melatih kemampuan teknis, atau seka
 </section>
 
 <!-- =========================================
-     TIM KEPELATIHAN
+     FAQ
 ========================================= -->
-<section class="coaches" id="pelatih">
+<section class="faq" id="pelatih">
 
   <div class="container">
 
     <!-- HEADER -->
-    <div class="sec-head">
+    <div class="sec-head reveal-on-scroll">
 
       <span class="eyebrow">
-        04 — Tim Kepelatihan
+        04 — FAQ
       </span>
 
       <h2>
-        Dibimbing untuk Berkembang dan Berprestasi
+        Pertanyaan yang Sering Diajukan
       </h2>
 
       <p>
-        Setiap sesi latihan didampingi oleh pelatih yang membantu
-        pemain mengembangkan kemampuan secara bertahap, mulai dari
-        teknik dasar, footwork, konsistensi pukulan, hingga strategi permainan.
+        Beberapa hal yang biasa ditanyakan sebelum bergabung dengan PB Djarem Malang.
       </p>
 
     </div>
 
+    <!-- DAFTAR FAQ -->
+    <div class="faq-list">
 
-    <!-- PROFIL PELATIH -->
-    <div class="coach-single">
-
-      <!-- FOTO / GAMBAR PELATIH -->
-      <div class="coach-photo-large">
-        <span>NP</span>
-
-        <!-- Jika sudah ada foto, gunakan ini:
-        <img src="pelatih.jpg" alt="Pelatih PB Djarum Malang">
-        -->
+      <div class="faq-item reveal-on-scroll">
+        <button class="faq-question" type="button">
+          <span class="faq-num">01</span>
+          <span class="faq-q-text">Apakah harus daftar dulu sebelum datang latihan?</span>
+          <span class="faq-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Perlu. Klub kami membatasi jumlah anggota maksimal 16 orang per sesi, sehingga pendaftaran diperlukan agar kuota latihan dapat diatur dengan baik.
+          </div>
+        </div>
       </div>
 
-
-      <!-- INFORMASI PELATIH -->
-      <div class="coach-info-single">
-
-        <span class="coach-label">
-          PELATIH PB DJARUM MALANG
-        </span>
-
-        <h3>
-          Nama Pelatih
-        </h3>
-
-        <div class="role">
-          Pelatih Utama
+      <div class="faq-item reveal-on-scroll delay-1">
+        <button class="faq-question" type="button">
+          <span class="faq-num">02</span>
+          <span class="faq-q-text">Berapa biaya untuk bergabung / latihan?</span>
+          <span class="faq-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Iuran latihan sebesar Rp20.000 per pertemuan.
+          </div>
         </div>
+      </div>
 
-        <p>
-          Pelatih mendampingi setiap pemain dalam proses latihan
-          dan membantu mengembangkan kemampuan sesuai dengan level
-          serta kebutuhan masing-masing pemain.
-        </p>
-
-        <div class="coach-skills">
-
-          <div class="skill-item">
-            <strong>01</strong>
-            <span>Teknik Dasar & Footwork</span>
+      <div class="faq-item reveal-on-scroll delay-2">
+        <button class="faq-question" type="button">
+          <span class="faq-num">03</span>
+          <span class="faq-q-text">Apakah ada batasan usia atau level kemampuan?</span>
+          <span class="faq-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Tidak ada. PB Djarem terbuka untuk semua usia dan tingkat kemampuan, mulai dari pemula hingga pemain berpengalaman.
           </div>
-
-          <div class="skill-item">
-            <strong>02</strong>
-            <span>Program Drilling</span>
-          </div>
-
-          <div class="skill-item">
-            <strong>03</strong>
-            <span>Strategi Permainan</span>
-          </div>
-
-          <div class="skill-item">
-            <strong>04</strong>
-            <span>Evaluasi & Pengembangan Pemain</span>
-          </div>
-
         </div>
-
       </div>
 
     </div>
@@ -1949,7 +1831,7 @@ Apakah Anda ingin kembali aktif berolahraga, melatih kemampuan teknis, atau seka
   <!-- SPONSOR -->
   <section class="sponsor" id="sponsor">
    <div class="container">
-    <div class="sec-head">
+    <div class="sec-head reveal-on-scroll">
      <span class="eyebrow">
       05 &mdash; Didukung Oleh
      </span>
@@ -1961,7 +1843,7 @@ Apakah Anda ingin kembali aktif berolahraga, melatih kemampuan teknis, atau seka
         berbagai sponsor dan mitra terkait.
      </p>
     </div>
-    <div class="sponsor-row">
+    <div class="sponsor-row reveal-on-scroll delay-1">
      <!-- 1 -->
      <div class="sponsor-chip">
       <img alt="Mandor" src="mandor.png"/>
@@ -2011,7 +1893,7 @@ Apakah Anda ingin kembali aktif berolahraga, melatih kemampuan teknis, atau seka
   <section class="join" id="gabung">
    <div class="container">
     <!-- JUDUL SECTION -->
-    <div class="sec-head">
+    <div class="sec-head reveal-on-scroll">
      <span class="eyebrow">
       06 &mdash; Cara Bergabung
      </span>
@@ -2025,7 +1907,7 @@ Apakah Anda ingin kembali aktif berolahraga, melatih kemampuan teknis, atau seka
      </p>
     </div>
     <!-- BOX PENDAFTARAN -->
-    <div class="join-box">
+    <div class="join-box reveal-on-scroll delay-1">
      <!-- =====================
            QR CODE
       ====================== -->
@@ -2033,7 +1915,7 @@ Apakah Anda ingin kembali aktif berolahraga, melatih kemampuan teknis, atau seka
       <div class="qr-placeholder">
        <!-- GANTI qr-whatsapp.png
                DENGAN FILE QR ANDA -->
-       <img alt="QR Code Grup WhatsApp PB Djarum Malang" src="qr-whatsapp.png"/>
+       <img alt="QR Code Grup WhatsApp PB Djarum Malang" src="qr PB Djarem.png"/>
       </div>
       <p class="qr-text">
        Scan QR Code untuk bergabung
@@ -2102,79 +1984,134 @@ Apakah Anda ingin kembali aktif berolahraga, melatih kemampuan teknis, atau seka
     </div>
    </div>
   </section>
-  <!-- KONTAK -->
-  <section class="contact" id="kontak">
-   <div class="container">
-    <div class="sec-head">
-     <span class="eyebrow">
-      07 &mdash; Kontak &amp; Lokasi
-     </span>
-     <h2>
-      Temukan Kami
-     </h2>
-     <p>
-      Ingin bergabung, bermain bersama, atau mengikuti program latihan kami? Jangan ragu untuk menghubungi kami. Kami terbuka bagi para pecinta bulutangkis yang ingin berkembang, berlatih, dan menjadi bagian dari komunitas kami.
-     </p>
-    </div>
-    <div class="contact-grid">
-     <ul class="contact-list">
-      <li>
-       <span class="label">
-        Alamat
-       </span>
-       <span class="value">
-        📍 Lokasi
-GOR Angkasa
-Jl. Papakuning, Malang, Jawa Timur, Indonesia
-       </span>
-      </li>
-      <li>
-       <span class="label">
-        Telepon
-       </span>
-       <span class="value">
-        (0341) xxx-xxxx
-       </span>
-      </li>
-      <li>
-       <span class="label">
-        Email
-       </span>
-       <span class="value">
-        info@pbdjarum.example
-       </span>
-      </li>
-      <li>
-       <span class="label">
-        Instagram
-       </span>
-       <span class="value">
-        @pbdjaremmlg
-       </span>
-      </li>
-     </ul>
-     <div class="map-box">
-      <iframe allowfullscreen="" height="100%" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=-7.941734,112.625606&amp;z=16&amp;output=embed" style="border:0;" width="100%">
-      </iframe>
-     </div>
-     <footer>
-      &copy; 2026 PB DJARUM &mdash;
-      <span>
-       Bakat Diasah, Prestasi Diraih
-      </span>
-      <a href="#top" class="back-to-top" id="backToTop">
-       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="12" y1="19" x2="12" y2="5"></line>
-        <polyline points="5 12 12 5 19 12"></polyline>
-       </svg>
-       Kembali ke Halaman Awal
-      </a>
-     </footer>
-    </div>
-   </div>
-  </section>
+<!-- KONTAK -->
+<section class="contact" id="kontak">
+  <div class="container">
 
-  </div><!-- /#main-content -->
+    <div class="sec-head reveal-on-scroll">
+      <span class="eyebrow">
+        07 &mdash; Kontak &amp; Lokasi
+      </span>
+
+      <h2>
+        Temukan Kami
+      </h2>
+
+      <p>
+        Ingin bergabung, bermain bersama, atau mengikuti program latihan kami?
+        Jangan ragu untuk menghubungi kami. Kami terbuka bagi para pecinta
+        bulutangkis yang ingin berkembang, berlatih, dan menjadi bagian dari
+        komunitas kami.
+      </p>
+    </div>
+
+    <div class="contact-grid reveal-on-scroll delay-1">
+
+      <!-- INFORMASI KONTAK -->
+      <ul class="contact-list">
+
+        <li>
+          <span class="label">
+            Alamat
+          </span>
+
+          <span class="value">
+            📍 Lokasi<br>
+            GOR Angkasa<br>
+            Jl. Papakuning, Malang, Jawa Timur, Indonesia
+          </span>
+        </li>
+
+        <li>
+          <span class="label">
+            WA Admin
+          </span>
+
+          <span class="value">
+            085196339968
+          </span>
+        </li>
+
+        <li>
+          <span class="label">
+            TikTok
+          </span>
+
+          <span class="value">
+            @pbdjarem.mlg
+          </span>
+        </li>
+
+        <li>
+          <span class="label">
+            Instagram
+          </span>
+
+          <span class="value">
+            @pbdjaremmlg
+          </span>
+        </li>
+
+        <li>
+          <span class="label">
+            Facebook
+          </span>
+
+          <span class="value">
+            PB Djarem Mlg
+          </span>
+        </li>
+
+      </ul>
+
+      <!-- GOOGLE MAPS -->
+      <div class="map-box">
+        <iframe
+          src="https://www.google.com/maps?q=-7.941734,112.625606&amp;z=16&amp;output=embed"
+          width="100%"
+          height="100%"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      &copy; 2026 PB DJAREM &mdash;
+
+      <span>
+        Bakat Diasah, Prestasi Diraih
+      </span>
+
+      <a href="#top" class="back-to-top" id="backToTop">
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round">
+
+          <line x1="12" y1="19" x2="12" y2="5"></line>
+          <polyline points="5 12 12 5 19 12"></polyline>
+
+        </svg>
+
+        Kembali ke Halaman Awal
+      </a>
+    </footer>
+
+  </div>
+</section>
+
+</div><!-- /#main-content -->
+
 
   <script>
    // ---- Build the animated preloader title letter-by-letter ----
@@ -2293,6 +2230,108 @@ Jl. Papakuning, Malang, Jawa Timur, Indonesia
        toggle.textContent = '🌙';
      }
    });
+
+   // ---- FAQ accordion ----
+   (function(){
+     const items = document.querySelectorAll('.faq-item');
+     items.forEach(item => {
+       const question = item.querySelector('.faq-question');
+       const answer = item.querySelector('.faq-answer');
+       question.addEventListener('click', () => {
+         const isActive = item.classList.contains('active');
+         items.forEach(other => {
+           other.classList.remove('active');
+           other.querySelector('.faq-answer').style.maxHeight = null;
+         });
+         if (!isActive) {
+           item.classList.add('active');
+           answer.style.maxHeight = answer.scrollHeight + 'px';
+         }
+       });
+     });
+   })();
+
+   // ---- Scroll reveal animation ----
+   (function(){
+     const els = document.querySelectorAll('.reveal-on-scroll');
+     if (!('IntersectionObserver' in window) || !els.length) {
+       els.forEach(el => el.classList.add('in-view'));
+       return;
+     }
+     const io = new IntersectionObserver((entries) => {
+       entries.forEach(entry => {
+         if (entry.isIntersecting) {
+           entry.target.classList.add('in-view');
+           io.unobserve(entry.target);
+         }
+       });
+     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+     els.forEach(el => io.observe(el));
+   })();
+
+   // ---- Cursor glow follow (desktop only) ----
+   (function(){
+     const glow = document.getElementById('cursorGlow');
+     if (!glow || window.matchMedia('(max-width: 900px)').matches) return;
+     let raf = null;
+     window.addEventListener('mousemove', (e) => {
+       glow.style.opacity = '1';
+       if (raf) return;
+       raf = requestAnimationFrame(() => {
+         glow.style.left = e.clientX + 'px';
+         glow.style.top = e.clientY + 'px';
+         raf = null;
+       });
+     });
+     document.addEventListener('mouseleave', () => { glow.style.opacity = '0'; });
+   })();
+
+   // ---- Ripple effect on buttons ----
+   (function(){
+     document.querySelectorAll('.btn, .wa-btn').forEach(btn => {
+       btn.addEventListener('click', function(e){
+         const rect = this.getBoundingClientRect();
+         const ripple = document.createElement('span');
+         const size = Math.max(rect.width, rect.height);
+         ripple.className = 'ripple';
+         ripple.style.width = ripple.style.height = size + 'px';
+         ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+         ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+         this.appendChild(ripple);
+         setTimeout(() => ripple.remove(), 650);
+       });
+     });
+   })();
+
+   // ---- Animated number counters for stats ----
+   (function(){
+     const stats = document.querySelectorAll('.stat b');
+     if (!stats.length || !('IntersectionObserver' in window)) return;
+     const io = new IntersectionObserver((entries) => {
+       entries.forEach(entry => {
+         if (!entry.isIntersecting) return;
+         const el = entry.target;
+         const raw = el.textContent.trim();
+         const num = parseInt(raw.replace(/\D/g, ''), 10);
+         el.closest('.stat').classList.add('counted');
+         if (!isNaN(num) && num > 1) {
+           let current = 0;
+           const duration = 1000;
+           const start = performance.now();
+           function step(now){
+             const progress = Math.min((now - start) / duration, 1);
+             current = Math.floor(progress * num);
+             el.textContent = current;
+             if (progress < 1) requestAnimationFrame(step);
+             else el.textContent = raw;
+           }
+           requestAnimationFrame(step);
+         }
+         io.unobserve(el);
+       });
+     }, { threshold: 0.5 });
+     stats.forEach(el => io.observe(el));
+   })();
   </script>
  </body>
 </html>
