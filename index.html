@@ -1,3819 +1,1061 @@
 <!DOCTYPE html>
 <html lang="id">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   PB Djarum &mdash; Membentuk Juara, Membangun Bangsa
-  </title>
-  <link href="https://fonts.googleapis.com" rel="preconnect"/>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Oswald:wght@400;500;600&amp;family=Work+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-  <style>
-   :root{
-    --accent: #dc2626;
-    --accent-light: #fbbf24;
-    --accent-rgb: 220, 38, 38;
-    --bg: #f3f3f1;
-    --bg-gradient: radial-gradient(ellipse at top, rgba(220,38,38,0.05) 0%, transparent 50%), #f3f3f1;
-    --surface: #e6e5e1;
-    --surface-hover: #dcdbd6;
-    --card-bg: rgba(243, 243, 241, 0.85);
-    --border: rgba(0,0,0,0.08);
-    --border-hover: rgba(220,38,38,0.25);
-    --text: #1a1a2e;
-    --text-heading: #0f172a;
-    --muted: #5c6370;
-    --muted-light: #8b95a5;
-    --shadow: rgba(0,0,0,0.08);
-    --shadow-accent: rgba(220,38,38,0.15);
-    --code-bg: #e2e2e2;
-  }
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PB Djarem &mdash; Membentuk Juara, Membangun Bangsa</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Oswald:wght@400;500;600&amp;family=Work+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --accent:#dc2626; --accent-light:#fbbf24; --accent-rgb:220,38,38;
+  --bg:#f3f3f1;
+  --bg-gradient:radial-gradient(ellipse at top, rgba(220,38,38,0.05) 0%, transparent 50%), #f3f3f1;
+  --surface:#e6e5e1; --surface-hover:#dcdbd6;
+  --card-bg:rgba(243,243,241,0.85);
+  --border:rgba(0,0,0,0.08); --border-hover:rgba(220,38,38,0.25);
+  --text:#1a1a2e; --text-heading:#0f172a;
+  --muted:#5c6370; --muted-light:#8b95a5;
+  --shadow:rgba(0,0,0,0.08); --shadow-accent:rgba(220,38,38,0.15);
+  --code-bg:#e2e2e2;
+}
+[data-theme="dark"]{
+  --bg:#0a0a0f;
+  --bg-gradient:radial-gradient(ellipse at top, rgba(220,38,38,0.08) 0%, transparent 50%), #0a0a0f;
+  --surface:#111118; --surface-hover:#1a1a24;
+  --card-bg:rgba(17,17,24,0.7);
+  --border:rgba(255,255,255,0.08); --border-hover:rgba(220,38,38,0.3);
+  --text:#e2e8f0; --text-heading:#f8fafc;
+  --muted:#94a3b8; --muted-light:#64748b;
+  --shadow:rgba(0,0,0,0.4); --shadow-accent:rgba(220,38,38,0.25);
+  --code-bg:#1e1e2e;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg-gradient); color:var(--text);
+  font-family:'Work Sans', sans-serif; line-height:1.6; overflow-x:hidden;
+  transition:background 0.3s ease, color 0.3s ease;
+}
+body.no-scroll{overflow:hidden; height:100vh;}
+h1,h2,h3{font-family:'Anton', sans-serif; font-weight:400; letter-spacing:0.5px; text-transform:uppercase; color:var(--text-heading);}
+.eyebrow{font-family:'Oswald', sans-serif; font-weight:500; letter-spacing:3px; text-transform:uppercase; font-size:12.5px; color:var(--accent-light);}
+a{color:inherit; text-decoration:none;}
+html{background:var(--bg);}
+img{max-width:100%; display:block;}
+section{position:relative; padding:110px 8vw;}
+section:not(.banner-section){border-top:1px solid var(--border);}
+.container{max-width:1180px; margin:0 auto;}
 
-  [data-theme="dark"] {
-    --bg: #0a0a0f;
-    --bg-gradient: radial-gradient(ellipse at top, rgba(220,38,38,0.08) 0%, transparent 50%), #0a0a0f;
-    --surface: #111118;
-    --surface-hover: #1a1a24;
-    --card-bg: rgba(17, 17, 24, 0.7);
-    --border: rgba(255,255,255,0.08);
-    --border-hover: rgba(220,38,38,0.3);
-    --text: #e2e8f0;
-    --text-heading: #f8fafc;
-    --muted: #94a3b8;
-    --muted-light: #64748b;
-    --shadow: rgba(0,0,0,0.4);
-    --shadow-accent: rgba(220,38,38,0.25);
-    --code-bg: #1e1e2e;
-  }
+/* ---------- PRELOADER ---------- */
+#preloader{
+  position:fixed; inset:0; z-index:9999; background:var(--bg);
+  display:flex; align-items:center; justify-content:center; flex-direction:column;
+  overflow:hidden; transition:opacity 0.8s ease, visibility 0.8s ease;
+}
+#preloader.hide{opacity:0; visibility:hidden; pointer-events:none;}
+.preloader-glow{
+  position:absolute; width:520px; height:520px; border-radius:50%;
+  background:radial-gradient(circle, rgba(220,38,38,0.35) 0%, transparent 70%);
+  animation:glowPulse 3.2s ease-in-out infinite; filter:blur(10px);
+}
+@keyframes glowPulse{0%,100%{transform:scale(0.9); opacity:0.6;} 50%{transform:scale(1.15); opacity:1;}}
+.preloader-logo-ring{
+  position:relative; width:150px; height:150px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center; margin-bottom:34px;
+  animation:introFadeScale 1s cubic-bezier(.2,.8,.2,1) both;
+}
+.preloader-logo-ring::before{
+  content:''; position:absolute; inset:-8px; border-radius:50%;
+  border:2px solid transparent; border-top-color:var(--accent); border-right-color:var(--accent-light);
+  animation:ringSpin 1.6s linear infinite;
+}
+.preloader-logo-ring::after{
+  content:''; position:absolute; inset:-18px; border-radius:50%;
+  border:1px solid rgba(251,191,36,0.25); animation:ringSpin 3.2s linear infinite reverse;
+}
+.preloader-logo-ring img{
+  width:82px; height:82px; object-fit:contain; border-radius:50%;
+  background:rgba(255,255,255,0.04); padding:14px;
+  filter:drop-shadow(0 0 18px rgba(220,38,38,0.5));
+}
+@keyframes ringSpin{to{transform:rotate(360deg);}}
+@keyframes introFadeScale{0%{opacity:0; transform:scale(0.6);} 100%{opacity:1; transform:scale(1);}}
+.preloader-title{
+  display:flex; gap:2px; flex-wrap:wrap; justify-content:center;
+  font-family:'Anton', sans-serif; font-size:clamp(26px, 5vw, 46px);
+  letter-spacing:3px; color:var(--text-heading); text-transform:uppercase; perspective:600px;
+}
+.preloader-title span{
+  display:inline-block; opacity:0; transform:translateY(30px) rotateX(60deg);
+  animation:letterReveal 0.6s cubic-bezier(.2,.8,.2,1) forwards;
+}
+.preloader-title span.accent-word{color:var(--accent-light);}
+@keyframes letterReveal{to{opacity:1; transform:translateY(0) rotateX(0);}}
+.preloader-sub{
+  margin-top:16px; font-family:'Oswald', sans-serif; letter-spacing:4px; font-size:11.5px;
+  text-transform:uppercase; color:var(--accent-light); opacity:0;
+  animation:fadeUp 0.7s ease forwards; animation-delay:1.05s;
+}
+@keyframes fadeUp{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);}}
+.preloader-bar-track{
+  margin-top:34px; width:220px; height:3px; background:rgba(255,255,255,0.08);
+  border-radius:3px; overflow:hidden; opacity:0;
+  animation:fadeUp 0.7s ease forwards; animation-delay:1.2s;
+}
+.preloader-bar-fill{
+  height:100%; width:0%; background:linear-gradient(90deg, var(--accent), var(--accent-light));
+  border-radius:3px; animation:barFill 1.6s ease-in-out forwards; animation-delay:1.25s;
+  box-shadow:0 0 12px rgba(220,38,38,0.6);
+}
+@keyframes barFill{from{width:0%;} to{width:100%;}}
+.preloader-shuttle{position:absolute; animation:shuttleFly 2.6s ease-in-out infinite;}
+@keyframes shuttleFly{
+  0%{transform:translate(-60vw, 40vh) rotate(-20deg); opacity:0;}
+  15%{opacity:0.8;}
+  50%{transform:translate(0, -10vh) rotate(10deg); opacity:0.9;}
+  85%{opacity:0.6;}
+  100%{transform:translate(60vw, 30vh) rotate(25deg); opacity:0;}
+}
+#main-content{opacity:0; visibility:hidden;}
+#main-content.reveal{visibility:visible; animation:contentFadeIn 1s ease forwards;}
+@keyframes contentFadeIn{from{opacity:0; transform:translateY(12px);} to{opacity:1; transform:none;}}
+@media (max-width:600px){
+  .preloader-logo-ring{width:110px; height:110px; margin-bottom:24px;}
+  .preloader-logo-ring img{width:60px; height:60px; padding:10px;}
+  .preloader-glow{width:340px; height:340px;}
+}
 
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
-  body{
-    background: var(--bg-gradient);
-    color: var(--text);
-    font-family:'Work Sans', sans-serif;
-    line-height:1.6;
-    overflow-x:hidden;
-    transition: background 0.3s ease, color 0.3s ease;
-  }
-  body.no-scroll{ overflow:hidden; height:100vh; }
-  h1,h2,h3{ font-family:'Anton', sans-serif; font-weight:400; letter-spacing:0.5px; text-transform:uppercase; color: var(--text-heading); }
-  .eyebrow{
-    font-family:'Oswald', sans-serif;
-    font-weight:500;
-    letter-spacing:3px;
-    text-transform:uppercase;
-    font-size:12.5px;
-    color: var(--accent-light);
-  }
-  a{ color:inherit; text-decoration:none; }
-  html{ background: var(--bg); }
-  img{ max-width:100%; display:block; }
-  section{ position:relative; padding:110px 8vw; }
-  section:not(.banner-section){ border-top:1px solid var(--border); }
-  .container{ max-width:1180px; margin:0 auto; }
+/* ---------- THEME TOGGLE ---------- */
+.theme-toggle{
+  position:fixed; bottom:24px; right:24px; z-index:200;
+  width:48px; height:48px; border-radius:50%;
+  background:var(--surface); border:1px solid var(--border); color:var(--text);
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; font-size:20px; box-shadow:0 4px 20px var(--shadow); transition:all 0.3s ease;
+}
+.theme-toggle:hover{border-color:var(--accent); box-shadow:0 4px 20px var(--shadow-accent); transform:scale(1.1);}
 
-  /* ---------- PRELOADER / INTRO ---------- */
-  #preloader{
-    position:fixed; inset:0; z-index:9999;
-    background: var(--bg);
-    display:flex; align-items:center; justify-content:center;
-    flex-direction:column;
-    overflow:hidden;
-    transition: opacity 0.8s ease, visibility 0.8s ease;
-  }
-  #preloader.hide{
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
-  }
-  .preloader-court{
-    position:absolute; inset:0; opacity:0.25; pointer-events:none;
-  }
-  .preloader-glow{
-    position:absolute;
-    width:520px; height:520px;
-    border-radius:50%;
-    background: radial-gradient(circle, rgba(220,38,38,0.35) 0%, transparent 70%);
-    animation: glowPulse 3.2s ease-in-out infinite;
-    filter: blur(10px);
-  }
-  @keyframes glowPulse{
-    0%,100%{ transform:scale(0.9); opacity:0.6; }
-    50%{ transform:scale(1.15); opacity:1; }
-  }
-  .preloader-logo-ring{
-    position:relative;
-    width:150px; height:150px;
-    border-radius:50%;
-    display:flex; align-items:center; justify-content:center;
-    margin-bottom:34px;
-    animation: introFadeScale 1s cubic-bezier(.2,.8,.2,1) both;
-  }
-  .preloader-logo-ring::before{
-    content:'';
-    position:absolute; inset:-8px;
-    border-radius:50%;
-    border:2px solid transparent;
-    border-top-color: var(--accent);
-    border-right-color: var(--accent-light);
-    animation: ringSpin 1.6s linear infinite;
-  }
-  .preloader-logo-ring::after{
-    content:'';
-    position:absolute; inset:-18px;
-    border-radius:50%;
-    border:1px solid rgba(251,191,36,0.25);
-    animation: ringSpin 3.2s linear infinite reverse;
-  }
-  .preloader-logo-ring img{
-    width:82px; height:82px; object-fit:contain;
-    border-radius:50%;
-    background: rgba(255,255,255,0.04);
-    padding:14px;
-    filter: drop-shadow(0 0 18px rgba(220,38,38,0.5));
-  }
-  @keyframes ringSpin{ to{ transform:rotate(360deg); } }
-  @keyframes introFadeScale{
-    0%{ opacity:0; transform:scale(0.6); }
-    100%{ opacity:1; transform:scale(1); }
-  }
-  .preloader-title{
-    display:flex; gap:2px; flex-wrap:wrap; justify-content:center;
-    font-family:'Anton', sans-serif;
-    font-size:clamp(26px, 5vw, 46px);
-    letter-spacing:3px;
-    color: var(--text-heading);
-    text-transform:uppercase;
-    perspective:600px;
-  }
-  .preloader-title span{
-    display:inline-block;
-    opacity:0;
-    transform: translateY(30px) rotateX(60deg);
-    animation: letterReveal 0.6s cubic-bezier(.2,.8,.2,1) forwards;
-  }
-  .preloader-title span.accent-word{ color: var(--accent-light); }
-  @keyframes letterReveal{
-    to{ opacity:1; transform: translateY(0) rotateX(0); }
-  }
-  .preloader-sub{
-    margin-top:16px;
-    font-family:'Oswald', sans-serif;
-    letter-spacing:4px;
-    font-size:11.5px;
-    text-transform:uppercase;
-    color: var(--accent-light);
-    opacity:0;
-    animation: fadeUp 0.7s ease forwards;
-    animation-delay:1.05s;
-  }
-  @keyframes fadeUp{
-    from{ opacity:0; transform:translateY(10px); }
-    to{ opacity:1; transform:translateY(0); }
-  }
-  .preloader-bar-track{
-    margin-top:34px;
-    width:220px; height:3px;
-    background: rgba(255,255,255,0.08);
-    border-radius:3px;
-    overflow:hidden;
-    opacity:0;
-    animation: fadeUp 0.7s ease forwards;
-    animation-delay:1.2s;
-  }
-  .preloader-bar-fill{
-    height:100%; width:0%;
-    background: linear-gradient(90deg, var(--accent), var(--accent-light));
-    border-radius:3px;
-    animation: barFill 1.6s ease-in-out forwards;
-    animation-delay:1.25s;
-    box-shadow: 0 0 12px rgba(220,38,38,0.6);
-  }
-  @keyframes barFill{
-    from{ width:0%; }
-    to{ width:100%; }
-  }
-  .preloader-shuttle{
-    position:absolute;
-    animation: shuttleFly 2.6s ease-in-out infinite;
-  }
-  @keyframes shuttleFly{
-    0%{ transform: translate(-60vw, 40vh) rotate(-20deg); opacity:0; }
-    15%{ opacity:0.8; }
-    50%{ transform: translate(0, -10vh) rotate(10deg); opacity:0.9; }
-    85%{ opacity:0.6; }
-    100%{ transform: translate(60vw, 30vh) rotate(25deg); opacity:0; }
-  }
-  #main-content{
-    opacity:0;
-    visibility:hidden;
-  }
-  #main-content.reveal{
-    visibility:visible;
-    animation: contentFadeIn 1s ease forwards;
-  }
-  #main-content.no-anim{ opacity:1; visibility:visible; animation:none; }
-  @keyframes contentFadeIn{
-    from{ opacity:0; transform:translateY(12px); }
-    to{ opacity:1; transform:translateY(0); }
-  }
-  @media (max-width:600px){
-    .preloader-logo-ring{ width:110px; height:110px; margin-bottom:24px; }
-    .preloader-logo-ring img{ width:60px; height:60px; padding:10px; }
-    .preloader-glow{ width:340px; height:340px; }
-  }
-
-  /* ---------- THEME TOGGLE ---------- */
-  .theme-toggle{
-    position:fixed; bottom:24px; right:24px; z-index:200;
-    width:48px; height:48px; border-radius:50%;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    color: var(--text);
-    display:flex; align-items:center; justify-content:center;
-    cursor:pointer; font-size:20px;
-    box-shadow: 0 4px 20px var(--shadow);
-    transition: all 0.3s ease;
-  }
-  .theme-toggle:hover{
-    border-color: var(--accent);
-    box-shadow: 0 4px 20px var(--shadow-accent);
-    transform: scale(1.1);
-  }
-
-  /* ---------- NAV ---------- */
-  nav{
-    position:fixed; top:0; left:0; right:0; z-index:100;
-    display:flex; align-items:center; justify-content:space-between;
-    padding:18px 5vw;
-    background: #262626;
-    backdrop-filter:blur(12px);
-    border-bottom:1px solid rgba(255,255,255,0.08);
-    transition: all 0.3s ease;
-  }
-  .brand{ display:flex; align-items:center; gap:12px; }
-  .brand-mark{
-    width:38px; height:38px; background: var(--accent);
-    display:flex; align-items:center; justify-content:center;
-    font-family:'Anton'; color:#fff; font-size:17px;
-    transform:skewX(-8deg);
-    box-shadow: 0 0 20px rgba(220,38,38,0.3);
-  }
-  .brand-name{ color:#f8fafc; font-family:'Oswald'; font-weight:600; letter-spacing:1.5px; font-size:15px; }
-  .brand-name span{ color: var(--accent-light); }
-  .brand-logo{
-    width:38px; height:38px;
-    object-fit:contain;
-    display:block;
-    flex-shrink:0;
-  }
-  .nav-links{ display:flex; gap:34px; }
-  .nav-links a{
-    color:#e2e8f0; font-family:'Oswald'; font-size:12.5px;
-    letter-spacing:2px; text-transform:uppercase; opacity:0.85;
-    transition:opacity 0.25s, color 0.25s; padding-bottom:4px; border-bottom:1px solid transparent;
-  }
-  .nav-links a:hover{ opacity:1; border-color: var(--accent); color: var(--accent-light); }
-  .nav-toggle{
-    display:none; align-items:center; justify-content:center;
-    width:40px; height:40px; color:#e2e8f0;
-    cursor:pointer; background:none; border:none; flex-shrink:0;
-  }
-  .nav-toggle svg line{ transition: transform 0.3s ease, opacity 0.3s ease; transform-origin: center; }
-  .nav-toggle.open #navIconTop{ transform: translateY(6px) rotate(45deg); }
-  .nav-toggle.open #navIconMid{ opacity:0; }
-  .nav-toggle.open #navIconBot{ transform: translateY(-6px) rotate(-45deg); }
+/* ---------- NAV ---------- */
+nav{
+  position:sticky; top:0; z-index:2000;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:18px 5vw; background:#262626; backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,0.08); transition:all 0.3s ease;
+}
+.brand{display:flex; align-items:center; gap:12px;}
+.brand-mark{
+  width:38px; height:38px; background:var(--accent);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Anton'; color:#fff; font-size:17px; transform:skewX(-8deg);
+  box-shadow:0 0 20px rgba(220,38,38,0.3);
+}
+.brand-name{color:#f8fafc; font-family:'Oswald'; font-weight:600; letter-spacing:1.5px; font-size:15px;}
+.brand-name span{color:var(--accent-light);}
+.brand-logo{width:38px; height:38px; object-fit:contain; display:block; flex-shrink:0;}
+.nav-links{display:flex; gap:34px;}
+.nav-links a{
+  color:#e2e8f0; font-family:'Oswald'; font-size:12.5px; letter-spacing:2px; text-transform:uppercase;
+  opacity:0.85; transition:opacity 0.25s, color 0.25s; padding-bottom:4px; border-bottom:1px solid transparent;
+}
+.nav-links a:hover{opacity:1; border-color:var(--accent); color:var(--accent-light);}
+.nav-toggle{
+  display:none; align-items:center; justify-content:center; width:40px; height:40px;
+  color:#e2e8f0; cursor:pointer; background:none; border:none; flex-shrink:0;
+}
+.nav-toggle svg line{transition:transform 0.3s ease, opacity 0.3s ease; transform-origin:center;}
+.nav-toggle.open #navIconTop{transform:translateY(6px) rotate(45deg);}
+.nav-toggle.open #navIconMid{opacity:0;}
+.nav-toggle.open #navIconBot{transform:translateY(-6px) rotate(-45deg);}
 
 /* =========================================================
-   BANNER PB DJAREM
+   BANNER PB DJAREM  (WARNA GOLD)
 ========================================================= */
-
-.banner-section {
-    position: relative;
-
-    width: 100%;
-
-    margin: 0;
-    padding: 0;
-
-    background: linear-gradient(135deg, #6e0000 0%, #b70707 40%, #8a0303 70%, #520101 100%);
-
-    overflow: hidden;
-
-    z-index: 1;
-}
-
-
-/* =========================================================
-   CONTAINER UTAMA
-========================================================= */
-
-.banner-container {
-
-    position: relative;
-
-    width: 100%;
-
-    /*
-       Tinggi keseluruhan banner
-    */
-    height: 235px;
-
-
-    display: grid;
-
-
-    /*
-       PEMBAGIAN:
-
-       KIRI   = 42%
-       TENGAH = 37%
-       KANAN  = 21%
-    */
-
-    grid-template-columns:
-        42%
-        37%
-        21%;
-
-
-    /*
-       BARIS:
-
-       Bagian utama = 190px
-       Footer       = 45px
-    */
-
-    grid-template-rows:
-        190px
-        45px;
-
-
-    overflow: hidden;
-
-    box-sizing: border-box;
-
-
-    background-color: #7a0202;
-
-
-    /*
-       Gradasi merah tua + pattern titik-titik
-    */
-
-    background-image:
-        radial-gradient(
-            rgba(255,255,255,0.10) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            135deg,
-            #6e0000 0%,
-            #c40909 35%,
-            #8a0303 70%,
-            #4d0101 100%
-        );
-
-    background-size: 6px 6px, 100% 100%;
-    background-repeat: repeat, no-repeat;
-
-}
-
-
-/* =========================================================
-   BAGIAN KIRI
-========================================================= */
-
-.banner-left {
-
-    grid-column: 1;
-
-    grid-row: 1;
-
-    position: relative;
-
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-
-    align-items: flex-start;
-
-
-    /*
-       Jarak dari tepi kiri
-    */
-
-    padding:
-        10px
-        20px
-        15px
-        35px;
-
-
-    box-sizing: border-box;
-
-
-    z-index: 5;
-
-    overflow: hidden;
-
-}
-
-
-/* =========================================================
-   LOGO + NAMA
-========================================================= */
-
-.brand-area {
-
-    display: flex;
-
-    flex-direction: row;
-
-    align-items: center;
-
-    justify-content: flex-start;
-
-
-    width: 100%;
-
-
-    /*
-       Jarak logo dengan tulisan
-    */
-
-    gap: 15px;
-
-
-    margin-bottom: 14px;
-
-}
-
-
-/* =========================================================
-   LOGO UTAMA
-========================================================= */
-
-.sponsor-logo {
-
-    display: block;
-
-
-    /*
-       LOGO DIPERBESAR
-    */
-
-    width: 105px;
-
-    height: 105px;
-
-
-    object-fit: contain;
-
-
-    flex-shrink: 0;
-
-}
-
-
-/* =========================================================
-   BLOK NAMA PB DJAREM
-========================================================= */
-
-.event-title-block {
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-
-    align-items: flex-start;
-
-
-    margin: 0;
-
-    padding: 0;
-
-}
-
-
-/* =========================================================
-   PB DJAREM
-========================================================= */
-.event-title {
-    margin: 0;
-
-    font-size: clamp(32px, 3.2vw, 50px);
-
-    line-height: 0.9;
-
-    font-weight: 800;
-
-    letter-spacing: 10px;
-
-    color: #ffffff;
-
-    white-space: nowrap;
-}
-
-
-/* =========================================================
-   MALANG
-========================================================= */
-
-.event-subtitle {
-
-    display: block;
-
-
-    margin-top: 7px;
-
-
-    font-size:
-        clamp(
-            18px,
-            1.8vw,
-            26px
-        );
-
-
-    line-height: 1;
-
-
-    font-weight: 900;
-
-
-    font-style: italic;
-
-
-    letter-spacing: 5px;
-
-
-    color: #ffffff;
-
-
-    white-space: nowrap;
-
-}
-
-
-/* =========================================================
-   PANEL INFORMASI BERDIRI
-========================================================= */
-
-.banner-info-table {
-
-    width: 100%;
-
-
-    max-width: 430px;
-
-
-    margin-top: 2px;
-
-
-    box-sizing: border-box;
-
-
-    overflow: hidden;
-
-
-    border-radius: 4px;
-
-
-    background: #ffffff;
-
-
-    box-shadow:
-        0 3px 8px rgba(0,0,0,0.18);
-
-}
-
-
-/* =========================================================
-   BARIS PANEL
-========================================================= */
-
-.banner-info-row {
-
-    display: flex;
-
-
-    flex-direction: row;
-
-
-    justify-content: space-between;
-
-
-    align-items: center;
-
-
-    width: 100%;
-
-
-    min-height: 38px;
-
-}
-
-
-/* =========================================================
-   TEKS "PB DJAREM BERDIRI PADA"
-========================================================= */
-
-.banner-info-label {
-
-    flex: 1;
-
-
-    padding:
-        8px
-        15px;
-
-
-    box-sizing: border-box;
-
-
-    color: #333333;
-
-
-    font-size: 13px;
-
-
-    font-weight: 800;
-
-
-    text-transform: uppercase;
-
-
-    white-space: nowrap;
-
-}
-
-
-/* =========================================================
-   TAHUN 2025
-========================================================= */
-
-.banner-info-value {
-
-    display: flex;
-
-
-    align-items: center;
-
-    justify-content: center;
-
-
-    min-width: 75px;
-
-
-    height: 38px;
-
-
-    padding:
-        0
-        15px;
-
-
-    box-sizing: border-box;
-
-
-    background: #c7a935;
-
-
-    color: #ffffff;
-
-
-    font-size: 20px;
-
-
-    font-weight: 900;
-
-
-    font-style: italic;
-
-
-    transform: none;
-
-
-    white-space: nowrap;
-
-}
-
-
-/* =========================================================
-   BAGIAN TENGAH
-========================================================= */
-
-.banner-center {
-
-    grid-column: 2;
-
-    grid-row: 1;
-
-
-    position: relative;
-
-
-    width: 100%;
-
-    height: 100%;
-
-
-    overflow: hidden;
-
-
-    box-sizing: border-box;
-
-
-    display: block;
-
-
-    z-index: 2;
-
-}
-
-
-/* =========================================================
-   TEKS BACKGROUND
-========================================================= */
-
-.headline {
-
-    position: absolute;
-
-
-    top: 13px;
-
-    left: 50%;
-
-
-    width: 100%;
-
-
-    transform:
-        translateX(-50%);
-
-
-    margin: 0;
-
-
-    text-align: center;
-
-
-    font-size:
-        clamp(
-            20px,
-            2.4vw,
-            38px
-        );
-
-
-    line-height: 1;
-
-
-    font-weight: 900;
-
-
-    text-transform: uppercase;
-
-
-    letter-spacing: 1px;
-
-
-    color:
-        rgba(
-            255,
-            255,
-            255,
-            0.13
-        );
-
-
-    z-index: 1;
-
-
-    pointer-events: none;
-
-
-    white-space: nowrap;
-
-}
-
-
-/* =========================================================
-   SPAN HEADLINE
-========================================================= */
-
-.headline span {
-
-    color:
-        rgba(
-            255,
-            230,
-            0,
-            0.13
-        );
-
-}
-
-
-/* =========================================================
-   TULISAN DI SISI KANAN BANNER TENGAH
-========================================================= */
-
-.banner-tagline {
-
-    position: absolute;
-
-
-    top: 50%;
-
-    right: 20%;
-
-
-left: 50%;
-transform: translate(-50%, -50%);
-
-
-    margin: 0;
-
-
-    max-width: 34%;
-
-
-    text-align: right;
-
-
-    font-family: 'Anton', sans-serif;
-
-
-    font-size:
-        clamp(
-            13px,
-            1.6vw,
-            22px
-        );
-
-
-    line-height: 1.15;
-
-
-    letter-spacing: 0.5px;
-
-
-    text-transform: uppercase;
-
-
-    color:
-        rgba(
-            255,
-            255,
-            255,
-            0.55
-        );
-
-
-    z-index: 3;
-
-
-    pointer-events: none;
-
-}
-
-
-/* =========================================================
-   JOIN TEXT
-========================================================= */
-
-.join-text {
-
-    position: absolute;
-
-
-    top: 75px;
-
-    left: 50%;
-
-
-    transform:
-        translateX(-50%)
-        skew(-10deg);
-
-
-    margin: 0;
-
-
-    padding:
-        4px
-        15px;
-
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.65
-        );
-
-
-    color:
-        rgba(
-            190,
-            0,
-            0,
-            0.8
-        );
-
-
-    font-size: 10px;
-
-
-    font-weight: 900;
-
-
-    text-transform: uppercase;
-
-
-    white-space: nowrap;
-
-
-    z-index: 2;
-
-
-    pointer-events: none;
-
-}
-
-
-/* =========================================================
-   FOTO BERSAMA
-========================================================= */
-
-.player-img {
-
-    position: absolute;
-
-
-    left: 50%;
-
-
-    bottom: -1px;
-
-
-    transform:
-        translateX(-50%);
-
-
-    /*
-       Foto sedikit diperbesar
-    */
-
-    width: 108%;
-
-
-    height: 100%;
-
-
-    object-fit: contain;
-
-
-    object-position:
-        center
-        bottom;
-
-
-    z-index: 5;
-
-
-    pointer-events: none;
-
-
-    filter:
-        drop-shadow(
-            0 6px 8px
-            rgba(0,0,0,0.30)
-        );
-
-}
-
-
-/* =========================================================
-   BAGIAN KANAN
-========================================================= */
-
-.banner-right {
-
-    grid-column: 3;
-
-    grid-row: 1;
-
-
-    position: relative;
-
-
-    width: 100%;
-
-    height: 100%;
-
-
-    display: flex;
-
-
-    flex-direction: column;
-
-
-    justify-content: space-between;
-
-
-    align-items: stretch;
-
-
-    padding:
-        0
-        0
-        8px
-        0;
-
-
-    box-sizing: border-box;
-
-
-    z-index: 6;
-
-
-    overflow: hidden;
-
-}
-
-
-/* =========================================================
-   LOGO KANAN
-========================================================= */
-.right-logo {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-}
-.right-logo {
-
-    position: relative;
-
-
-    width: 100%;
-
-
-    height: 85px;
-
-
-    min-height: 85px;
-
-
-    display: flex;
-
-
-    justify-content: center;
-
-
-    align-items: center;
-
-
-    padding:
-        8px
-        15px;
-
-
-    box-sizing: border-box;
-
-
-    background: #ffffff;
-
-
-    border-radius:
-        0
-        0
-        0
-        18px;
-
-
-    box-shadow:
-        -2px
-        3px
-        8px
-        rgba(0,0,0,0.20);
-
-}
-
-
-/* =========================================================
-   LOGO KANAN
-========================================================= */
-
-.right-logo img {
-
-    display: block;
-
-
-    width: 250px;
-
-    height: 250px;
-
-
-    object-fit: contain;
-
-}
-
-
-/* =========================================================
-   SOCIAL INFO
-========================================================= */
-
-.social-info {
-
-    width: 100%;
-
-
-    margin-top: auto;
-
-
-    padding:
-        0
-        12px
-        8px
-        12px;
-
-
-    box-sizing: border-box;
-
-
-    text-align: right;
-
-}
-
-
-/* =========================================================
-   SOCIAL BOX
-========================================================= */
-
-.social-box {
-
-    display: inline-flex;
-
-
-    flex-direction: column;
-
-
-    align-items: stretch;
-
-
-    min-width: 230px;
-
-
-    max-width: 100%;
-
-
-    overflow: hidden;
-
-
-    border-radius: 4px;
-
-
-    background: #ffffff;
-
-
-    box-shadow:
-        0
-        3px
-        8px
-        rgba(0,0,0,0.20);
-
-}
-
-
-/* =========================================================
-   INSTAGRAM
-========================================================= */
-
-.instagram {
-
-    margin: 0;
-
-
-    padding:
-        7px
-        14px;
-
-
-    box-sizing: border-box;
-
-
-    background: #ffffff;
-
-
-    color: #b80000;
-
-
-    font-size: 13px;
-
-
-    line-height: 1.2;
-
-
-    font-weight: 900;
-
-
-    text-align: right;
-
-
-    white-space: nowrap;
-
-}
-
-
-/* =========================================================
-   WEBSITE
-========================================================= */
-
-.website {
-
-    margin: 0;
-
-
-    padding:
-        7px
-        14px;
-
-
-    box-sizing: border-box;
-
-
-    background: #b80000;
-
-
-    color: #ffffff;
-
-
-    font-size: 11px;
-
-
-    line-height: 1.2;
-
-
-    font-weight: 900;
-
-
-    letter-spacing: 0.5px;
-
-
-    text-align: right;
-
-
-    white-space: nowrap;
-
-}
-
-
-/* =========================================================
-   FOOTER / SPONSOR
-========================================================= */
-
-.banner-footer {
-
-    grid-column: 1 / 4;
-
-    grid-row: 2;
-
-
-    position: relative;
-
-
-    width: 100%;
-
-    height: 45px;
-
-
-    display: flex;
-
-
-    justify-content: center;
-
-
-    align-items: center;
-
-
-    gap: 12px;
-
-
-    padding:
-        4px
-        15px;
-
-
-    box-sizing: border-box;
-
-
-    background:
-        rgba(
-            120,
-            0,
-            0,
-            0.78
-        );
-
-
-    z-index: 10;
-
-
-    overflow: hidden;
-
-}
-
-
-/* =========================================================
-   JUDUL FOOTER
-========================================================= */
-
-.support-title {
-
-    flex-shrink: 0;
-
-
-    font-size: 8px;
-
-
-    font-weight: 800;
-
-
-    color: #ffffff;
-
-
-    white-space: nowrap;
-
-}
-
-
-/* =========================================================
-   LOGO FOOTER
-========================================================= */
-
-.banner-footer img {
-
-    display: block;
-
-
-    width: auto;
-
-    height: auto;
-
-
-    max-width: 64px;
-
-    max-height: 30px;
-
-
-    object-fit: contain;
-
-
-    flex-shrink: 0;
-
-}
-
-
-/* =========================================================
-   NAVBAR DI ATAS BANNER
-========================================================= */
-
-nav,
-.navbar,
-header {
-
-    position: relative;
-
-    z-index: 1000;
-
-}
-
-
-/* =========================================================
-   TABLET
-========================================================= */
-
-@media (max-width: 1100px) {
-
-
-    .banner-container {
-
-        height: 220px;
-
-
-        grid-template-columns:
-            43%
-            36%
-            21%;
-
-
-        grid-template-rows:
-            180px
-            40px;
-
-    }
-
-
-    .banner-left {
-
-        padding-left: 1px;
-
-    }
-
-
-    .sponsor-logo {
-
-        width: 80px;
-
-        height: 80px;
-
-    }
-
-
-    .brand-area {
-
-        gap: 10px;
-
-    }
-
-
-    .event-title {
-
-        font-size: 38px;
-
-    }
-
-
-    .event-subtitle {
-
-        font-size: 18px;
-
-        letter-spacing: 2px;
-
-    }
-
-
-    .banner-info-label {
-
-        font-size: 10px;
-
-    }
-
-
-    .banner-info-value {
-
-        min-width: 60px;
-
-        height: 32px;
-
-        font-size: 15px;
-
-    }
-
-
-    .right-logo {
-
-        height: 75px;
-
-        min-height: 75px;
-
-    }
-
-
-    .right-logo img {
-
-        width: 70px;
-
-        height: 70px;
-
-    }
-
-
-    .social-box {
-
-        min-width: 180px;
-
-    }
-
-
-    .instagram {
-
-        font-size: 10px;
-
-    }
-
-
-    .website {
-
-        font-size: 8px;
-
-    }
-
-
-    .banner-footer {
-
-        gap: 8px;
-
-    }
-
-
-    .banner-footer img {
-
-        max-width: 54px;
-
-        max-height: 27px;
-
-    }
-
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 768px) {
-
-
-    .banner-container {
-
-        height: 175px;
-
-
-        grid-template-columns:
-            48%
-            32%
-            20%;
-
-
-        grid-template-rows:
-            140px
-            35px;
-
-    }
-
-
-    .banner-left {
-
-        padding:
-            7px
-            5px
-            10px
-            12px;
-
-    }
-
-
-    .brand-area {
-
-        gap: 7px;
-
-        margin-bottom: 7px;
-
-    }
-
-
-    .sponsor-logo {
-
-        width: 55px;
-
-        height: 55px;
-
-    }
-
-
-    .event-title {
-
-        font-size: 23px;
-
-        letter-spacing: -1px;
-
-    }
-
-
-    .event-subtitle {
-
-        margin-top: 3px;
-
-        font-size: 11px;
-
-        letter-spacing: 1px;
-
-    }
-
-
-    .banner-info-table {
-
-        max-width: 100%;
-
-    }
-
-
-    .banner-info-row {
-
-        min-height: 25px;
-
-    }
-
-
-    .banner-info-label {
-
-        padding:
-            5px
-            7px;
-
-        font-size: 6px;
-
-    }
-
-
-    .banner-info-value {
-
-        min-width: 42px;
-
-        height: 25px;
-
-        padding: 0 5px;
-
-        font-size: 10px;
-
-    }
-
-
-    .headline {
-
-        top: 7px;
-
-        font-size: 12px;
-
-    }
-
-
-    .join-text {
-
-        top: 35px;
-
-        padding:
-            2px
-            6px;
-
-        font-size: 5px;
-
-    }
-
-
-    .player-img {
-
-        width: 120%;
-
-    }
-
-
-    .right-logo {
-
-        height: 52px;
-
-        min-height: 52px;
-
-        padding: 3px;
-
-        border-radius:
-            0
-            0
-            0
-            8px;
-
-    }
-
-
-    .right-logo img {
-
-        width: 48px;
-
-        height: 48px;
-
-    }
-
-
-    .social-info {
-
-        padding:
-            0
-            4px
-            4px
-            2px;
-
-    }
-
-
-    .social-box {
-
-        min-width: 0;
-
-        width: 100%;
-
-    }
-
-
-    .instagram {
-
-        padding:
-            4px
-            5px;
-
-        font-size: 6px;
-
-    }
-
-
-    .website {
-
-        padding:
-            4px
-            5px;
-
-        font-size: 5px;
-
-    }
-
-
-    .banner-footer {
-
-        height: 35px;
-
-        gap: 5px;
-
-        padding:
-            2px
-            5px;
-
-    }
-
-
-    .support-title {
-
-        font-size: 5px;
-
-    }
-
-
-    .banner-footer img {
-
-        max-width: 40px;
-
-        max-height: 20px;
-
-    }
-
-}
-
-
-/* =========================================================
-   HP KECIL
-========================================================= */
-
-@media (max-width: 480px) {
-
-
-    .banner-container {
-
-        height: 150px;
-
-
-        grid-template-columns:
-            50%
-            30%
-            20%;
-
-
-        grid-template-rows:
-            120px
-            30px;
-
-    }
-
-
-    .banner-left {
-
-        padding-left: 8px;
-
-    }
-
-
-    .sponsor-logo {
-
-        width: 45px;
-
-        height: 45px;
-
-    }
-
-
-    .brand-area {
-
-        gap: 5px;
-
-        margin-bottom: 5px;
-
-    }
-
-
-    .event-title {
-
-        font-size: 18px;
-
-    }
-
-
-    .event-subtitle {
-
-        font-size: 9px;
-
-        letter-spacing: 1px;
-
-    }
-
-
-    .banner-info-label {
-
-        font-size: 5px;
-
-    }
-
-
-    .banner-info-value {
-
-        min-width: 35px;
-
-        height: 22px;
-
-        font-size: 8px;
-
-    }
-
-
-    .right-logo {
-
-        height: 45px;
-
-        min-height: 45px;
-
-    }
-
-
-    .right-logo img {
-
-        width: 40px;
-
-        height: 40px;
-
-    }
-
-
-    .social-box {
-
-        width: 100%;
-
-    }
-
-
-    .instagram {
-
-        font-size: 5px;
-
-        padding: 3px;
-
-    }
-
-
-    .website {
-
-        font-size: 4px;
-
-        padding: 3px;
-
-    }
-
-
-    .banner-footer {
-
-        height: 30px;
-
-        gap: 3px;
-
-    }
-
-
-    .support-title {
-
-        font-size: 4px;
-
-    }
-
-
-    .banner-footer img {
-
-        max-width: 32px;
-
-        max-height: 16px;
-
-    }
-
-}
-  /* ---------- HERO ---------- */
-  .hero{
-    min-height:100vh;
-    background: var(--bg-gradient);
-    color: var(--text);
-    display:flex; align-items:center;
-    padding:0 8vw;
-    position:relative;
-    overflow:hidden;
-  }
-  .court-lines{
-    position:absolute; inset:0; pointer-events:none; opacity:0.3;
-  }
-  .hero .eyebrow{ color: var(--accent-light); }
-  .hero h1{
-    font-size:clamp(44px, 8vw, 96px);
-    line-height:0.95;
-    margin:18px 0 22px;
-    color: var(--text-heading);
-  }
-
-  .hero-inner{
-    position:relative; z-index:2;
-    width:100%; max-width:760px;
-    padding-top:70px;
-  }
-
-  @media (max-width:900px){
-    .hero-inner{ width:100%; }
-  }
-
-  @media (max-width:760px){
-    .hero{
-      flex-direction:column;
-      justify-content:center;
-      text-align:center;
-      padding:130px 6vw 60px;
-      min-height:auto;
-      gap:8px;
-    }
-    .hero-inner{
-      width:100%; max-width:100%;
-      padding-top:0;
-    }
-    .hero p{ margin-left:auto; margin-right:auto; }
-    .hero-cta{ justify-content:center; }
-  }
-
-  @media (max-width:420px){
-    .hero{ padding:120px 6vw 50px; }
-    .hero h1{ font-size:clamp(32px, 11vw, 48px); }
-  }
-  .hero h1 em{ font-style:normal; color: var(--accent); text-shadow: 0 0 40px rgba(220,38,38,0.4); }
-  .slogan{
-    font-family:'Oswald', sans-serif; font-weight:500; font-size:19px;
-    letter-spacing:1px; color: var(--accent-light); margin-bottom:26px;
-  }
-  .hero p{ color: var(--muted); font-size:16.5px; max-width:560px; margin-bottom:22px; }
-  .hero-subhead{
-    font-family:'Oswald', sans-serif;
-    font-weight:600;
-    font-size:15.5px;
-    letter-spacing:1px;
-    text-transform:uppercase;
-    color: var(--text-heading);
-    margin:26px 0 10px;
-  }
-  .hero-accordion{ display:flex; flex-direction:column; gap:10px; margin:22px 0 6px; max-width:560px; }
-  .hero-accordion-item{
-    border:1px solid var(--border);
-    border-radius:10px;
-    background: var(--card-bg);
-    overflow:hidden;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  }
-  .hero-accordion-item:hover{ border-color: var(--border-hover); }
-  .hero-accordion-item.active{
-    border-color: var(--accent);
-    box-shadow: 0 8px 24px var(--shadow-accent);
-  }
-  .hero-accordion-question{
-    display:flex; align-items:center; justify-content:space-between; gap:14px;
-    width:100%; padding:16px 18px;
-    background:none; border:none; cursor:pointer; text-align:left;
-  }
-  .hero-accordion-text{
-    font-family:'Oswald', sans-serif; font-weight:600; font-size:14.5px;
-    letter-spacing:1px; text-transform:uppercase; color: var(--text-heading);
-  }
-  .hero-accordion-icon{
-    flex-shrink:0; width:24px; height:24px; border-radius:50%;
-    display:flex; align-items:center; justify-content:center;
-    border:1px solid var(--border);
-    color: var(--accent-light);
-    transition: transform 0.35s cubic-bezier(.2,.8,.2,1), background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-  }
-  .hero-accordion-item.active .hero-accordion-icon{
-    transform: rotate(135deg);
-    background: var(--accent);
-    color:#fff;
-    border-color: var(--accent);
-  }
-  .hero-accordion-answer{
-    max-height:0; overflow:hidden;
-    transition: max-height 0.4s cubic-bezier(.2,.8,.2,1);
-  }
-  .hero-accordion-answer-inner{
-    padding:0 18px 18px;
-    color: var(--muted);
-    font-size:15.5px;
-    line-height:1.7;
-  }
-  .hero-cta{ display:flex; gap:16px; flex-wrap:wrap; margin-top:16px; }
-  .btn{
-    display:inline-block; padding:15px 30px;
-    font-family:'Oswald'; letter-spacing:2px; font-size:12.5px; text-transform:uppercase;
-    border:1px solid var(--border); transition:all 0.25s;
-    color: var(--text);
-  }
-  .btn-solid{
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #fff;
-    box-shadow: 0 4px 20px rgba(220,38,38,0.3);
-  }
-  .btn-solid:hover{
-    background: #b91c1c;
-    border-color: #b91c1c;
-    box-shadow: 0 6px 30px rgba(220,38,38,0.5);
-    transform: translateY(-2px);
-  }
-  .btn-outline{
-    color: var(--text);
-    border-color: var(--border);
-  }
-  .btn-outline:hover{
-    background: var(--surface-hover);
-    border-color: var(--accent);
-    color: var(--accent-light);
-  }
-
-  .shuttle{ position:absolute; opacity:0.9; }
-  .shuttle svg{ display:block; }
-
-  .trajectory{
-    position:relative; height:90px; background: var(--bg);
-  }
-  .trajectory svg{ position:absolute; top:0; left:0; width:100%; height:100%; }
-
-  /* ---------- SECTION HEADERS ---------- */
-  .sec-head{ margin-bottom:56px; max-width:640px; }
-  .sec-head .eyebrow{ display:block; margin-bottom:12px; }
-  .sec-head h2{ font-size:clamp(32px,4.5vw,52px); line-height:1.02; }
-  .sec-head p{ margin-top:16px; color: var(--muted); font-size:16px; max-width:560px; }
-
-  /* ---------- ABOUT ---------- */
-  .about{ background: var(--surface); }
-  .about-grid{ display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start; }
-  .about-text p{ margin-bottom:18px; color: var(--muted); font-size:16px; }
-  .stat-row{ display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:20px; }
-  .stat{ border-top:2px solid var(--accent); padding-top:12px; }
-  .stat b{ font-family:'Anton'; font-size:38px; display:block; color: var(--accent); }
-  .stat span{ font-family:'Oswald'; font-size:12px; letter-spacing:1.5px; text-transform:uppercase; color: var(--muted-light); }
-
-  /* ---------- ATLET / FOTO BERSAMA ---------- */
-  .athletes{ background: var(--bg); }
-  .athletes .sec-head p{ color: var(--muted); }
-  .team-photo-wrap{
-    position:relative;
-    width:100%;
-    max-width:1180px;
-    margin:0 auto;
-    border-radius:18px;
-    overflow:hidden;
-    border:1px solid var(--border);
-    box-shadow: 0 25px 60px var(--shadow);
-    background: var(--surface);
-  }
-  .team-photo-frame{
-    position:relative;
-    width:100%;
-    aspect-ratio:16/8;
-    overflow:hidden;
-  }
-  .team-photo-frame img{
-    width:100%; height:100%;
-    object-fit:cover;
-    display:block;
-    transition: transform 0.7s cubic-bezier(.2,.8,.2,1);
-  }
-  .team-photo-wrap:hover .team-photo-frame img{
-    transform: scale(1.045);
-  }
-  .team-photo-frame::after{
-    content:'';
-    position:absolute; inset:0;
-    background: linear-gradient(180deg, transparent 55%, rgba(0,0,0,0.55) 100%);
-    pointer-events:none;
-  }
-  .team-photo-glow{
-    position:absolute; inset:-2px;
-    border-radius:20px;
-    padding:2px;
-    background: linear-gradient(120deg, rgba(220,38,38,0.6), transparent 35%, transparent 65%, rgba(251,191,36,0.5));
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events:none;
-    opacity:0.7;
-  }
-  .team-photo-caption{
-    position:absolute; left:0; right:0; bottom:0;
-    padding:22px 28px;
-    display:flex; align-items:flex-end; justify-content:space-between; gap:16px;
-    flex-wrap:wrap;
-    z-index:2;
-  }
-  .team-photo-caption h4{
-    font-family:'Oswald'; font-weight:600; letter-spacing:1px;
-    font-size:15px; text-transform:uppercase; color:#f8fafc;
-  }
-  .team-photo-caption span{
-    font-family:'Oswald'; font-size:11.5px; letter-spacing:1.5px;
-    text-transform:uppercase; color: rgba(255,255,255,0.75);
-  }
-  .team-photo-badge{
-    display:inline-flex; align-items:center; gap:6px;
-    padding:7px 14px;
-    border-radius:30px;
-    background: rgba(220,38,38,0.25);
-    border:1px solid rgba(251,191,36,0.4);
-    -webkit-backdrop-filter: blur(6px);
-    backdrop-filter: blur(6px);
-    font-family:'Oswald'; font-size:11px; letter-spacing:1.5px;
-    text-transform:uppercase; color:#fff3e0;
-  }
-  .team-photo-badge::before{
-    content:''; width:6px; height:6px; border-radius:50%;
-    background: #fbbf24; box-shadow:0 0 8px #fbbf24;
-  }
-  @media (max-width:760px){
-    .team-photo-frame{ aspect-ratio:4/3; }
-    .team-photo-caption{ padding:16px 18px; }
-  }
-
-  /* ---------- PROGRAM ---------- */
-  .program{ background: var(--bg); }
-  .program-list{ display:flex; flex-direction:column; }
-  .program-item{
-    display:grid; grid-template-columns:90px 1fr; gap:28px;
-    padding:32px 0; border-bottom:1px solid var(--border);
-    align-items:start;
-    transition: background 0.3s ease;
-  }
-  .program-item:hover{
-    background: var(--surface-hover);
-    margin: 0 -20px;
-    padding-left: 20px;
-    padding-right: 20px;
-    border-radius: 8px;
-  }
-  .program-item:first-child{ border-top:1px solid var(--border); }
-  .program-num{ font-family:'Anton'; font-size:40px; color: var(--accent); opacity:0.7; }
-  .program-item h3{ font-size:22px; margin-bottom:8px; }
-  .program-item p{ color: var(--muted); font-size:15.5px; max-width:600px; }
-  .program-coach{ margin-top:10px; font-family:'Oswald'; font-size:12px; letter-spacing:1.5px; text-transform:uppercase; color: var(--accent-light); }
-
-  /* ---------- FAQ ---------- */
-  .faq{ background: var(--surface); }
-  .faq .sec-head p{ color: var(--muted); }
-  .faq-list{
-    max-width:820px;
-    margin:0 auto;
-    display:flex; flex-direction:column;
-    gap:14px;
-  }
-  .faq-item{
-    border:1px solid var(--border);
-    border-radius:14px;
-    background: var(--card-bg);
-    overflow:hidden;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-  }
-  .faq-item:hover{
-    border-color: var(--border-hover);
-    box-shadow: 0 10px 30px var(--shadow-accent);
-  }
-  .faq-item.active{
-    border-color: var(--accent);
-    box-shadow: 0 10px 34px var(--shadow-accent);
-  }
-  .faq-question{
-    display:flex; align-items:center; gap:20px;
-    width:100%;
-    padding:22px 24px;
-    background:none; border:none; cursor:pointer;
-    text-align:left;
-    color: var(--text-heading);
-    font-family:'Work Sans', sans-serif;
-  }
-  .faq-num{
-    flex-shrink:0;
-    width:38px; height:38px;
-    border-radius:50%;
-    display:flex; align-items:center; justify-content:center;
-    background: rgba(220,38,38,0.12);
-    border:1px solid rgba(251,191,36,0.35);
-    color: var(--accent-light);
-    font-family:'Oswald'; font-weight:600; font-size:13px;
-    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
-  }
-  .faq-item.active .faq-num{
-    background: var(--accent);
-    color:#fff;
-    transform: scale(1.08);
-  }
-  .faq-question span.faq-q-text{
-    flex:1;
-    font-size:17px; font-weight:600;
-    letter-spacing:0.2px;
-  }
-  .faq-icon{
-    flex-shrink:0;
-    width:28px; height:28px;
-    display:flex; align-items:center; justify-content:center;
-    border-radius:50%;
-    border:1px solid var(--border);
-    color: var(--accent-light);
-    transition: transform 0.35s cubic-bezier(.2,.8,.2,1), background 0.3s ease, border-color 0.3s ease;
-  }
-  .faq-item.active .faq-icon{
-    transform: rotate(135deg);
-    background: var(--accent);
-    color:#fff;
-    border-color: var(--accent);
-  }
-  .faq-answer{
-    max-height:0;
-    overflow:hidden;
-    transition: max-height 0.4s cubic-bezier(.2,.8,.2,1);
-  }
-  .faq-answer-inner{
-    padding:0 24px 24px 82px;
-    color: var(--muted);
-    font-size:15px;
-    line-height:1.75;
-  }
-  @media (max-width:600px){
-    .faq-question{ padding:18px; gap:14px; }
-    .faq-question span.faq-q-text{ font-size:15.5px; }
-    .faq-answer-inner{ padding:0 18px 20px 62px; font-size:14px; }
-    .faq-num{ width:32px; height:32px; font-size:12px; }
-  }
-
-  /* ---------- PELATIH (legacy, tidak dipakai lagi) ---------- */
-  .coaches{ background: var(--bg); }
-  .coach-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:36px; }
-  .coach-card{
-    text-align:left;
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 24px;
-    transition: all 0.3s ease;
-  }
-  .coach-card:hover{
-    border-color: var(--border-hover);
-    box-shadow: 0 8px 30px var(--shadow-accent);
-    transform: translateY(-4px);
-  }
-  /* =========================================
-   SECTION CARA BERGABUNG
-========================================= */
-
-.join {
-  padding: 110px 0;
-  position: relative;
-}
-
-/* BOX UTAMA */
-
-.join-box {
-  margin-top: 50px;
-
-  display: grid;
-  grid-template-columns: 320px 1fr;
-
-  gap: 60px;
-
-  align-items: center;
-
-  padding: 45px;
-
-  border-radius: 24px;
-
-  background: rgba(255, 255, 255, 0.03);
-
-  border: 1px solid rgba(251, 191, 36, 0.2);
-
-  box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.2);
-}
-
-/* =========================================
-   QR CODE
-========================================= */
-
-.qr-section {
-  text-align: center;
-}
-
-.qr-placeholder {
-  width: 260px;
-  height: 260px;
-
-  margin: auto;
-
-  padding: 15px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  background: #ffffff;
-
-  border-radius: 18px;
-
-  box-shadow:
-    0 15px 40px rgba(220, 38, 38, 0.25);
-}
-
-/* GAMBAR QR */
-
-.qr-placeholder img {
-  width: 100%;
-  height: 100%;
-
-  object-fit: contain;
-
-  display: block;
-
-  border-radius: 8px;
-}
-
-.qr-text {
-  margin-top: 18px;
-
-  font-size: 14px;
-
-  color: var(--muted-light);
-
-  font-family: "Work Sans", sans-serif;
-}
-
-/* =========================================
-   INFO
-========================================= */
-
-.join-info {
-  max-width: 650px;
-}
-
-.join-label {
-  display: inline-block;
-
-  margin-bottom: 15px;
-
-  font-size: 11px;
-
-  letter-spacing: 2px;
-
-  color: #fbbf24;
-
-  font-weight: 700;
-}
-
-.join-info h3 {
-  font-size: 30px;
-
-  margin-bottom: 15px;
-
-  font-family: "Playfair Display", serif;
-}
-
-.join-info > p {
-  line-height: 1.8;
-
-  color: var(--muted-light);
-
-  margin-bottom: 30px;
-}
-
-/* =========================================
-   LANGKAH
-========================================= */
-
-.join-steps {
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 18px;
-
-  margin-bottom: 30px;
-}
-
-.join-step {
-  display: flex;
-
-  align-items: flex-start;
-
-  gap: 18px;
-
-  padding: 15px;
-
-  border-left: 2px solid rgba(220, 38, 38, 0.6);
-
-  background: rgba(220, 38, 38, 0.04);
-}
-
-.step-number {
-  font-size: 14px;
-
-  font-weight: 700;
-
-  color: #fbbf24;
-
-  min-width: 28px;
-}
-
-.join-step strong {
-  display: block;
-
-  margin-bottom: 5px;
-
-  font-size: 15px;
-}
-
-.join-step p {
-  margin: 0;
-
-  font-size: 14px;
-
-  line-height: 1.6;
-
-  color: var(--muted-light);
-}
-
-/* =========================================
-   TOMBOL WHATSAPP
-========================================= */
-
-.wa-btn {
-  display: inline-flex;
-
-  align-items: center;
-
-  gap: 10px;
-
-  padding: 15px 25px;
-
-  border-radius: 10px;
-
-  text-decoration: none;
-
-  font-weight: 600;
-
-  background: #25D366;
-
-  color: white;
-
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
-}
-
-.wa-btn:hover {
-  transform: translateY(-3px);
-
-  box-shadow:
-    0 12px 30px rgba(37, 211, 102, 0.25);
-}
-
-.wa-btn svg {
-  flex-shrink: 0;
-}
-
-/* CATATAN */
-
-.join-note {
-  display: block;
-
-  margin-top: 18px;
-
-  font-size: 12px;
-
-  color: var(--muted-light);
-
-  opacity: 0.8;
-}
-
-/* =========================================
-   RESPONSIVE TABLET
-========================================= */
-
-@media (max-width: 850px) {
-
-  .join-box {
-    grid-template-columns: 1fr;
-
-    gap: 40px;
-
-    text-align: center;
-  }
-
-  .join-info {
-    max-width: 100%;
-  }
-
-  .join-step {
-    text-align: left;
-  }
-
-}
-
-/* =========================================
-   RESPONSIVE MOBILE
-========================================= */
-
-@media (max-width: 550px) {
-
-  .join {
-    padding: 70px 0;
-  }
-
-  .join-box {
-    padding: 25px 18px;
-
-    border-radius: 18px;
-  }
-
-  .qr-placeholder {
-    width: 210px;
-    height: 210px;
-  }
-
-  .join-info h3 {
-    font-size: 24px;
-  }
-
-  .wa-btn {
-    width: 100%;
-
-    justify-content: center;
-
-    padding: 16px;
-  }
-
-}
-  .coach-photo{
-    aspect-ratio:1/1; width:100%; background: var(--surface);
-    display:flex; align-items:center; justify-content:center;
-    font-family:'Anton'; font-size:40px; color: var(--border);
-    margin-bottom:18px; position:relative; overflow:hidden;
-    border-radius: 8px;
-  }
-  .coach-photo::before{
-    content:''; position:absolute; width:160%; height:3px; background: var(--accent);
-    top:50%; left:-30%; transform:rotate(-18deg); opacity:0.5;
-  }
-  .map-box {
-  width: 100%;
-  height: 400px;
-
-  overflow: hidden;
-
-  border-radius: 16px;
-
-  border: 1px solid rgba(251, 191, 36, 0.25);
-
-  box-shadow:
-    0 15px 40px rgba(0, 0, 0, 0.15);
-}
-
-.map-box iframe {
-  width: 100%;
-  height: 100%;
-
-  display: block;
-}
-  .coach-card h4{ font-family:'Oswald'; font-weight:600; font-size:17px; color: var(--text-heading); }
-  .coach-card .role{ font-family:'Oswald'; font-size:12px; letter-spacing:1.5px; text-transform:uppercase; color: var(--accent-light); margin:5px 0 10px; }
-  .coach-card p{ font-size:14.5px; color: var(--muted); }
-
-  /* ---------- SPONSOR ---------- */
-  .sponsor{ background: var(--surface); color: var(--text); text-align:center; }
-  .sponsor .sec-head{ margin-left:auto; margin-right:auto; text-align:center; }
-  .sponsor .sec-head p{ margin-left:auto; margin-right:auto; color: var(--muted); }
-  .sponsor-row{
-    display:grid; grid-template-columns:repeat(4,1fr);
-    gap:16px; margin-top:20px;
-  }
-  /* Kotak logo sponsor SELALU gelap, terlepas dari tema terang/gelap,
-     supaya logo (yang kebanyakan berwarna terang) tetap terlihat jelas. */
-  .sponsor-chip{
-    border:1px solid rgba(251,191,36,0.25); padding:30px 20px;
-    display:flex; align-items:center; justify-content:center;
-    min-height:120px;
-    font-family:'Oswald'; letter-spacing:2px; font-size:13px; text-transform:uppercase;
-    color: #94a3b8; transition:all 0.3s ease;
-    background: #111118;
-    border-radius: 8px;
-  }
-  .sponsor-chip:hover{
-    border-color: var(--accent);
-    color: var(--accent-light);
-    box-shadow: 0 4px 20px var(--shadow-accent);
-    transform: translateY(-2px);
-  }
-  .sponsor-chip img,
-  .sponsor-img{
-    max-width:100%; max-height:60px; width:auto; object-fit:contain; opacity:0.85;
-    transition:opacity 0.25s;
-  }
-  .sponsor-chip:hover img,
-  .sponsor-chip:hover .sponsor-img{ opacity:1; }
-
-  /* ---------- JALUR PENDAFTARAN ---------- */
-  .join{ background: var(--bg); color: var(--text); }
-  .join .eyebrow{ color: var(--accent-light); }
-  .join .sec-head p{ color: var(--muted); }
-  .join-box{
-    display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;
-    margin-top:20px;
-  }
-  .qr-placeholder{
-    width:240px; height:240px;
-    background: var(--surface);
-    display:flex; align-items:center; justify-content:center;
-    margin:0 auto;
-    border-radius:12px;
-    border: 2px dashed var(--border);
-  }
-  .qr-placeholder span{
-    font-family:'Oswald'; font-size:14px; letter-spacing:1px;
-    text-transform:uppercase; color: var(--muted);
-    text-align: center;
-  }
-  .join-info h3{
-    font-family:'Oswald'; font-size:22px; margin-bottom:16px;
-    color: var(--text-heading);
-  }
-  .join-info p{ color: var(--muted); font-size:16px; margin-bottom:24px; }
-  .wa-btn{
-    display:inline-flex; align-items:center; gap:10px;
-    background: var(--accent); color: #fff;
-    padding:16px 32px;
-    font-family:'Oswald'; letter-spacing:2px; font-size:14px; text-transform:uppercase;
-    border-radius:8px;
-    transition:all 0.3s ease;
-    box-shadow: 0 4px 20px rgba(220,38,38,0.3);
-  }
-  /* =========================================
-   PROGRAM
-========================================= */
-
-.program-list {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-
-  margin-top: 50px;
-}
-
-.program-item {
-  display: grid;
-  grid-template-columns: 70px 1fr;
-  gap: 30px;
-
-  padding: 35px;
-
-  border-radius: 16px;
-
-  border: 1px solid rgba(251, 191, 36, 0.15);
-
-  background: rgba(255, 255, 255, 0.02);
-
-  transition: 0.3s ease;
-}
-
-.program-item:hover {
-  transform: translateY(-4px);
-
-  border-color: rgba(251, 191, 36, 0.5);
-}
-
-.program-num {
-  width: 55px;
-  height: 55px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  border-radius: 50%;
-
-  background: rgba(220, 38, 38, 0.15);
-
-  border: 1px solid rgba(251, 191, 36, 0.4);
-
-  color: #fbbf24;
-
-  font-weight: 700;
-
-  font-size: 16px;
-}
-
-.program-content {
-  min-width: 0;
-}
-
-.program-content h3 {
-  margin: 0 0 10px;
-
-  font-size: 23px;
-}
-
-.program-content p {
-  margin: 18px 0;
-
-  line-height: 1.8;
-
-  color: var(--muted-light);
-}
-
-.program-coach {
-  display: inline-block;
-
-  padding: 8px 14px;
-
-  margin-bottom: 10px;
-
-  border-radius: 20px;
-
-  background: rgba(220, 38, 38, 0.1);
-
-  color: #fde68a;
-
-  font-size: 13px;
-
-  font-weight: 600;
-}
-
-.program-detail {
-  margin-top: 20px;
-
-  padding: 18px 20px;
-
-  border-left: 3px solid #dc2626;
-
-  background: rgba(220, 38, 38, 0.05);
-
-  border-radius: 0 10px 10px 0;
-
-  line-height: 1.8;
-}
-
-.program-detail strong {
-  display: block;
-
-  margin-bottom: 8px;
-
-  color: #fde68a;
-}
-
-.program-detail ul {
-  margin: 10px 0 0 20px;
-
-  padding: 0;
-}
-
-.program-detail li {
-  margin-bottom: 6px;
-}
-
-  .wa-btn:hover{
-    background: #1ebe5d;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 30px rgba(37,211,102,0.5);
-  }
-  .join-note{ margin-top:24px; font-size:13.5px; color: var(--muted-light); display:block; }
-
-  /* ---------- KONTAK ---------- */
-  .contact{ background: var(--surface); }
-  .contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:60px; }
-  .contact-list{ list-style:none; }
-  .contact-list li{ padding:20px 0; border-bottom:1px solid var(--border); }
-  .contact-list li:first-child{ border-top:1px solid var(--border); }
-  .contact-list .label{ font-family:'Oswald'; font-size:11.5px; letter-spacing:2px; text-transform:uppercase; color: var(--accent-light); display:block; margin-bottom:6px; }
-  .contact-list .value{ font-size:16px; color: var(--text-heading); }
-  .contact-link{
-    display:inline-flex; align-items:center; gap:12px;
-    font-size:16px; color: var(--text-heading);
-    text-decoration:none;
-    transition: color 0.25s ease, transform 0.25s ease;
-  }
-  .contact-link:hover{ color: var(--accent); transform: translateX(3px); }
-  .contact-link-icon{
-    flex-shrink:0;
-    width:34px; height:34px;
-    border-radius:50%;
-    display:flex; align-items:center; justify-content:center;
-    color:#fff;
-    transition: box-shadow 0.25s ease, transform 0.25s ease;
-  }
-  .contact-link:hover .contact-link-icon{
-    box-shadow: 0 4px 16px var(--shadow-accent);
-    transform: scale(1.08);
-  }
-  .contact-link-icon.icon-whatsapp{ background:#25D366; }
-  .contact-link-icon.icon-tiktok{ background:#000000; }
-  .contact-link-icon.icon-instagram{ background: radial-gradient(circle at 30% 110%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
-  .contact-link-icon.icon-facebook{ background:#1877F2; }
-  .map-box{
-    background: var(--bg); border:1px solid var(--border);
-    display:flex; align-items:center; justify-content:center; min-height:320px;
-    font-family:'Oswald'; letter-spacing:1.5px; color: var(--muted-light); text-transform:uppercase; font-size:13px;
-    text-align:center; padding:20px; flex-direction:column; gap:10px;
-    border-radius: 12px;
-  }
-
-  footer{
-    background: var(--bg); color: var(--muted-light); text-align:center;
-    padding:34px 8vw; font-family:'Oswald'; font-size:12px; letter-spacing:1.5px;
-    text-transform:uppercase; border-top:1px solid var(--border);
-    display:flex; flex-direction:column; align-items:center; gap:16px;
-  }
-  footer span{ color: var(--accent-light); }
-  .back-to-top{
-    display:inline-flex; align-items:center; gap:8px;
-    padding:11px 20px;
-    border-radius:30px;
-    border:1px solid var(--border);
-    background: var(--surface);
-    color: var(--text);
-    font-family:'Oswald'; font-size:11px; letter-spacing:1.5px; text-transform:uppercase;
-    transition: all 0.25s ease;
-  }
-  .back-to-top:hover{
-    border-color: var(--accent);
-    color: var(--accent-light);
-    background: var(--surface-hover);
-    box-shadow: 0 4px 18px var(--shadow-accent);
-    transform: translateY(-2px);
-  }
-  .back-to-top svg{ flex-shrink:0; }
-  
-
-  /* ---------- SCROLL REVEAL ---------- */
-  .reveal-on-scroll{
-    opacity:0;
-    transform: translateY(28px);
-    transition: opacity 0.8s cubic-bezier(.2,.8,.2,1), transform 0.8s cubic-bezier(.2,.8,.2,1);
-  }
-  .reveal-on-scroll.in-view{
-    opacity:1;
-    transform: translateY(0);
-  }
-  .reveal-on-scroll.delay-1{ transition-delay: 0.08s; }
-  .reveal-on-scroll.delay-2{ transition-delay: 0.16s; }
-  .reveal-on-scroll.delay-3{ transition-delay: 0.24s; }
-  .reveal-on-scroll.delay-4{ transition-delay: 0.32s; }
-
-  /* ---------- CURSOR GLOW (desktop) ---------- */
-  .cursor-glow{
-    position:fixed;
-    top:0; left:0;
-    width:420px; height:420px;
-    border-radius:50%;
-    background: radial-gradient(circle, rgba(220,38,38,0.10) 0%, transparent 70%);
-    pointer-events:none;
-    z-index:1;
-    transform: translate(-50%,-50%);
-    transition: opacity 0.3s ease;
-    opacity:0;
-  }
-  @media (max-width:900px){ .cursor-glow{ display:none; } }
-
-  /* ---------- BUTTON RIPPLE ---------- */
-  .btn, .wa-btn{ position:relative; overflow:hidden; }
-  .ripple{
-    position:absolute;
-    border-radius:50%;
-    background: rgba(255,255,255,0.5);
-    transform: scale(0);
-    animation: rippleAnim 0.6s ease-out;
-    pointer-events:none;
-  }
-  @keyframes rippleAnim{
-    to{ transform: scale(2.6); opacity:0; }
-  }
-
-  /* ---------- STAT COUNTER GLOW ---------- */
-  .stat b{ transition: text-shadow 0.4s ease; }
-  .stat.counted b{ text-shadow: 0 0 22px rgba(220,38,38,0.55); }
-
-  @media (max-width:900px){
-    nav{ padding:16px 5vw; }
-    .brand-name span{ display:none; }
-    .nav-links{
-      display:flex;
-      flex-direction:column;
-      gap:0;
-      position:absolute;
-      top:100%; left:0; right:0;
-      background: #262626;
-      backdrop-filter:blur(14px);
-      border-bottom:1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
-      max-height:0;
-      overflow:hidden;
-      opacity:0;
-      transition: max-height 0.35s ease, opacity 0.3s ease;
-    }
-    .nav-links.open{ max-height:520px; opacity:1; }
-    .nav-links a{
-      width:100%; box-sizing:border-box;
-      padding:16px 6vw;
-      border-bottom:1px solid rgba(255,255,255,0.08);
-      opacity:1;
-    }
-    .nav-toggle{ display:flex; }
-    .about-grid, .contact-grid, .join-box{ grid-template-columns:1fr; gap:40px; }
-    .coach-grid{ grid-template-columns:1fr; }
-    .sponsor-row{ grid-template-columns:repeat(2,1fr); }
-    section{ padding:80px 6vw; overflow:hidden; }
-  }
-  @media (max-width:760px){
-    .join-box{ padding:28px 20px; }
-  }
-  @media (max-width:520px){
-    .sponsor-row{ grid-template-columns:1fr; }
-    .program-item{ grid-template-columns:1fr; }
-    .theme-toggle{ bottom:16px; right:16px; width:40px; height:40px; }
-  }
-  </style>
-  <base target="_blank"/>
- </head>
- <body class="no-scroll">
-
-  <!-- ========================================= -->
-  <!-- PRELOADER / INTRO ANIMATION -->
-  <!-- ========================================= -->
-  <div id="preloader">
-   <div class="preloader-shuttle" style="top:20%; left:0;">
+.banner-section{
+  position:relative; width:100%; margin:0; padding:0;
+  background:linear-gradient(135deg, #7a5a00 0%, #d4a72c 40%, #a67c00 70%, #5c4300 100%);
+  overflow:hidden; z-index:1;
+}
+.banner-container{
+  position:relative; width:100%; height:250px; display:grid;
+  grid-template-columns:38% 42% 20%;
+  grid-template-rows:205px 45px;
+  overflow:hidden; box-sizing:border-box;
+  background-color:#8a6500;
+  background-image:
+    radial-gradient(rgba(255,255,255,0.10) 1px, transparent 1px),
+    linear-gradient(135deg, #7a5a00 0%, #d4a72c 35%, #a67c00 70%, #5c4300 100%);
+  background-size:6px 6px, 100% 100%;
+  background-repeat:repeat, no-repeat;
+}
+.banner-left{
+  grid-column:1; grid-row:1; position:relative;
+  display:flex; flex-direction:column; justify-content:center; align-items:flex-start;
+  padding:10px 20px 15px 35px; box-sizing:border-box; z-index:5; overflow:hidden;
+}
+.brand-area{
+  display:flex; flex-direction:row; align-items:center; justify-content:flex-start;
+  width:100%; gap:15px; margin-bottom:14px;
+}
+.sponsor-logo{display:block; width:105px; height:105px; object-fit:contain; flex-shrink:0;}
+.event-title-block{display:flex; flex-direction:column; justify-content:center; align-items:flex-start; margin:0; padding:0;}
+.event-title{
+  margin:0; font-size:clamp(32px, 3.2vw, 50px); line-height:0.9; font-weight:800;
+  letter-spacing:10px; color:#ffffff; white-space:nowrap;
+}
+.event-subtitle{
+  display:block; margin-top:7px; font-size:clamp(18px, 1.8vw, 26px); line-height:1;
+  font-weight:900; font-style:italic; letter-spacing:5px; color:#ffffff; white-space:nowrap;
+}
+.banner-info-table{
+  width:100%; max-width:430px; margin-top:2px; box-sizing:border-box; overflow:hidden;
+  border-radius:4px; background:#ffffff; box-shadow:0 3px 8px rgba(0,0,0,0.18);
+}
+.banner-info-row{display:flex; flex-direction:row; justify-content:space-between; align-items:center; width:100%; min-height:38px;}
+.banner-info-label{
+  flex:1; padding:8px 15px; box-sizing:border-box; color:#333333; font-size:13px;
+  font-weight:800; text-transform:uppercase; white-space:nowrap;
+}
+.banner-info-value{
+  display:flex; align-items:center; justify-content:center; min-width:75px; height:38px;
+  padding:0 15px; box-sizing:border-box;
+  background:#5c4300;
+  color:#ffffff; font-size:20px; font-weight:900; font-style:italic; transform:none; white-space:nowrap;
+}
+.banner-center{
+  grid-column:2; grid-row:1; position:relative; width:100%; height:100%;
+  overflow:hidden; box-sizing:border-box; display:block; z-index:2;
+}
+.headline{
+  position:absolute; top:13px; left:50%; width:100%; transform:translateX(-50%); margin:0;
+  text-align:center; font-size:clamp(20px, 2.4vw, 38px); line-height:1; font-weight:900;
+  text-transform:uppercase; letter-spacing:1px; color:rgba(255,255,255,0.13);
+  z-index:1; pointer-events:none; white-space:nowrap;
+}
+.headline span{color:rgba(255,255,255,0.18);}
+.banner-tagline{
+  position:absolute; top:50%; right:20%; left:50%; transform:translate(-50%, -50%);
+  margin:0; max-width:34%; text-align:right; font-family:'Anton', sans-serif;
+  font-size:clamp(13px, 1.6vw, 22px); line-height:1.15; letter-spacing:0.5px;
+  text-transform:uppercase; color:rgba(255,255,255,0.55); z-index:3; pointer-events:none;
+}
+.join-text{
+  position:absolute; top:75px; left:50%; transform:translateX(-50%) skew(-10deg);
+  margin:0; padding:4px 15px; background:rgba(255,255,255,0.65);
+  color:rgba(138,101,0,0.9);
+  font-size:10px; font-weight:900; text-transform:uppercase; white-space:nowrap; z-index:2; pointer-events:none;
+}
+.player-img{
+  position:absolute; left:50%; bottom:-1px; transform:translateX(-50%);
+  width:120%; height:100%; object-fit:contain; object-position:center bottom;
+  z-index:5; pointer-events:none; filter:drop-shadow(0 6px 8px rgba(0,0,0,0.30));
+}
+.banner-right{
+  grid-column:3; grid-row:1; position:relative; width:100%; height:100%;
+  display:flex; flex-direction:column; justify-content:space-between; align-items:stretch;
+  padding:0 0 8px 0; box-sizing:border-box; z-index:6; overflow:hidden;
+}
+.right-logo{
+  position:relative; width:100%; height:85px; min-height:85px;
+  display:flex; justify-content:center; align-items:center; padding:8px 15px; box-sizing:border-box;
+  border-radius:0 0 0 18px;
+  background:transparent !important; border:none !important; box-shadow:none !important;
+}
+.right-logo img{display:block; width:250px; height:250px; object-fit:contain;}
+.social-info{width:100%; margin-top:auto; padding:0 12px 8px 12px; box-sizing:border-box; text-align:right;}
+.social-box{
+  display:inline-flex; flex-direction:column; align-items:stretch; min-width:230px; max-width:100%;
+  overflow:hidden; border-radius:4px; background:#ffffff; box-shadow:0 3px 8px rgba(0,0,0,0.20);
+}
+.instagram{
+  margin:0; padding:7px 14px; box-sizing:border-box; background:#ffffff;
+  color:#8a6500;
+  font-size:13px; line-height:1.2; font-weight:900; text-align:right; white-space:nowrap;
+}
+.website{
+  margin:0; padding:7px 14px; box-sizing:border-box;
+  background:#8a6500;
+  color:#ffffff; font-size:11px; line-height:1.2; font-weight:900; letter-spacing:0.5px;
+  text-align:right; white-space:nowrap;
+}
+.banner-footer{
+  grid-column:1 / 4; grid-row:2; position:relative; width:100%; height:45px;
+  display:flex; justify-content:center; align-items:center; gap:12px; padding:4px 15px;
+  box-sizing:border-box;
+  background:rgba(92,67,0,0.85);
+  z-index:10; overflow:hidden;
+}
+.support-title{flex-shrink:0; font-size:8px; font-weight:800; color:#ffffff; white-space:nowrap;}
+.banner-footer img{display:block; width:auto; height:auto; max-width:64px; max-height:30px; object-fit:contain; flex-shrink:0;}
+
+
+@media (max-width:1100px){
+  .banner-container{height:235px; grid-template-columns:41% 39% 20%; grid-template-rows:195px 40px;}
+  .banner-left{padding-left:1px;}
+  .sponsor-logo{width:80px; height:80px;}
+  .brand-area{gap:10px;}
+  .event-title{font-size:38px;}
+  .event-subtitle{font-size:18px; letter-spacing:2px;}
+  .banner-info-label{font-size:10px;}
+  .banner-info-value{min-width:60px; height:32px; font-size:15px;}
+  .right-logo{height:75px; min-height:75px;}
+  .right-logo img{width:70px; height:70px;}
+  .social-box{min-width:180px;}
+  .instagram{font-size:10px;}
+  .website{font-size:8px;}
+  .banner-footer{gap:8px;}
+  .banner-footer img{max-width:54px; max-height:27px;}
+}
+@media (max-width:768px){
+  .banner-container{height:190px; grid-template-columns:46% 34% 20%; grid-template-rows:155px 35px;}
+  .banner-left{padding:7px 5px 10px 12px;}
+  .brand-area{gap:7px; margin-bottom:7px;}
+  .sponsor-logo{width:55px; height:55px;}
+  .event-title{font-size:23px; letter-spacing:-1px;}
+  .event-subtitle{margin-top:3px; font-size:11px; letter-spacing:1px;}
+  .banner-info-table{max-width:100%;}
+  .banner-info-row{min-height:25px;}
+  .banner-info-label{padding:5px 7px; font-size:6px;}
+  .banner-info-value{min-width:42px; height:25px; padding:0 5px; font-size:8px;}
+  .headline{top:7px; font-size:12px;}
+  .join-text{top:35px; padding:2px 6px; font-size:5px;}
+  .player-img{width:132%;}
+  .right-logo{height:52px; min-height:52px; padding:3px; border-radius:0 0 0 8px;}
+  .right-logo img{width:48px; height:48px;}
+  .social-info{padding:0 4px 4px 2px;}
+  .social-box{min-width:0; width:100%;}
+  .instagram{padding:4px 5px; font-size:6px;}
+  .website{padding:4px 5px; font-size:5px;}
+  .banner-footer{height:35px; gap:5px; padding:2px 5px;}
+  .support-title{font-size:5px;}
+  .banner-footer img{max-width:40px; max-height:20px;}
+}
+@media (max-width:480px){
+  .banner-container{height:165px; grid-template-columns:47% 33% 20%; grid-template-rows:135px 30px;}
+  .player-img{width:138%;}
+  .banner-left{padding-left:8px;}
+  .sponsor-logo{width:45px; height:45px;}
+  .brand-area{gap:5px; margin-bottom:5px;}
+  .event-title{font-size:18px;}
+  .event-subtitle{font-size:9px; letter-spacing:1px;}
+  .banner-info-label{font-size:5px;}
+  .banner-info-value{min-width:35px; height:22px; font-size:7px;}
+  .right-logo{height:45px; min-height:45px;}
+  .right-logo img{width:40px; height:40px;}
+  .social-box{width:100%;}
+  .instagram{font-size:5px; padding:3px;}
+  .website{font-size:4px; padding:3px;}
+  .banner-footer{height:30px; gap:3px;}
+  .support-title{font-size:4px;}
+  .banner-footer img{max-width:32px; max-height:16px;}
+}
+
+/* ---------- HERO ---------- */
+.hero{
+  min-height:100vh; background:var(--bg-gradient); color:var(--text);
+  display:flex; align-items:center; padding:0 8vw; position:relative; overflow:hidden;
+}
+.court-lines{position:absolute; inset:0; pointer-events:none; opacity:0.3;}
+.hero .eyebrow{color:var(--accent-light);}
+.hero h1{font-size:clamp(44px, 8vw, 96px); line-height:0.95; margin:18px 0 22px; color:var(--text-heading);}
+.hero-inner{position:relative; z-index:2; width:100%; max-width:760px; padding-top:70px;}
+@media (max-width:900px){.hero-inner{width:100%;}}
+@media (max-width:760px){
+  .hero{flex-direction:column; justify-content:center; text-align:center; padding:130px 6vw 60px; min-height:auto; gap:8px;}
+  .hero-inner{width:100%; max-width:100%; padding-top:0;}
+  .hero p{margin-left:auto; margin-right:auto;}
+  .hero-cta{justify-content:center;}
+}
+@media (max-width:420px){
+  .hero{padding:120px 6vw 50px;}
+  .hero h1{font-size:clamp(32px, 11vw, 48px);}
+}
+.hero h1 em{font-style:normal; color:var(--accent); text-shadow:0 0 40px rgba(220,38,38,0.4);}
+.slogan{font-family:'Oswald', sans-serif; font-weight:500; font-size:19px; letter-spacing:1px; color:var(--accent-light); margin-bottom:26px;}
+.hero p{color:var(--muted); font-size:16.5px; max-width:560px; margin-bottom:22px;}
+.hero p.slogan{color:var(--accent-light); font-size:19px; margin-bottom:26px;}
+.hero-cta{display:flex; gap:16px; flex-wrap:wrap; margin-top:16px;}
+.btn{
+  display:inline-block; padding:15px 30px; font-family:'Oswald'; letter-spacing:2px; font-size:12.5px;
+  text-transform:uppercase; border:1px solid var(--border); transition:all 0.25s; color:var(--text);
+}
+.btn-solid{background:var(--accent); border-color:var(--accent); color:#fff; box-shadow:0 4px 20px rgba(220,38,38,0.3);}
+.btn-solid:hover{background:#b91c1c; border-color:#b91c1c; box-shadow:0 6px 30px rgba(220,38,38,0.5); transform:translateY(-2px);}
+.btn-outline{color:var(--text); border-color:var(--border);}
+.btn-outline:hover{background:var(--surface-hover); border-color:var(--accent); color:var(--accent-light);}
+.shuttle{position:absolute; opacity:0.9;}
+.shuttle svg{display:block;}
+
+/* ---------- SECTION HEADERS ---------- */
+.sec-head{margin-bottom:56px; max-width:640px;}
+.sec-head .eyebrow{display:block; margin-bottom:12px;}
+.sec-head h2{font-size:clamp(32px,4.5vw,52px); line-height:1.02;}
+.sec-head p{margin-top:16px; color:var(--muted); font-size:16px; max-width:560px;}
+
+/* ---------- FAQ ---------- */
+.faq{background:var(--surface);}
+.faq .sec-head p{color:var(--muted);}
+.faq-list{max-width:820px; margin:0 auto; display:flex; flex-direction:column; gap:14px;}
+.faq-item{
+  border:1px solid var(--border); border-radius:14px; background:var(--card-bg); overflow:hidden;
+  transition:border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+.faq-item:hover{border-color:var(--border-hover); box-shadow:0 10px 30px var(--shadow-accent);}
+.faq-item.active{border-color:var(--accent); box-shadow:0 10px 34px var(--shadow-accent);}
+.faq-question{
+  display:flex; align-items:center; gap:20px; width:100%; padding:22px 24px;
+  background:none; border:none; cursor:pointer; text-align:left;
+  color:var(--text-heading); font-family:'Work Sans', sans-serif;
+}
+.faq-num{
+  flex-shrink:0; width:38px; height:38px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(220,38,38,0.12); border:1px solid rgba(251,191,36,0.35);
+  color:var(--accent-light); font-family:'Oswald'; font-weight:600; font-size:13px;
+  transition:background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+.faq-item.active .faq-num{background:var(--accent); color:#fff; transform:scale(1.08);}
+.faq-question span.faq-q-text{flex:1; font-size:17px; font-weight:600; letter-spacing:0.2px;}
+.faq-icon{
+  flex-shrink:0; width:28px; height:28px; display:flex; align-items:center; justify-content:center;
+  border-radius:50%; border:1px solid var(--border); color:var(--accent-light);
+  transition:transform 0.35s cubic-bezier(.2,.8,.2,1), background 0.3s ease, border-color 0.3s ease;
+}
+.faq-item.active .faq-icon{transform:rotate(135deg); background:var(--accent); color:#fff; border-color:var(--accent);}
+.faq-answer{max-height:0; overflow:hidden; transition:max-height 0.4s cubic-bezier(.2,.8,.2,1);}
+.faq-answer-inner{padding:0 24px 24px 82px; color:var(--muted); font-size:15px; line-height:1.75;}
+@media (max-width:600px){
+  .faq-question{padding:18px; gap:14px;}
+  .faq-question span.faq-q-text{font-size:15.5px;}
+  .faq-answer-inner{padding:0 18px 20px 62px; font-size:14px;}
+  .faq-num{width:32px; height:32px; font-size:12px;}
+}
+
+/* ---------- CARA BERGABUNG (blok 1) ---------- */
+.join{padding:110px 8vw; position:relative;}
+.join-box{
+  margin-top:50px; display:grid; grid-template-columns:320px 1fr; gap:60px; align-items:center;
+  padding:45px; border-radius:24px; background:rgba(255,255,255,0.03);
+  border:1px solid rgba(251,191,36,0.2); box-shadow:0 20px 60px rgba(0,0,0,0.2);
+}
+.qr-section{text-align:center;}
+.qr-placeholder{
+  width:260px; height:260px; margin:auto; padding:15px;
+  display:flex; justify-content:center; align-items:center;
+  background:#ffffff; border-radius:18px; box-shadow:0 15px 40px rgba(220,38,38,0.25);
+}
+.qr-placeholder img{width:100%; height:100%; object-fit:contain; display:block; border-radius:8px;}
+.qr-text{margin-top:18px; font-size:14px; color:var(--muted-light); font-family:"Work Sans", sans-serif;}
+.join-info{max-width:650px;}
+.join-label{display:inline-block; margin-bottom:15px; font-size:11px; letter-spacing:2px; color:#fbbf24; font-weight:700;}
+.join-info h3{font-size:30px; margin-bottom:15px; font-family:"Playfair Display", serif;}
+.join-info > p{line-height:1.8; color:var(--muted-light); margin-bottom:30px;}
+.join-steps{display:flex; flex-direction:column; gap:18px; margin-bottom:30px;}
+.join-step{
+  display:flex; align-items:flex-start; gap:18px; padding:15px;
+  border-left:2px solid rgba(220,38,38,0.6); background:rgba(220,38,38,0.04);
+}
+.step-number{font-size:14px; font-weight:700; color:#fbbf24; min-width:28px;}
+.join-step strong{display:block; margin-bottom:5px; font-size:15px;}
+.join-step p{margin:0; font-size:14px; line-height:1.6; color:var(--muted-light);}
+.wa-btn{
+  display:inline-flex; align-items:center; gap:10px; padding:15px 25px; border-radius:10px;
+  text-decoration:none; font-weight:600; background:#25D366; color:white;
+  transition:transform 0.3s ease, box-shadow 0.3s ease;
+}
+.wa-btn:hover{transform:translateY(-3px); box-shadow:0 12px 30px rgba(37,211,102,0.25);}
+.wa-btn svg{flex-shrink:0;}
+.join-note{display:block; margin-top:18px; font-size:12px; color:var(--muted-light); opacity:0.8;}
+@media (max-width:850px){
+  .join-box{grid-template-columns:1fr; gap:40px; text-align:center;}
+  .join-info{max-width:100%;}
+  .join-step{text-align:left;}
+}
+@media (max-width:550px){
+  .join{padding:70px 6vw;}
+  .join-box{padding:25px 18px; border-radius:18px;}
+  .qr-placeholder{width:210px; height:210px;}
+  .join-info h3{font-size:24px;}
+  .wa-btn{width:100%; justify-content:center; padding:16px;}
+}
+
+/* ---------- SPONSOR ---------- */
+.sponsor{background:var(--surface); color:var(--text); text-align:center;}
+.sponsor .sec-head{margin-left:auto; margin-right:auto; text-align:center;}
+.sponsor .sec-head p{margin-left:auto; margin-right:auto; color:var(--muted);}
+.sponsor-row{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:20px;}
+.sponsor-chip{
+  border:1px solid rgba(251,191,36,0.25); padding:30px 20px;
+  display:flex; align-items:center; justify-content:center; min-height:120px;
+  font-family:'Oswald'; letter-spacing:2px; font-size:13px; text-transform:uppercase;
+  color:#94a3b8; transition:all 0.3s ease; background:#111118; border-radius:8px;
+}
+.sponsor-chip:hover{border-color:var(--accent); color:var(--accent-light); box-shadow:0 4px 20px var(--shadow-accent); transform:translateY(-2px);}
+.sponsor-chip img, .sponsor-img{max-width:100%; max-height:60px; width:auto; object-fit:contain; opacity:0.85; transition:opacity 0.25s;}
+.sponsor-chip:hover img, .sponsor-chip:hover .sponsor-img{opacity:1;}
+
+/* ---------- CARA BERGABUNG (blok 2, menimpa blok 1 seperti aslinya) ---------- */
+.join{background:var(--bg); color:var(--text);}
+.join .eyebrow{color:var(--accent-light);}
+.join .sec-head p{color:var(--muted);}
+.join-box{display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; margin-top:20px;}
+.qr-placeholder{
+  width:240px; height:240px; background:var(--surface);
+  display:flex; align-items:center; justify-content:center; margin:0 auto;
+  border-radius:12px; border:2px dashed var(--border);
+}
+.qr-placeholder span{font-family:'Oswald'; font-size:14px; letter-spacing:1px; text-transform:uppercase; color:var(--muted); text-align:center;}
+.join-info h3{font-family:'Oswald'; font-size:22px; margin-bottom:16px; color:var(--text-heading);}
+.join-info p{color:var(--muted); font-size:16px; margin-bottom:24px;}
+.wa-btn{
+  display:inline-flex; align-items:center; gap:10px; background:#25D366; color:#fff;
+  padding:16px 32px; font-family:'Oswald'; letter-spacing:2px; font-size:14px; text-transform:uppercase;
+  border-radius:8px; transition:all 0.3s ease; box-shadow:0 4px 20px rgba(37,211,102,0.3);
+}
+
+/* ---------- PROGRAM ---------- */
+.program{background:var(--bg);}
+.program-list{display:flex; flex-direction:column; gap:25px; margin-top:50px;}
+.program-item{
+  display:grid; grid-template-columns:70px 1fr; gap:30px; padding:35px; border-radius:16px;
+  border:1px solid rgba(251,191,36,0.15); background:rgba(255,255,255,0.02); transition:0.3s ease;
+}
+.program-item:hover{transform:translateY(-4px); border-color:rgba(251,191,36,0.5);}
+.program-num{
+  width:55px; height:55px; display:flex; justify-content:center; align-items:center;
+  border-radius:50%; background:rgba(220,38,38,0.15); border:1px solid rgba(251,191,36,0.4);
+  color:var(--text-heading); font-weight:700; font-size:16px;
+}
+.program-content{min-width:0;}
+.program-content h3{margin:0 0 10px; font-size:23px;}
+.program-content p{margin:18px 0; line-height:1.8; color:var(--muted-light);}
+.program-coach{
+  display:inline-block; padding:8px 14px; margin-bottom:10px; border-radius:20px;
+  background:rgba(220,38,38,0.1); color:var(--text-heading); font-size:13px; font-weight:600;
+}
+.program-detail{
+  margin-top:20px; padding:18px 20px; border-left:3px solid #dc2626;
+  background:rgba(220,38,38,0.05); border-radius:0 10px 10px 0; line-height:1.8;
+}
+.program-detail strong{display:block; margin-bottom:8px; color:var(--text-heading);}
+.program .eyebrow{color:var(--text-heading);}
+.program-detail ul{margin:10px 0 0 20px; padding:0;}
+.program-detail li{margin-bottom:6px;}
+.wa-btn:hover{background:#1ebe5d; transform:translateY(-2px); box-shadow:0 6px 30px rgba(37,211,102,0.5);}
+.join-note{margin-top:24px; font-size:13.5px; color:var(--muted-light); display:block;}
+
+/* ---------- KONTAK ---------- */
+.contact{background:var(--surface);}
+.contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:60px;}
+.contact-list{list-style:none;}
+.contact-list li{padding:20px 0; border-bottom:1px solid var(--border);}
+.contact-list li:first-child{border-top:1px solid var(--border);}
+.contact-list .label{font-family:'Oswald'; font-size:11.5px; letter-spacing:2px; text-transform:uppercase; color:var(--accent-light); display:block; margin-bottom:6px;}
+.contact-list .value{font-size:16px; color:var(--text-heading);}
+.contact-left{min-width:0;}
+.social-table{
+  margin-top:28px; display:flex; flex-direction:column; gap:12px;
+}
+.social-row{
+  display:flex; align-items:center; gap:16px; padding:16px 20px; color:#ffffff;
+  background:var(--row-bg); border-radius:14px;
+  box-shadow:0 6px 18px var(--shadow);
+  transition:background 0.25s ease, transform 0.25s ease;
+}
+.social-row:hover{background:var(--row-hover); transform:translateY(-2px);}
+.row-wa{--row-bg:#1fa855; --row-hover:#178f47;}
+.row-tt{--row-bg:#000000; --row-hover:#1c1c1c;}
+.row-ig{--row-bg:#e1306c; --row-hover:#c42a5e;}
+.row-fb{--row-bg:#1877f2; --row-hover:#1465d0;}
+.social-icon{
+  flex-shrink:0; width:40px; height:40px; border-radius:50%;
+  background:#ffffff; color:var(--row-bg);
+  display:flex; align-items:center; justify-content:center;
+}
+.social-text{flex:1; min-width:0; display:flex; flex-direction:column;}
+.social-label{font-family:'Oswald'; font-size:11.5px; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.85);}
+.social-handle{font-size:16px; color:#ffffff; overflow-wrap:anywhere;}
+.social-arrow{flex-shrink:0; color:#ffffff; transition:transform 0.25s ease;}
+.social-row:hover .social-arrow{transform:translate(3px,-3px);}
+.map-box{
+  width:100%; height:400px; overflow:hidden; border-radius:12px;
+  border:1px solid var(--border); box-shadow:0 15px 40px rgba(0,0,0,0.15);
+  background:var(--bg); display:flex; align-items:center; justify-content:center; min-height:320px;
+  font-family:'Oswald'; letter-spacing:1.5px; color:var(--muted-light); text-transform:uppercase; font-size:13px;
+  text-align:center; padding:20px; flex-direction:column; gap:10px;
+}
+.map-box iframe{width:100%; height:100%; display:block;}
+
+footer{
+  background:var(--bg); color:var(--muted-light); text-align:center; padding:34px 8vw;
+  font-family:'Oswald'; font-size:12px; letter-spacing:1.5px; text-transform:uppercase;
+  border-top:1px solid var(--border); display:flex; flex-direction:column; align-items:center; gap:16px;
+}
+footer span{color:var(--accent-light);}
+footer{margin-top:70px;}
+.back-to-top{
+  display:inline-flex; align-items:center; gap:8px; padding:11px 20px; border-radius:30px;
+  border:1px solid var(--border); background:var(--surface); color:var(--text);
+  font-family:'Oswald'; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; transition:all 0.25s ease;
+}
+.back-to-top:hover{border-color:var(--accent); color:var(--accent-light); background:var(--surface-hover); box-shadow:0 4px 18px var(--shadow-accent); transform:translateY(-2px);}
+.back-to-top svg{flex-shrink:0;}
+
+/* ---------- SCROLL REVEAL ---------- */
+.reveal-on-scroll{opacity:0; transform:translateY(28px); transition:opacity 0.8s cubic-bezier(.2,.8,.2,1), transform 0.8s cubic-bezier(.2,.8,.2,1);}
+.reveal-on-scroll.in-view{opacity:1; transform:translateY(0);}
+.reveal-on-scroll.delay-1{transition-delay:0.08s;}
+.reveal-on-scroll.delay-2{transition-delay:0.16s;}
+.reveal-on-scroll.delay-3{transition-delay:0.24s;}
+.reveal-on-scroll.delay-4{transition-delay:0.32s;}
+
+/* ---------- CURSOR GLOW ---------- */
+.cursor-glow{
+  position:fixed; top:0; left:0; width:420px; height:420px; border-radius:50%;
+  background:radial-gradient(circle, rgba(220,38,38,0.10) 0%, transparent 70%);
+  pointer-events:none; z-index:1; transform:translate(-50%,-50%); transition:opacity 0.3s ease; opacity:0;
+}
+@media (max-width:900px){.cursor-glow{display:none;}}
+
+/* ---------- RIPPLE ---------- */
+.btn, .wa-btn{position:relative; overflow:hidden;}
+.ripple{position:absolute; border-radius:50%; background:rgba(255,255,255,0.5); transform:scale(0); animation:rippleAnim 0.6s ease-out; pointer-events:none;}
+@keyframes rippleAnim{to{transform:scale(2.6); opacity:0;}}
+
+@media (max-width:900px){
+  nav{padding:16px 5vw;}
+  .brand-name span{display:none;}
+  .nav-links{
+    display:flex; flex-direction:column; gap:0; position:absolute; top:100%; left:0; right:0;
+    background:#262626; backdrop-filter:blur(14px); border-bottom:1px solid rgba(255,255,255,0.08);
+    box-shadow:0 12px 30px rgba(0,0,0,0.4); max-height:0; overflow:hidden; opacity:0;
+    transition:max-height 0.35s ease, opacity 0.3s ease;
+  }
+  .nav-links.open{max-height:80vh; overflow-y:auto; opacity:1;}
+  .nav-links a{width:100%; box-sizing:border-box; padding:16px 6vw; border-bottom:1px solid rgba(255,255,255,0.08); opacity:1;}
+  .nav-toggle{display:flex;}
+  .contact-grid, .join-box{grid-template-columns:1fr; gap:40px;}
+  .sponsor-row{grid-template-columns:repeat(2,1fr);}
+  section{padding:80px 6vw; overflow:hidden;}
+}
+@media (max-width:760px){.join-box{padding:28px 20px;}}
+@media (max-width:520px){
+  .sponsor-row{grid-template-columns:1fr;}
+  .program-item{grid-template-columns:1fr;}
+  .theme-toggle{bottom:16px; right:16px; width:40px; height:40px;}
+}
+
+/* ---------- TAMBAHAN RESPONSIF HP ---------- */
+@media (max-width:760px){
+  .shuttle{display:none;}
+  .sec-head{margin-bottom:36px;}
+  .program-list{gap:18px; margin-top:32px;}
+  .program-item{padding:22px 18px; gap:14px;}
+  .program-content h3{font-size:19px;}
+  .program-content p{margin:14px 0; line-height:1.7;}
+  .program-detail{padding:14px 16px;}
+  .contact-grid{gap:36px;}
+  .map-box{height:300px; min-height:260px;}
+  .social-row{padding:14px 16px; gap:12px;}
+  footer{padding:28px 6vw;}
+  footer{margin-top:48px;}
+}
+@media (max-width:600px){
+  .brand-mark{display:none;}
+  .brand{gap:8px;}
+  .brand-name{font-size:14px;}
+  .hero h1{font-size:clamp(34px, 12vw, 56px);}
+  .slogan{font-size:17px;}
+  .btn{padding:14px 22px;}
+}
+
+/* ---------- HERO: TEKS RAPI (tanpa kotak) ---------- */
+.hero-inner{max-width:680px;}
+.hero .eyebrow{display:inline-flex; align-items:center; gap:12px; color:var(--accent);}
+.hero .eyebrow::before{content:''; width:34px; height:2px; background:var(--accent);}
+.hero h1 em{
+  background:linear-gradient(90deg,#dc2626,#ea580c);
+  -webkit-background-clip:text; background-clip:text;
+  -webkit-text-fill-color:transparent; color:transparent; text-shadow:none;
+}
+.hero h1{margin-bottom:18px;}
+.hero h1::after{
+  content:''; display:block; width:90px; height:5px; margin-top:18px; border-radius:4px;
+  background:linear-gradient(90deg,#dc2626,#fbbf24);
+}
+.hero p.slogan{
+  max-width:none; font-size:22px; font-style:italic; letter-spacing:1px;
+  color:var(--accent); margin-bottom:30px;
+}
+.hero .hero-lead{
+  font-size:19px; line-height:1.75; font-weight:500; color:var(--text-heading);
+  max-width:640px; margin-bottom:20px;
+}
+.hero p{font-size:16.5px; line-height:1.85; color:var(--text); max-width:640px; margin-bottom:18px;}
+.hero p strong{color:var(--accent); font-weight:700;}
+.hero .hero-closing{
+  margin-top:32px; padding-top:24px; border-top:1px solid var(--border);
+  font-family:'Oswald', sans-serif; font-size:20px; font-weight:500; letter-spacing:0.5px; line-height:1.5;
+  color:var(--accent); max-width:640px; margin-bottom:0;
+}
+@keyframes heroIn{from{opacity:0; transform:translateY(22px);} to{opacity:1; transform:translateY(0);}}
+#main-content.reveal .hero-inner > *{animation:heroIn 0.8s cubic-bezier(.2,.8,.2,1) both;}
+#main-content.reveal .hero-inner > *:nth-child(2){animation-delay:0.08s;}
+#main-content.reveal .hero-inner > *:nth-child(3){animation-delay:0.16s;}
+#main-content.reveal .hero-inner > *:nth-child(4){animation-delay:0.24s;}
+#main-content.reveal .hero-inner > *:nth-child(5){animation-delay:0.32s;}
+#main-content.reveal .hero-inner > *:nth-child(6){animation-delay:0.4s;}
+#main-content.reveal .hero-inner > *:nth-child(7){animation-delay:0.48s;}
+@media (max-width:760px){
+  .hero h1::after{margin-left:auto; margin-right:auto;}
+  .hero p.slogan{font-size:19px;}
+  .hero .hero-lead{font-size:17px;}
+  .hero p{font-size:15.5px; margin-left:auto; margin-right:auto;}
+  .hero .hero-closing{font-size:17px;}
+}
+
+/* ---------- PROGRAM: PENGUMUMAN & LINK MAPS ---------- */
+.program-notice{
+  margin-top:16px; padding:16px 20px; border-left:3px solid #dc2626;
+  background:rgba(220,38,38,0.08); border-radius:0 10px 10px 0; line-height:1.7;
+}
+.program-notice strong{display:block; margin-bottom:6px; color:#dc2626; letter-spacing:0.5px;}
+.program-notice span{color:var(--text);}
+.map-link{
+  display:inline-block; margin-top:10px; font-family:'Oswald'; font-size:12.5px; letter-spacing:1.5px;
+  text-transform:uppercase; color:var(--accent); border-bottom:1px solid transparent; transition:border-color 0.25s ease;
+}
+.map-link:hover{border-color:var(--accent);}
+
+
+/* ---------- PROGRAM: INFO JADWAL ---------- */
+.program-info{
+  margin-top:10px; padding:32px; border-radius:16px;
+  border:1px solid rgba(251,191,36,0.25); background:rgba(255,255,255,0.02);
+}
+.program-info-title{font-size:24px; margin-bottom:20px;}
+.program-schedule{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+.schedule-item{
+  display:flex; flex-direction:column; gap:6px; padding:18px 22px; border-radius:12px;
+  border-left:3px solid var(--accent); background:rgba(220,38,38,0.06);
+}
+.schedule-day{font-family:'Oswald'; font-size:13px; letter-spacing:2px; text-transform:uppercase; color:var(--accent);}
+.schedule-time{font-family:'Anton', sans-serif; font-size:26px; letter-spacing:0.5px; color:var(--text-heading);}
+@media (max-width:600px){
+  .program-info{padding:22px 18px;}
+  .program-info-title{font-size:20px;}
+  .program-schedule{grid-template-columns:1fr;}
+  .schedule-time{font-size:22px;}
+}
+</style>
+</head>
+<body class="no-scroll">
+
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="preloader-shuttle" style="top:20%; left:0;">
     <svg width="46" height="70" viewBox="0 0 60 90" xmlns="http://www.w3.org/2000/svg">
-     <path d="M30 0 L14 46 L46 46 Z" fill="none" stroke="#fbbf24" stroke-width="1.4" opacity="0.6"></path>
-     <circle cx="30" cy="52" r="7" fill="#dc2626" opacity="0.8"></circle>
+      <path d="M30 0 L14 46 L46 46 Z" fill="none" stroke="#fbbf24" stroke-width="1.4" opacity="0.6"></path>
+      <circle cx="30" cy="52" r="7" fill="#dc2626" opacity="0.8"></circle>
     </svg>
-   </div>
-   <div class="preloader-glow"></div>
-   <div class="preloader-logo-ring">
-    <img src="logo.png" alt="Logo PB Djarum" onerror="this.style.display='none'"/>
-   </div>
-   <div class="preloader-title" id="preloaderTitle"></div>
-   <div class="preloader-sub">Malang &middot; Jawa Timur &middot; Indonesia</div>
-   <div class="preloader-bar-track">
-    <div class="preloader-bar-fill"></div>
-   </div>
   </div>
-
-  <div class="cursor-glow" id="cursorGlow"></div>
-
-  <div id="main-content">
-
-  <button class="theme-toggle" id="themeToggle" title="Ganti Tema">
-   🌙
-  </button>
-  <nav>
-<div class="brand">
-
-  <div class="brand-mark">
-    PB
+  <div class="preloader-glow"></div>
+  <div class="preloader-logo-ring">
+    <img src="logo.png" alt="Logo PB Djarem" onerror="this.style.display='none'"/>
   </div>
-
-  <div class="brand-name">
-    DJARUM
-    <span>
-      BADMINTON
-    </span>
-  </div>
-
-  <!-- LOGO -->
-  <img 
-    src="logo.png" 
-    alt="Logo PB Djarum"
-    class="brand-logo"
-  >
-
+  <div class="preloader-title" id="preloaderTitle"></div>
+  <div class="preloader-sub">Malang &middot; Jawa Timur &middot; Indonesia</div>
+  <div class="preloader-bar-track"><div class="preloader-bar-fill"></div></div>
 </div>
-   <div class="nav-links" id="navLinks">
-    <a href="#tentang">
-     Tentang
-    </a>
-    <a href="#program">
-     Program
-    </a>
-    <a href="#pelatih">
-     FAQ
-    </a>
-    <a href="#gabung">
-     Gabung
-    </a>
-    <a href="#kontak">
-     Kontak
-    </a>
-   </div>
-   <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false">
+
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<div id="main-content">
+
+<button class="theme-toggle" id="themeToggle" title="Ganti Tema">🌙</button>
+
+<nav>
+  <div class="brand">
+    <div class="brand-mark">PB</div>
+    <div class="brand-name">DJAREM <span>BADMINTON</span></div>
+    <img src="logo.png" alt="Logo PB Djarem" class="brand-logo">
+  </div>
+  <div class="nav-links" id="navLinks">
+    <a href="#program">Program</a>
+    <a href="#pelatih">FAQ</a>
+    <a href="#gabung">Gabung</a>
+    <a href="#kontak">Kontak</a>
+  </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false">
     <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-     <line id="navIconTop" x1="3" y1="6" x2="21" y2="6"></line>
-     <line id="navIconMid" x1="3" y1="12" x2="21" y2="12"></line>
-     <line id="navIconBot" x1="3" y1="18" x2="21" y2="18"></line>
+      <line id="navIconTop" x1="3" y1="6" x2="21" y2="6"></line>
+      <line id="navIconMid" x1="3" y1="12" x2="21" y2="12"></line>
+      <line id="navIconBot" x1="3" y1="18" x2="21" y2="18"></line>
     </svg>
-   </button>
-  </nav>
+  </button>
+</nav>
 
-<!-- ========================================= -->
 <!-- BANNER PROMOSI PB DJAREM -->
-<!-- ========================================= -->
-
 <section class="banner-section">
+  <div class="banner-container">
 
-    <div class="banner-container">
-
-
-        <!-- ========================================= -->
-        <!-- BAGIAN KIRI -->
-        <!-- ========================================= -->
-
-        <div class="banner-left">
-
-            <!-- LOGO + NAMA PB DJAREM -->
-
-            <div class="brand-area">
-
-                <img
-                    src="logo.png"
-                    alt="Logo PB Djarem"
-                    class="sponsor-logo"
-                >
-
-                <div class="event-title-block">
-
-                    <h1 class="event-title">
-                        PB DJAREM
-                    </h1>
-
-                    <span class="event-subtitle">
-                        MALANG
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <!-- ========================================= -->
-            <!-- INFORMASI TAHUN BERDIRI -->
-            <!-- ========================================= -->
-
-            <div class="banner-info-table">
-
-                <div class="banner-info-row">
-
-                    <span class="banner-info-label">
-                        INVITATION TOURNAMENT
-                    </span>
-
-                    <span class="banner-info-value">
-                        26-27 Sep 2026
-                    </span>
-
-                </div>
-
-            </div>
-
+    <!-- KIRI -->
+    <div class="banner-left">
+      <div class="brand-area">
+        <img src="logo.png" alt="Logo PB Djarem" class="sponsor-logo">
+        <div class="event-title-block">
+          <h1 class="event-title">PB DJAREM</h1>
+          <span class="event-subtitle">MALANG</span>
         </div>
-
-
-        <!-- ========================================= -->
-        <!-- BAGIAN TENGAH -->
-        <!-- ========================================= -->
-
-        <div class="banner-center">
-
-
-            <!-- TEKS BACKGROUND -->
-
-            <h2 class="headline">
-                <span>PB DJAREM</span> MALANG
-            </h2>
-
-
-            <!-- TULISAN DI SISI KANAN BANNER TENGAH -->
-
-            <p class="banner-tagline">
-                Come play with us again
-            </p>
-
-
-            <!-- FOTO BERSAMA -->
-
-            <img
-                src="fotobersama.PB Djarem.png"
-                alt="Foto Bersama PB Djarem Malang"
-                class="player-img"
-            >
-
+      </div>
+      <div class="banner-info-table">
+        <div class="banner-info-row">
+          <span class="banner-info-label">INVITATION TOURNAMENT</span>
+          <span class="banner-info-value">26-27 Sep 2026</span>
         </div>
-
-
-        <!-- ========================================= -->
-        <!-- BAGIAN KANAN -->
-        <!-- ========================================= -->
-
-        <div class="banner-right">
-
-
-
-
-
-            <!-- INFORMASI SOSIAL -->
-
-            <div class="social-info">
-
-                <div class="social-box">
-
-                    <p class="instagram">
-                        @pbdjaremmlg
-                    </p>
-
-                    <p class="website">
-                        WWW.DJAREMMALANG.COM
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- ========================================= -->
-        <!-- FOOTER / SPONSOR -->
-        <!-- ========================================= -->
-
-        <div class="banner-footer">
-
-
-            <span class="support-title">
-              
-            </span>
-
-
-            <img
-                src="mandor.png"
-                alt="Mandor"
-            >
-
-            <img
-                src="etful.png"
-                alt="Etful"
-            >
-
-            <img
-                src="titikbumi.png"
-                alt="Titikbumi"
-            >
-
-            <img
-                src="pororo.png"
-                alt="Pororo"
-            >
-
-            <img
-                src="bromo.png"
-                alt="Bromo"
-            >
-
-            <img
-                src="arkafit.png"
-                alt="Arkafit"
-            >
-
-            <img
-                src="wins.png"
-                alt="Wins"
-            >
-
-            <img
-                src="flip.png"
-                alt="Flip"
-            >
-
-            <img
-                src="tbusahajaya.png"
-                alt="Tbusahajaya"
-            >
-
-            <img
-                src="bingo.png"
-                alt="Bingo"
-            >
-
-        </div>
-
-
+      </div>
     </div>
 
+    <!-- TENGAH -->
+    <div class="banner-center">
+      <h2 class="headline"><span>PB DJAREM</span> MALANG</h2>
+      <p class="banner-tagline">Come play with us again</p>
+      <img src="fotokita.png" alt="Foto Bersama PB Djarem Malang" class="player-img">
+    </div>
+
+    <!-- KANAN -->
+    <div class="banner-right">
+      <div class="social-info">
+        <div class="social-box">
+          <p class="instagram">@pbdjaremmlg</p>
+          <p class="website">WWW.DJAREMMALANG.COM</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER SPONSOR -->
+    <div class="banner-footer">
+      <span class="support-title"></span>
+      <img src="mandor.png" alt="Mandor">
+      <img src="etful.png" alt="Etful">
+      <img src="titikbumi.png" alt="Titikbumi">
+      <img src="pororo.png" alt="Pororo">
+      <img src="bromo.png" alt="Bromo">
+      <img src="arkafit.png" alt="Arkafit">
+      <img src="wins.png" alt="Wins">
+      <img src="flip.png" alt="Flip">
+      <img src="tbusahajaya.png" alt="Tbusahajaya">
+      <img src="bingo.png" alt="Bingo">
+    </div>
+
+  </div>
 </section>
 
-  <!-- HERO -->
-  <header class="hero" id="top">
-   <div aria-hidden="true" class="court-lines">
-    <svg height="100%" preserveaspectratio="none" viewbox="0 0 1400 900" width="100%">
-     <line opacity="0.15" stroke="#dc2626" stroke-width="1" x1="900" x2="1450" y1="-50" y2="950">
-     </line>
-     <line opacity="0.04" stroke="#e2e8f0" stroke-width="1" x1="1050" x2="1600" y1="-50" y2="950">
-     </line>
-     <circle cx="1180" cy="230" fill="none" opacity="0.12" r="150" stroke="#dc2626" stroke-width="1">
-     </circle>
+<!-- HERO -->
+<header class="hero" id="top">
+  <div aria-hidden="true" class="court-lines">
+    <svg height="100%" preserveAspectRatio="none" viewBox="0 0 1400 900" width="100%">
+      <line opacity="0.15" stroke="#dc2626" stroke-width="1" x1="900" x2="1450" y1="-50" y2="950"></line>
+      <line opacity="0.04" stroke="#e2e8f0" stroke-width="1" x1="1050" x2="1600" y1="-50" y2="950"></line>
+      <circle cx="1180" cy="230" fill="none" opacity="0.12" r="150" stroke="#dc2626" stroke-width="1"></circle>
     </svg>
-   </div>
-   <div class="shuttle" style="top:16%; right:9%; width:70px;">
-    <svg height="105" style="transform:rotate(18deg);" viewbox="0 0 60 90" width="70" xmlns="http://www.w3.org/2000/svg">
-     <path d="M30 0 L14 46 L46 46 Z" fill="none" opacity="0.4" stroke="#fbbf24" stroke-width="1.4">
-     </path>
-     <path d="M30 0 L22 46" opacity="0.25" stroke="#fbbf24" stroke-width="1">
-     </path>
-     <path d="M30 0 L38 46" opacity="0.25" stroke="#fbbf24" stroke-width="1">
-     </path>
-     <circle cx="30" cy="52" fill="#dc2626" opacity="0.7" r="7">
-     </circle>
+  </div>
+  <div class="shuttle" style="top:16%; right:9%; width:70px;">
+    <svg height="105" style="transform:rotate(18deg);" viewBox="0 0 60 90" width="70" xmlns="http://www.w3.org/2000/svg">
+      <path d="M30 0 L14 46 L46 46 Z" fill="none" opacity="0.4" stroke="#fbbf24" stroke-width="1.4"></path>
+      <path d="M30 0 L22 46" opacity="0.25" stroke="#fbbf24" stroke-width="1"></path>
+      <path d="M30 0 L38 46" opacity="0.25" stroke="#fbbf24" stroke-width="1"></path>
+      <circle cx="30" cy="52" fill="#dc2626" opacity="0.7" r="7"></circle>
     </svg>
-   </div>
-   <div class="hero-inner">
-    <span class="eyebrow">
-     PB Djarem &mdash; Malang, Jawa Timur, Indonesia
-    </span>
-    <h1>
-     Selamat datang di
-     <em>
-      PB Djarem
-     </em>
-     Malang 
-    </h1>
-    <p class="slogan">
-     "Awal Langkah dan Dedikasi"
+  </div>
+
+  <div class="hero-inner">
+    <span class="eyebrow">PB Djarem &mdash; Malang, Jawa Timur, Indonesia</span>
+    <h1><em>PB Djarem</em> Malang</h1>
+    <p class="slogan">“Awal Langkah dan Dedikasi”</p>
+
+    <p class="hero-lead">
+      Mau Main Badminton Bareng Sambil Nambah Teman? Gabung ke PB Djarem Malang Aja!
     </p>
 
     <p>
-     PB Djarem Malang lahir dari sebuah alur cerita yang sederhana namun bermakna: arena bulu tangkis yang menjadi titik temu bagi masyarakat dari pelbagai latar belakang. Di balik riuh tepukan kok dan ayunan raket, perkumpulan ini berdiri atas dasar semangat kebersamaan para pecinta tepok bulu di Malang. Tanpa memandang batas usia, tingkat kemahiran, maupun profesi sehari-hari, setiap individu menyatu dalam satu ritme permainan yang penuh energi.
+      Buat kamu warga Malang dan sekitarnya yang hobi main bulu tangkis, PB Djarem Malang hadir sebagai <strong>safe space</strong> buat semua kalangan. Gak peduli umur, background, atau jago tidaknya skill kamu—semua welcome di sini!
+    </p>
+    <p>
+      Lebih dari sekadar kejar skor di lapangan, PB Djarem itu soal vibes yang seru, sehat, dan penuh kekeluargaan. Mulai dari pemula yang baru pegang raket sampai pemain pro yang haus latihan, semuanya kumpul bareng buat keringetan sambil seru-seruan.
     </p>
 
-    <div class="hero-accordion">
-
-     <div class="hero-accordion-item">
-      <button class="hero-accordion-question" type="button">
-       <span class="hero-accordion-text">Lebih Dari Sekadar Komunitas Olahraga</span>
-       <span class="hero-accordion-icon">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-         <line x1="12" y1="5" x2="12" y2="19"></line>
-         <line x1="5" y1="12" x2="19" y2="12"></line>
-        </svg>
-       </span>
-      </button>
-      <div class="hero-accordion-answer">
-       <div class="hero-accordion-answer-inner">
-        Bagi kami, bulu tangkis bukan sekadar mengejar skor di atas lapangan atau menjaga stamina tubuh. PB Djarem hadir sebagai wadah inklusif untuk mempererat tali silaturahmi, merawat jiwa sportivitas, dan menjunjung tinggi rasa saling menghargai. Di sinilah tempat di mana pemula yang baru belajar memegang raket dapat berlatih tanpa canggung, sementara pemain yang lebih berpengalaman terus mengasah keahlian dan berbagi ilmu. Atmosfer yang hangat dan ramah memastikan setiap anggota merasa memiliki rumah kedua untuk menyalurkan hobi mereka.
-       </div>
-      </div>
-     </div>
-
-     <div class="hero-accordion-item">
-      <button class="hero-accordion-question" type="button">
-       <span class="hero-accordion-text">Visi &amp; Semangat Ke Depan</span>
-       <span class="hero-accordion-icon">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-         <line x1="12" y1="5" x2="12" y2="19"></line>
-         <line x1="5" y1="12" x2="19" y2="12"></line>
-        </svg>
-       </span>
-      </button>
-      <div class="hero-accordion-answer">
-       <div class="hero-accordion-answer-inner">
-        Menatap masa depan, PB Djarem Malang terus berkomitmen untuk membudayakan gaya hidup sehat serta melahirkan ruang interaksi yang positif bagi warga Malang dan sekitarnya. Kami percaya bahwa kebugaran fisik dan kehangatan komunitas adalah kunci menuju kualitas hidup yang lebih baik.
-       </div>
-      </div>
-     </div>
-
-     <div class="hero-accordion-item">
-      <button class="hero-accordion-question" type="button">
-       <span class="hero-accordion-text">Bergabung Bersama Kami</span>
-       <span class="hero-accordion-icon">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-         <line x1="12" y1="5" x2="12" y2="19"></line>
-         <line x1="5" y1="12" x2="19" y2="12"></line>
-        </svg>
-       </span>
-      </button>
-      <div class="hero-accordion-answer">
-       <div class="hero-accordion-answer-inner">
-        Apakah Anda ingin kembali aktif berolahraga, melatih kemampuan teknis, atau sekadar mencari lingkaran pertemanan baru yang positif? Lapangan kami selalu terbuka lebar. Mari mengayunkan raket, berkeringat bersama, dan menjadi bagian dari keluarga besar PB Djarem Malang!
-       </div>
-      </div>
-     </div>
-
-    </div>
-
-    <div class="hero-cta">
-     <a class="btn btn-solid" href="#gabung">
-      Cara Bergabung
-     </a>
-     <a class="btn btn-outline" href="#tentang">
-      Selengkapnya
-     </a>
-    </div>
-   </div>
-  </header>
-  <!-- TENTANG -->
-  <section class="about" id="tentang">
-   <div class="container">
-    <div class="about-grid">
-     <div class="sec-head reveal-on-scroll">
-      <span class="eyebrow">
-       01 &mdash; Tentang Kami
-      </span>
-      <h2>
-       Rumah Bagi Lahirnya Generasi Indonesia
-      </h2>
-     </div>
-     <div class="about-text reveal-on-scroll delay-1">
-      <p>
-       Berawal dari sebuah komitmen sederhana di atas lapangan, PB Djarem Malang tumbuh dari wadah berkumpulnya para pecinta bulu tangkis dari berbagai latar belakang, profesi, dan kelompok usia. Berbasis di kota Malang, komunitas ini hadir sebagai tempat di mana kecintaan pada raket dan kok menyatukan siapa saja—mulai dari pemula yang ingin menjaga kebugaran hingga pemain berpengalaman yang mengasah keahlian.
-      </p>
-      <p>
-       Di PB Djarem, bulu tangkis bukan sekadar olahraga, melainkan sarana mempererat tali silaturahmi, membangun sportivitas, dan membudayakan gaya hidup sehat. Dengan suasana latihan yang hangat, inklusif, dan penuh semangat kekeluargaan, setiap anggota didorong untuk terus berkembang dan menikmati setiap permainan.      </p>
-      <div class="stat-row">
-       <div class="stat">
-        <b>
-         2025
-        </b>
-        <span>
-         Tahun Berdiri
-        </span>
-       </div>
-       <div class="stat">
-        <b>
-         Malang
-        </b>
-        <span>
-         Pusat Pembinaan
-        </span>
-       </div>
-      </div>
-     </div>
-    </div>
-   </div>
-  </section>
- <!-- =========================================
-     PROGRAM LATIHAN
-========================================= -->
-<section class="program" id="program">
-
-  <div class="container">
-
-    <div class="sec-head reveal-on-scroll">
-      <span class="eyebrow">
-        02 — Program Latihan
-      </span>
-
-      <h2>
-        Bersama Berlatih, Bersama Berkembang
-      </h2>
-
-      <p>
-        Program latihan dirancang sebagai wadah bagi setiap pemain
-        untuk mengembangkan kemampuan, meningkatkan teknik permainan,
-        serta membangun pengalaman bertanding. Setiap kegiatan
-        disusun secara terjadwal dan disesuaikan dengan kebutuhan
-        serta tingkat kemampuan pemain.
-      </p>
-    </div>
-
-
-    <div class="program-list">
-
-      <!-- 01 -->
-      <div class="program-item reveal-on-scroll">
-
-        <div class="program-num">
-          01
-        </div>
-
-        <div class="program-content">
-
-          <h3>
-            Latihan Rutin — Rabu
-          </h3>
-
-          <div class="program-coach">
-            Rabu | 19.00 — 22.00 WIB
-          </div>
-
-          <p>
-            Sesi hari Rabu difokuskan pada permainan bebas dan
-            aktivitas bermain bersama. Para pemain dapat meningkatkan
-            pengalaman bermain melalui pertandingan langsung,
-            mengembangkan konsistensi, strategi, serta kemampuan
-            beradaptasi dengan berbagai tipe permainan.
-          </p>
-
-          <p>
-            Kegiatan ini juga menjadi kesempatan bagi seluruh anggota
-            untuk saling berinteraksi, bertukar pengalaman, dan
-            membangun kekompakan dalam komunitas.
-          </p>
-
-          <div class="program-detail">
-            <strong>Kegiatan:</strong>
-            <span>
-              Permainan bebas, pertandingan internal, dan evaluasi permainan.
-            </span>
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- 02 -->
-      <div class="program-item reveal-on-scroll">
-
-        <div class="program-num">
-          02
-        </div>
-
-        <div class="program-content">
-
-          <h3>
-            Program Drilling — Sabtu
-          </h3>
-
-          <div class="program-coach">
-            Sabtu | 16.00 — 19.00 WIB
-          </div>
-
-          <p>
-            Sesi Sabtu dimulai dengan program drilling atau latihan
-            teknik bagi pemain yang ingin meningkatkan kemampuan
-            secara lebih terarah. Materi latihan disesuaikan dengan
-            level dan kebutuhan masing-masing pemain.
-          </p>
-
-          <div class="program-detail">
-            <strong>Materi latihan dapat meliputi:</strong>
-
-            <ul>
-              <li>Teknik dasar pukulan</li>
-              <li>Footwork dan pergerakan lapangan</li>
-              <li>Servis dan pengembalian bola</li>
-              <li>Smash dan pola serangan</li>
-              <li>Defense dan permainan bertahan</li>
-              <li>Pola permainan dan strategi</li>
-              <li>Konsistensi serta kontrol shuttlecock</li>
-            </ul>
-          </div>
-
-          <p>
-            Setiap pemain akan mendapatkan materi latihan yang
-            disesuaikan dengan tingkat kemampuan agar proses
-            perkembangan dapat berjalan secara efektif dan bertahap.
-          </p>
-
-          <div class="program-detail">
-            <strong>Fokus latihan:</strong>
-            <span>
-              Teknik, fisik, konsistensi, strategi, dan peningkatan kemampuan individu.
-            </span>
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- 03 -->
-      <div class="program-item reveal-on-scroll">
-
-        <div class="program-num">
-          03
-        </div>
-
-        <div class="program-content">
-
-          <h3>
-            Main Bersama — Sabtu
-          </h3>
-
-          <div class="program-coach">
-            Sabtu | 19.00 — 22.00 WIB
-          </div>
-
-          <p>
-            Setelah sesi drilling selesai, kegiatan dilanjutkan
-            dengan permainan bersama. Sesi ini memberikan kesempatan
-            kepada pemain untuk menerapkan teknik dan strategi yang
-            telah dipelajari ke dalam pertandingan secara langsung.
-          </p>
-
-          <p>
-            Pemain dapat bertanding dengan anggota lain dari berbagai
-            tingkat kemampuan sehingga memperoleh pengalaman bermain
-            yang lebih beragam.
-          </p>
-
-          <div class="program-detail">
-            <strong>Kegiatan:</strong>
-            <span>
-              Permainan bebas, pertandingan internal, sparring,
-              dan evaluasi permainan.
-            </span>
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- 04 -->
-      <div class="program-item reveal-on-scroll">
-
-        <div class="program-num">
-          04
-        </div>
-
-        <div class="program-content">
-
-          <h3>
-            Sistem Pembinaan Berdasarkan Level Pemain
-          </h3>
-
-          <p>
-            Setiap pemain memiliki kemampuan dan kebutuhan latihan
-            yang berbeda. Oleh karena itu, sistem drilling dan
-            pembinaan dilakukan secara bertahap dengan menyesuaikan
-            level kemampuan masing-masing pemain.
-          </p>
-
-          <p>
-            Mulai dari pemain pemula yang masih mempelajari teknik
-            dasar hingga pemain dengan kemampuan lebih tinggi yang
-            ingin meningkatkan strategi dan konsistensi permainan,
-            setiap peserta mendapatkan pendekatan latihan yang sesuai
-            dengan tahap perkembangannya.
-          </p>
-
-          <div class="program-detail">
-            <strong>Tujuan pembinaan:</strong>
-            <span>
-              Menciptakan pemain yang lebih baik sekaligus membangun
-              lingkungan latihan yang positif, disiplin, kompetitif,
-              dan saling mendukung.
-            </span>
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
+    <p class="hero-closing">
+      Yuk, gabung sama kita! Waktunya hidup sehat, seru-seruan bareng, dan bangun energi positif lewat badminton.
+    </p>
   </div>
+</header>
 
+<!-- PROGRAM LATIHAN -->
+<section class="program" id="program">
+  <div class="container">
+    <div class="sec-head reveal-on-scroll">
+      <span class="eyebrow">01 — Latihan</span>
+      <h2>Seru Seruan, Berlatih &amp; Berkembang</h2>
+      <p>
+        Program latihan ini asyik banget buat tempat kamu seru-seruan sambil ningkatin skill, matengin teknik, dan nambah jam terbang tanding. Jadwalnya fleksibel dan pas banget sama gaya main kamu!
+      </p>
+    </div>
+
+    <div class="program-info reveal-on-scroll">
+      <h3 class="program-info-title">Latihan Rutin &amp; Mabar</h3>
+      <div class="program-schedule">
+        <div class="schedule-item">
+          <span class="schedule-day">Rabu</span>
+          <span class="schedule-time">19.00–22.00 WIB</span>
+        </div>
+        <div class="schedule-item">
+          <span class="schedule-day">Sabtu</span>
+          <span class="schedule-time">19.00–22.00 WIB</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- =========================================
-     FAQ
-========================================= -->
+<!-- FAQ -->
 <section class="faq" id="pelatih">
-
   <div class="container">
-
-    <!-- HEADER -->
     <div class="sec-head reveal-on-scroll">
-
-      <span class="eyebrow">
-        03 — FAQ
-      </span>
-
-      <h2>
-        Pertanyaan yang Sering Diajukan
-      </h2>
-
-      <p>
-        Beberapa hal yang biasa ditanyakan sebelum bergabung dengan PB Djarem Malang.
-      </p>
-
+      <span class="eyebrow">02 — FAQ</span>
+      <h2>FAQ Anak Mager Tapi PenGEN Jago Badminton</h2>
     </div>
 
-    <!-- DAFTAR FAQ -->
     <div class="faq-list">
 
       <div class="faq-item reveal-on-scroll">
         <button class="faq-question" type="button">
           <span class="faq-num">01</span>
-          <span class="faq-q-text">Apakah harus daftar dulu sebelum datang latihan?</span>
-          <span class="faq-icon">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
-          </span>
+          <span class="faq-q-text">Wajib isi slot dulu ngga nih, sebelum gas mabar?</span>
+          <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
         </button>
         <div class="faq-answer">
-          <div class="faq-answer-inner">
-            Perlu. Klub kami membatasi jumlah anggota maksimal 16 orang per sesi, sehingga pendaftaran diperlukan agar kuota latihan dapat diatur dengan baik.
-          </div>
+          <div class="faq-answer-inner">Yoih, wajib banget! Biar admin bisa ngitung estimasi shuttlecock, nge-booking lapangan, plus ngatur pairing-an tim pas main nanti.</div>
         </div>
       </div>
 
       <div class="faq-item reveal-on-scroll delay-1">
         <button class="faq-question" type="button">
           <span class="faq-num">02</span>
-          <span class="faq-q-text">Berapa biaya untuk bergabung / latihan?</span>
-          <span class="faq-icon">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
-          </span>
+          <span class="faq-q-text">Emang pemula banget boleh langsung gabung, atau harus udah jago dulu?</span>
+          <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
         </button>
         <div class="faq-answer">
-          <div class="faq-answer-inner">
-            Iuran latihan sebesar Rp20.000 per pertemuan.
-          </div>
+          <div class="faq-answer-inner">Tenang, gak harus langsung seluwes Kevin Sanjaya kok. Semua level bakal dibimbing dan dicarikan lawan yang sebanding dulu!</div>
         </div>
       </div>
 
       <div class="faq-item reveal-on-scroll delay-2">
         <button class="faq-question" type="button">
           <span class="faq-num">03</span>
-          <span class="faq-q-text">Apakah ada batasan usia atau level kemampuan?</span>
-          <span class="faq-icon">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
-          </span>
+          <span class="faq-q-text">Biaya iuran bulanannya gimana? Kantong pelajar aman kan?</span>
+          <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
         </button>
         <div class="faq-answer">
-          <div class="faq-answer-inner">
-            Tidak ada. PB Djarem terbuka untuk semua usia dan tingkat kemampuan, mulai dari pemula hingga pemain berpengalaman.
-          </div>
+          <div class="faq-answer-inner">Dijamin aman &amp; sebanding sama fasilitas dan exp yang bakal kamu dapetin.</div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal-on-scroll delay-3">
+        <button class="faq-question" type="button">
+          <span class="faq-num">04</span>
+          <span class="faq-q-text">Biasanya alat-alat kayak raket harus bawa sendiri atau disediain?</span>
+          <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Sebaiknya bawa raket andalanmu sendiri ya, biar lebih klop pas dipakai smash!</div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal-on-scroll delay-4">
+        <button class="faq-question" type="button">
+          <span class="faq-num">05</span>
+          <span class="faq-q-text">Kira-kira kapan nih bisa mulai ikutan sparing atau turnamen?</span>
+          <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Kalau skill dasar kamu udah matang dan para member udah kasih lampu hijau, kamu bakal langsung dapet kesempatan buat unjuk gigi di tandingan!</div>
         </div>
       </div>
 
     </div>
-
   </div>
-
 </section>
 
-  <!-- =========================================
-     05 — CARA BERGABUNG
-========================================= -->
-  <section class="join" id="gabung">
-   <div class="container">
-    <!-- JUDUL SECTION -->
+<!-- CARA BERGABUNG -->
+<section class="join" id="gabung">
+  <div class="container">
     <div class="sec-head reveal-on-scroll">
-     <span class="eyebrow">
-      04 &mdash; Cara Bergabung
-     </span>
-     <h2>
-      Bergabung Bersama Kami
-     </h2>
-     <p>
-      Ingin menjadi bagian dari keluarga PB Djarum Malang?
+      <span class="eyebrow">03 &mdash; Cara Bergabung</span>
+      <h2>Bergabung Bersama Kami</h2>
+      <p>
+        Ingin menjadi bagian dari keluarga PB Djarem Malang?
         Bergabunglah bersama kami untuk bermain, berlatih,
         berkembang, dan bertemu dengan sesama pecinta bulutangkis.
-     </p>
+      </p>
     </div>
-    <!-- BOX PENDAFTARAN -->
+
     <div class="join-box reveal-on-scroll delay-1">
-     <!-- =====================
-           QR CODE
-      ====================== -->
-     <div class="qr-section">
-      <div class="qr-placeholder">
-       <!-- GANTI qr-whatsapp.png
-               DENGAN FILE QR ANDA -->
-       <img alt="QR Code Grup WhatsApp PB Djarum Malang" src="qr PB Djarem.png"/>
+      <div class="qr-section">
+        <div class="qr-placeholder">
+          <img alt="QR Code Grup WhatsApp PB Djarem Malang" src="qr PB Djarem.png"/>
+        </div>
+        <p class="qr-text">Scan QR Code untuk bergabung</p>
       </div>
-      <p class="qr-text">
-       Scan QR Code untuk bergabung
-      </p>
-     </div>
-     <!-- =====================
-           INFORMASI BERGABUNG
-      ====================== -->
-     <div class="join-info">
-      <span class="join-label">
-       PB DJARUM MALANG
-      </span>
-      <h3>
-       Langkah Mudah Bergabung
-      </h3>
-      <p>
-       Bergabung dengan komunitas kami sangat mudah.
+
+      <div class="join-info">
+        <span class="join-label">PB DJAREM MALANG</span>
+        <h3>Langkah Mudah Bergabung</h3>
+        <p>
+          Bergabung dengan komunitas kami sangat mudah.
           Pilih salah satu cara di bawah ini untuk masuk
-          ke grup WhatsApp PB Djarum Malang.
-      </p>
-      <!-- LANGKAH -->
-      <div class="join-steps">
-       <div class="join-step">
-        <span class="step-number">
-         01
-        </span>
-        <div>
-         <strong>
-          Scan QR Code
-         </strong>
-         <p>
-          Buka kamera atau aplikasi WhatsApp,
-                lalu scan QR Code di sebelah kiri.
-         </p>
+          ke grup WhatsApp PB Djarem Malang.
+        </p>
+
+        <div class="join-steps">
+          <div class="join-step">
+            <span class="step-number">01</span>
+            <div>
+              <strong>Scan QR Code</strong>
+              <p>Buka kamera atau aplikasi WhatsApp, lalu scan QR Code di sebelah kiri.</p>
+            </div>
+          </div>
+          <div class="join-step">
+            <span class="step-number">02</span>
+            <div>
+              <strong>Klik Tombol WhatsApp</strong>
+              <p>Klik tombol di bawah untuk langsung masuk ke grup WhatsApp kami.</p>
+            </div>
+          </div>
         </div>
-       </div>
-       <div class="join-step">
-        <span class="step-number">
-         02
-        </span>
-        <div>
-         <strong>
-          Klik Tombol WhatsApp
-         </strong>
-         <p>
-          Klik tombol di bawah untuk langsung
-                masuk ke grup WhatsApp kami.
-         </p>
-        </div>
-       </div>
-      </div>
-      <!-- TOMBOL WHATSAPP -->
-      <a class="wa-btn" href="https://chat.whatsapp.com/EF3sdLU9jHmD4upPcmNzP6" rel="noopener noreferrer" target="_blank">
-       <!-- ICON WHATSAPP -->
-       <svg fill="currentColor" height="21" viewbox="0 0 24 24" width="21" xmlns="http://www.w3.org/2000/svg">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z">
-        </path>
-       </svg>
-       Gabung Grup WhatsApp
-      </a>
-      <span class="join-note">
-       Setelah bergabung, Anda dapat memperoleh informasi
+
+        <a class="wa-btn" href="https://chat.whatsapp.com/EF3sdLU9jHmD4upPcmNzP6" rel="noopener noreferrer" target="_blank">
+          <svg fill="currentColor" height="21" viewBox="0 0 24 24" width="21" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path>
+          </svg>
+          Gabung Grup WhatsApp
+        </a>
+        <span class="join-note">
+          Setelah bergabung, Anda dapat memperoleh informasi
           seputar jadwal bermain, latihan, dan kegiatan lainnya.
-      </span>
-     </div>
+        </span>
+      </div>
     </div>
-   </div>
-  </section>
+  </div>
+</section>
+
 <!-- KONTAK -->
 <section class="contact" id="kontak">
   <div class="container">
 
     <div class="sec-head reveal-on-scroll">
-      <span class="eyebrow">
-        05 &mdash; Kontak &amp; Lokasi
-      </span>
-
-      <h2>
-        Temukan Kami
-      </h2>
-
+      <span class="eyebrow">04 &mdash; Kontak &amp; Lokasi</span>
+      <h2>Temukan Kami</h2>
       <p>
         Ingin bergabung, bermain bersama, atau mengikuti program latihan kami?
         Jangan ragu untuk menghubungi kami. Kami terbuka bagi para pecinta
@@ -3824,94 +1066,70 @@ header {
 
     <div class="contact-grid reveal-on-scroll delay-1">
 
-      <!-- INFORMASI KONTAK -->
+      <div class="contact-left">
       <ul class="contact-list">
-
         <li>
-          <span class="label">
-            Alamat
-          </span>
-
+          <span class="label">Alamat</span>
           <span class="value">
-            📍 Lokasi<br>
-            GOR Angkasa<br>
-            Jl. Papakuning, Malang, Jawa Timur, Indonesia
+            📍 Galaxy Badminton Arena<br>
+            Jl. Simpang Sulfat Selatan No.5, Pandanwangi, Kec. Blimbing, Kota Malang, Jawa Timur 65124
           </span>
+          <a class="map-link" href="https://maps.app.goo.gl/1hnAhPy1xDuEpwPo8" target="_blank" rel="noopener noreferrer">Buka di Google Maps &#8599;</a>
         </li>
+      </ul>
 
-        <li>
-          <span class="label">
-            WA Admin
-          </span>
-
-          <a class="value contact-link" href="https://wa.me/6285196339968" target="_blank" rel="noopener noreferrer">
-            <span class="contact-link-icon icon-whatsapp">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <!-- SATU TABEL SOSIAL MEDIA (seluruh baris bisa diklik) -->
+      <div class="social-table">
+        <a class="social-row row-wa" href="https://wa.me/6285196339968" target="_blank" rel="noopener noreferrer">
+          <span class="social-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-              </svg>
-            </span>
-            085196339968
-          </a>
-        </li>
-
-        <li>
-          <span class="label">
-            TikTok
+              </svg></span>
+          <span class="social-text">
+            <span class="social-label">WhatsApp Admin</span>
+            <span class="social-handle">085196339968</span>
           </span>
-
-          <a class="value contact-link" href="https://www.tiktok.com/@pbdjarem.mlg?_r=1&amp;_t=ZS-99cDQrBa0TV" target="_blank" rel="noopener noreferrer">
-            <span class="contact-link-icon icon-tiktok">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <span class="social-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
+        </a>
+        <a class="social-row row-tt" href="https://www.tiktok.com/@pbdjarem.mlg?_r=1&amp;_t=ZS-99cDQrBa0TV" target="_blank" rel="noopener noreferrer">
+          <span class="social-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path d="M16.6 5.82s.51.5 0 0A4.278 4.278 0 0115.54 3h-3.09v12.4a2.592 2.592 0 01-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 004.3 1.38V7.3s-1.88.09-3.24-1.48z"/>
-              </svg>
-            </span>
-            @pbdjarem.mlg
-          </a>
-        </li>
-
-        <li>
-          <span class="label">
-            Instagram
+              </svg></span>
+          <span class="social-text">
+            <span class="social-label">TikTok</span>
+            <span class="social-handle">@pbdjarem.mlg</span>
           </span>
-
-          <a class="value contact-link" href="https://www.instagram.com/pbdjaremmlg?stkn=MWh1bTc5eXByd28xbQ==" target="_blank" rel="noopener noreferrer">
-            <span class="contact-link-icon icon-instagram">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+          <span class="social-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
+        </a>
+        <a class="social-row row-ig" href="https://www.instagram.com/pbdjaremmlg?stkn=MWh1bTc5eXByd28xbQ==" target="_blank" rel="noopener noreferrer">
+          <span class="social-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                 <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path>
                 <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-            </span>
-            @pbdjaremmlg
-          </a>
-        </li>
-
-        <li>
-          <span class="label">
-            Facebook
+              </svg></span>
+          <span class="social-text">
+            <span class="social-label">Instagram</span>
+            <span class="social-handle">@pbdjaremmlg</span>
           </span>
-
-          <a class="value contact-link" href="https://www.facebook.com/share/1PGioEVigC/" target="_blank" rel="noopener noreferrer">
-            <span class="contact-link-icon icon-facebook">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <span class="social-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
+        </a>
+        <a class="social-row row-fb" href="https://www.facebook.com/share/1PGioEVigC/" target="_blank" rel="noopener noreferrer">
+          <span class="social-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path d="M22 12a10 10 0 10-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.45h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.45 2.89h-2.33v6.99A10 10 0 0022 12z"/>
-              </svg>
-            </span>
-            PB Djarem Mlg
-          </a>
-        </li>
-
-      </ul>
+              </svg></span>
+          <span class="social-text">
+            <span class="social-label">Facebook</span>
+            <span class="social-handle">PB Djarem Mlg</span>
+          </span>
+          <span class="social-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
+        </a>
+      </div>
+      </div>
 
       <!-- GOOGLE MAPS -->
       <div class="map-box">
         <iframe
-          src="https://www.google.com/maps?q=-7.941734,112.625606&amp;z=16&amp;output=embed"
-          width="100%"
-          height="100%"
-          style="border:0;"
-          allowfullscreen=""
-          loading="lazy"
+          src="https://www.google.com/maps?q=Galaxy+Badminton+Arena,+Jl.+Simpang+Sulfat+Selatan+No.5,+Pandanwangi,+Blimbing,+Malang&amp;z=16&amp;output=embed"
+          width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
           referrerpolicy="no-referrer-when-downgrade">
         </iframe>
       </div>
@@ -3921,27 +1139,12 @@ header {
     <!-- FOOTER -->
     <footer>
       &copy; 2026 PB DJAREM &mdash;
-
-      <span>
-        Bakat Diasah, Prestasi Diraih
-      </span>
-
+      <span>Bakat Diasah, Prestasi Diraih</span>
       <a href="#top" class="back-to-top" id="backToTop">
-        <svg
-          width="14"
-          height="14"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2.5"
-          stroke-linecap="round"
-          stroke-linejoin="round">
-
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <line x1="12" y1="19" x2="12" y2="5"></line>
           <polyline points="5 12 12 5 19 12"></polyline>
-
         </svg>
-
         Kembali ke Halaman Awal
       </a>
     </footer>
@@ -3951,246 +1154,186 @@ header {
 
 </div><!-- /#main-content -->
 
+<script>
+// ---- Preloader title ----
+(function(){
+  const titleEl = document.getElementById('preloaderTitle');
+  const words = [
+    { text: 'PB', accent: false },
+    { text: 'DJAREM', accent: true },
+    { text: 'MALANG', accent: false }
+  ];
+  let delay = 0.2;
+  words.forEach((word, wi) => {
+    const wordSpan = document.createElement('span');
+    wordSpan.style.display = 'inline-flex';
+    wordSpan.style.marginRight = (wi === words.length - 1) ? '0' : '18px';
+    [...word.text].forEach((ch) => {
+      const s = document.createElement('span');
+      s.textContent = ch;
+      if (word.accent) s.classList.add('accent-word');
+      s.style.animationDelay = delay.toFixed(2) + 's';
+      delay += 0.045;
+      wordSpan.appendChild(s);
+    });
+    delay += 0.08;
+    titleEl.appendChild(wordSpan);
+  });
+})();
 
-  <script>
-   // ---- Build the animated preloader title letter-by-letter ----
-   (function(){
-     const titleEl = document.getElementById('preloaderTitle');
-     const words = [
-       { text: 'PB', accent: false },
-       { text: 'DJARUM', accent: true },
-       { text: 'MALANG', accent: false }
-     ];
-     let delay = 0.2;
-     words.forEach((word, wi) => {
-       const wordSpan = document.createElement('span');
-       wordSpan.style.display = 'inline-flex';
-       wordSpan.style.marginRight = '18px';
-       if (wi === words.length - 1) wordSpan.style.marginRight = '0';
-       [...word.text].forEach((ch) => {
-         const s = document.createElement('span');
-         s.textContent = ch;
-         if (word.accent) s.classList.add('accent-word');
-         s.style.animationDelay = delay.toFixed(2) + 's';
-         delay += 0.045;
-         wordSpan.appendChild(s);
-       });
-       delay += 0.08;
-       titleEl.appendChild(wordSpan);
-     });
-   })();
+// ---- Hide preloader ----
+(function(){
+  const preloader = document.getElementById('preloader');
+  const mainContent = document.getElementById('main-content');
+  const body = document.body;
+  const minTime = 2600;
+  const start = Date.now();
+  function reveal(){
+    const wait = Math.max(0, minTime - (Date.now() - start));
+    setTimeout(() => {
+      preloader.classList.add('hide');
+      mainContent.classList.add('reveal');
+      body.classList.remove('no-scroll');
+      setTimeout(() => { preloader.style.display = 'none'; }, 850);
+    }, wait);
+  }
+  if (document.readyState === 'complete') reveal();
+  else {
+    window.addEventListener('load', reveal);
+    setTimeout(reveal, 4500);
+  }
+})();
 
-   // ---- Hide preloader once page has loaded (with minimum show time) ----
-   (function(){
-     const preloader = document.getElementById('preloader');
-     const mainContent = document.getElementById('main-content');
-     const body = document.body;
-     const minTime = 2600; // ms, lets the intro animation play out
-     const start = Date.now();
+// ---- Mobile nav ----
+(function(){
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  if (!navToggle || !navLinks) return;
+  function closeMenu(){
+    navLinks.classList.remove('open');
+    navToggle.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  }
+  function toggleMenu(){
+    const isOpen = navLinks.classList.toggle('open');
+    navToggle.classList.toggle('open', isOpen);
+    navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  }
+  navToggle.addEventListener('click', toggleMenu);
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+  document.addEventListener('click', (e) => {
+    if (!navLinks.classList.contains('open')) return;
+    if (!navLinks.contains(e.target) && !navToggle.contains(e.target)) closeMenu();
+  });
+  window.addEventListener('resize', () => { if (window.innerWidth > 900) closeMenu(); });
+})();
 
-     function reveal(){
-       const elapsed = Date.now() - start;
-       const wait = Math.max(0, minTime - elapsed);
-       setTimeout(() => {
-         preloader.classList.add('hide');
-         mainContent.classList.add('reveal');
-         body.classList.remove('no-scroll');
-         setTimeout(() => { preloader.style.display = 'none'; }, 850);
-       }, wait);
-     }
+// ---- Back to top ----
+(function(){
+  const btn = document.getElementById('backToTop');
+  if (!btn) return;
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
 
-     if (document.readyState === 'complete') {
-       reveal();
-     } else {
-       window.addEventListener('load', reveal);
-       // fallback in case 'load' never fires (missing images etc.)
-       setTimeout(reveal, 4500);
-     }
-   })();
+// ---- Theme toggle ----
+const toggle = document.getElementById('themeToggle');
+const html = document.documentElement;
+let savedTheme = null;
+try { savedTheme = localStorage.getItem('theme'); } catch(e) {}
+if (savedTheme === 'dark') {
+  html.setAttribute('data-theme', 'dark');
+  toggle.textContent = '☀️';
+} else {
+  toggle.textContent = '🌙';
+}
+toggle.addEventListener('click', () => {
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  if (isDark) {
+    html.removeAttribute('data-theme');
+    try { localStorage.removeItem('theme'); } catch(e) {}
+    toggle.textContent = '🌙';
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    try { localStorage.setItem('theme', 'dark'); } catch(e) {}
+    toggle.textContent = '☀️';
+  }
+});
 
-   // ---- Mobile nav menu toggle ----
-   (function(){
-     const navToggle = document.getElementById('navToggle');
-     const navLinks = document.getElementById('navLinks');
-     if (!navToggle || !navLinks) return;
+// ---- FAQ accordion ----
+(function(){
+  const items = document.querySelectorAll('.faq-item');
+  items.forEach(item => {
+    const question = item.querySelector('.faq-question');
+    const answer = item.querySelector('.faq-answer');
+    question.addEventListener('click', () => {
+      const isActive = item.classList.contains('active');
+      items.forEach(other => {
+        other.classList.remove('active');
+        other.querySelector('.faq-answer').style.maxHeight = null;
+      });
+      if (!isActive) {
+        item.classList.add('active');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    });
+  });
+})();
 
-     function closeMenu(){
-       navLinks.classList.remove('open');
-       navToggle.classList.remove('open');
-       navToggle.setAttribute('aria-expanded', 'false');
-     }
-     function toggleMenu(){
-       const isOpen = navLinks.classList.toggle('open');
-       navToggle.classList.toggle('open', isOpen);
-       navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-     }
+// ---- Scroll reveal ----
+(function(){
+  const els = document.querySelectorAll('.reveal-on-scroll');
+  if (!('IntersectionObserver' in window) || !els.length) {
+    els.forEach(el => el.classList.add('in-view'));
+    return;
+  }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(el => io.observe(el));
+})();
 
-     navToggle.addEventListener('click', toggleMenu);
-     navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
-     document.addEventListener('click', (e) => {
-       if (!navLinks.classList.contains('open')) return;
-       if (!navLinks.contains(e.target) && !navToggle.contains(e.target)) closeMenu();
-     });
-     window.addEventListener('resize', () => {
-       if (window.innerWidth > 900) closeMenu();
-     });
-   })();
+// ---- Cursor glow (desktop) ----
+(function(){
+  const glow = document.getElementById('cursorGlow');
+  if (!glow || window.matchMedia('(max-width: 900px)').matches) return;
+  let raf = null;
+  window.addEventListener('mousemove', (e) => {
+    glow.style.opacity = '1';
+    if (raf) return;
+    raf = requestAnimationFrame(() => {
+      glow.style.left = e.clientX + 'px';
+      glow.style.top = e.clientY + 'px';
+      raf = null;
+    });
+  });
+  document.addEventListener('mouseleave', () => { glow.style.opacity = '0'; });
+})();
 
-   // ---- Back to top button ----
-   (function(){
-     const btn = document.getElementById('backToTop');
-     if (!btn) return;
-     btn.addEventListener('click', (e) => {
-       e.preventDefault();
-       window.scrollTo({ top: 0, behavior: 'smooth' });
-     });
-   })();
+// ---- Ripple on buttons ----
+(function(){
+  document.querySelectorAll('.btn, .wa-btn').forEach(btn => {
+    btn.addEventListener('click', function(e){
+      const rect = this.getBoundingClientRect();
+      const ripple = document.createElement('span');
+      const size = Math.max(rect.width, rect.height);
+      ripple.className = 'ripple';
+      ripple.style.width = ripple.style.height = size + 'px';
+      ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+      ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+      this.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 650);
+    });
+  });
+})();
 
-   // ---- Theme toggle (unchanged behaviour) ----
-   const toggle = document.getElementById('themeToggle');
-   const html = document.documentElement;
-
-   const savedTheme = localStorage.getItem('theme');
-   if (savedTheme === 'dark') {
-     html.setAttribute('data-theme', 'dark');
-     toggle.textContent = '☀️';
-   } else {
-     toggle.textContent = '🌙';
-   }
-
-   toggle.addEventListener('click', () => {
-     const isDark = html.getAttribute('data-theme') === 'dark';
-     if (isDark) {
-       html.removeAttribute('data-theme');
-       localStorage.removeItem('theme');
-       toggle.textContent = '🌙';
-     } else {
-       html.setAttribute('data-theme', 'dark');
-       localStorage.setItem('theme', 'dark');
-       toggle.textContent = '☀️';
-     }
-   });
-
-   // ---- Hero accordion ----
-   (function(){
-     const items = document.querySelectorAll('.hero-accordion-item');
-     items.forEach(item => {
-       const question = item.querySelector('.hero-accordion-question');
-       const answer = item.querySelector('.hero-accordion-answer');
-       question.addEventListener('click', () => {
-         const isActive = item.classList.contains('active');
-         if (isActive) {
-           item.classList.remove('active');
-           answer.style.maxHeight = null;
-         } else {
-           item.classList.add('active');
-           answer.style.maxHeight = answer.scrollHeight + 'px';
-         }
-       });
-     });
-   })();
-
-   // ---- FAQ accordion ----
-   (function(){
-     const items = document.querySelectorAll('.faq-item');
-     items.forEach(item => {
-       const question = item.querySelector('.faq-question');
-       const answer = item.querySelector('.faq-answer');
-       question.addEventListener('click', () => {
-         const isActive = item.classList.contains('active');
-         items.forEach(other => {
-           other.classList.remove('active');
-           other.querySelector('.faq-answer').style.maxHeight = null;
-         });
-         if (!isActive) {
-           item.classList.add('active');
-           answer.style.maxHeight = answer.scrollHeight + 'px';
-         }
-       });
-     });
-   })();
-
-   // ---- Scroll reveal animation ----
-   (function(){
-     const els = document.querySelectorAll('.reveal-on-scroll');
-     if (!('IntersectionObserver' in window) || !els.length) {
-       els.forEach(el => el.classList.add('in-view'));
-       return;
-     }
-     const io = new IntersectionObserver((entries) => {
-       entries.forEach(entry => {
-         if (entry.isIntersecting) {
-           entry.target.classList.add('in-view');
-           io.unobserve(entry.target);
-         }
-       });
-     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-     els.forEach(el => io.observe(el));
-   })();
-
-   // ---- Cursor glow follow (desktop only) ----
-   (function(){
-     const glow = document.getElementById('cursorGlow');
-     if (!glow || window.matchMedia('(max-width: 900px)').matches) return;
-     let raf = null;
-     window.addEventListener('mousemove', (e) => {
-       glow.style.opacity = '1';
-       if (raf) return;
-       raf = requestAnimationFrame(() => {
-         glow.style.left = e.clientX + 'px';
-         glow.style.top = e.clientY + 'px';
-         raf = null;
-       });
-     });
-     document.addEventListener('mouseleave', () => { glow.style.opacity = '0'; });
-   })();
-
-   // ---- Ripple effect on buttons ----
-   (function(){
-     document.querySelectorAll('.btn, .wa-btn').forEach(btn => {
-       btn.addEventListener('click', function(e){
-         const rect = this.getBoundingClientRect();
-         const ripple = document.createElement('span');
-         const size = Math.max(rect.width, rect.height);
-         ripple.className = 'ripple';
-         ripple.style.width = ripple.style.height = size + 'px';
-         ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
-         ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
-         this.appendChild(ripple);
-         setTimeout(() => ripple.remove(), 650);
-       });
-     });
-   })();
-
-   // ---- Animated number counters for stats ----
-   (function(){
-     const stats = document.querySelectorAll('.stat b');
-     if (!stats.length || !('IntersectionObserver' in window)) return;
-     const io = new IntersectionObserver((entries) => {
-       entries.forEach(entry => {
-         if (!entry.isIntersecting) return;
-         const el = entry.target;
-         const raw = el.textContent.trim();
-         const num = parseInt(raw.replace(/\D/g, ''), 10);
-         el.closest('.stat').classList.add('counted');
-         if (!isNaN(num) && num > 1) {
-           let current = 0;
-           const duration = 1000;
-           const start = performance.now();
-           function step(now){
-             const progress = Math.min((now - start) / duration, 1);
-             current = Math.floor(progress * num);
-             el.textContent = current;
-             if (progress < 1) requestAnimationFrame(step);
-             else el.textContent = raw;
-           }
-           requestAnimationFrame(step);
-         }
-         io.unobserve(el);
-       });
-     }, { threshold: 0.5 });
-     stats.forEach(el => io.observe(el));
-   })();
-  </script>
- </body>
+</script>
+</body>
 </html>
