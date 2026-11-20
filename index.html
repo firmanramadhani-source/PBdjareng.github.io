@@ -177,9 +177,9 @@ nav{
   overflow:hidden; z-index:1;
 }
 .banner-container{
-  position:relative; width:100%; height:250px; display:grid;
+  position:relative; width:100%; height:290px; display:grid;
   grid-template-columns:38% 42% 20%;
-  grid-template-rows:205px 45px;
+  grid-template-rows:245px 45px;
   overflow:hidden; box-sizing:border-box;
   background-color:#8a6500;
   background-image:
@@ -223,7 +223,7 @@ nav{
   color:#ffffff; font-size:20px; font-weight:900; font-style:italic; transform:none; white-space:nowrap;
 }
 .banner-center{
-  grid-column:2; grid-row:1; position:relative; width:100%; height:100%;
+  grid-column:2 / 4; grid-row:1; position:relative; width:100%; height:100%;
   overflow:hidden; box-sizing:border-box; display:block; z-index:2;
 }
 .headline{
@@ -247,7 +247,7 @@ nav{
 }
 .player-img{
   position:absolute; left:50%; bottom:-1px; transform:translateX(-50%);
-  width:120%; height:100%; object-fit:contain; object-position:center bottom;
+  width:100%; height:100%; object-fit:contain; object-position:center bottom;
   z-index:5; pointer-events:none; filter:drop-shadow(0 6px 8px rgba(0,0,0,0.30));
 }
 .banner-right{
@@ -290,7 +290,7 @@ nav{
 
 
 @media (max-width:1100px){
-  .banner-container{height:235px; grid-template-columns:41% 39% 20%; grid-template-rows:195px 40px;}
+  .banner-container{height:265px; grid-template-columns:41% 39% 20%; grid-template-rows:225px 40px;}
   .banner-left{padding-left:1px;}
   .sponsor-logo{width:80px; height:80px;}
   .brand-area{gap:10px;}
@@ -307,7 +307,7 @@ nav{
   .banner-footer img{max-width:54px; max-height:27px;}
 }
 @media (max-width:768px){
-  .banner-container{height:190px; grid-template-columns:46% 34% 20%; grid-template-rows:155px 35px;}
+  .banner-container{height:215px; grid-template-columns:46% 34% 20%; grid-template-rows:180px 35px;}
   .banner-left{padding:7px 5px 10px 12px;}
   .brand-area{gap:7px; margin-bottom:7px;}
   .sponsor-logo{width:55px; height:55px;}
@@ -319,7 +319,7 @@ nav{
   .banner-info-value{min-width:42px; height:25px; padding:0 5px; font-size:8px;}
   .headline{top:7px; font-size:12px;}
   .join-text{top:35px; padding:2px 6px; font-size:5px;}
-  .player-img{width:132%;}
+  .player-img{width:100%;}
   .right-logo{height:52px; min-height:52px; padding:3px; border-radius:0 0 0 8px;}
   .right-logo img{width:48px; height:48px;}
   .social-info{padding:0 4px 4px 2px;}
@@ -331,8 +331,7 @@ nav{
   .banner-footer img{max-width:40px; max-height:20px;}
 }
 @media (max-width:480px){
-  .banner-container{height:165px; grid-template-columns:47% 33% 20%; grid-template-rows:135px 30px;}
-  .player-img{width:138%;}
+  .banner-container{height:185px; grid-template-columns:47% 33% 20%; grid-template-rows:155px 30px;}
   .banner-left{padding-left:8px;}
   .sponsor-logo{width:45px; height:45px;}
   .brand-area{gap:5px; margin-bottom:5px;}
@@ -747,6 +746,93 @@ footer{margin-top:70px;}
   .program-schedule{grid-template-columns:1fr;}
   .schedule-time{font-size:22px;}
 }
+
+/* ---------- SPARING & TURNAMEN ---------- */
+.sparing{background:var(--bg);--gd:#b45309;--ok:#15803d;}
+[data-theme="dark"] .sparing{--gd:#fbbf24;--ok:#4ade80;}
+body:not(.admin) .sparing .adm{display:none!important;}
+.sparing button,.sparing select,.sparing input{font:inherit;}
+.sparing button{cursor:pointer;border:1px solid var(--border);background:var(--surface);color:var(--text);padding:8px 14px;border-radius:8px;}
+.sparing button:hover{border-color:var(--accent);}
+.sparing .pri{background:var(--accent);border-color:var(--accent);color:#fff;}
+.sparing .dng{color:var(--accent);}
+.sparing input,.sparing select{padding:9px 12px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text);min-width:0;}
+.sparing h3{font-size:20px;margin:30px 0 14px;}
+.sp-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:10px;}
+.sp-tabs{display:flex;gap:8px;}
+.sparing .sp-tabs button{font-family:'Oswald';letter-spacing:1.5px;text-transform:uppercase;padding:11px 22px;}
+.sparing .sp-tabs button.on{background:var(--accent);border-color:var(--accent);color:#fff;}
+.sp-hint{color:var(--muted);font-size:14px;margin-bottom:8px;}
+.sp-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px;}
+.sp-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;}
+.sp-chip{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:5px 8px 5px 14px;display:inline-flex;gap:8px;align-items:center;font-size:14px;}
+.sparing .sp-chip button{padding:0 6px;border:none;background:none;color:var(--accent);}
+.sp-m{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:12px 14px;border:1px solid var(--border);border-radius:10px;margin-bottom:8px;background:var(--surface);}
+.sp-m.skip{opacity:.45;}
+.sp-t{font-weight:600;}
+.sp-vs{color:var(--muted);font-size:13px;}
+.sp-win{color:var(--ok);}.sp-win::after{content:' ✓';}
+.sp-lose{color:var(--muted);text-decoration:line-through;}
+.sp-acts{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap;}
+.sparing .sp-acts button{padding:5px 10px;font-size:13px;}
+.sp-rd{font-family:'Oswald';letter-spacing:2px;text-transform:uppercase;color:var(--gd);font-size:13px;margin:18px 0 8px;}
+.sp-tw{overflow-x:auto;border:1px solid var(--border);border-radius:10px;}
+.sp-tw table{width:100%;border-collapse:collapse;min-width:480px;}
+.sp-tw th,.sp-tw td{padding:10px 12px;text-align:center;border-bottom:1px solid var(--border);}
+.sp-tw th{font-family:'Oswald';letter-spacing:1px;text-transform:uppercase;font-size:12px;background:var(--surface);}
+.sp-tw td:nth-child(2),.sp-tw th:nth-child(2){text-align:left;}
+.sp-tw tr:last-child td{border-bottom:none;}
+.sp-tw tr.el td{opacity:.5;}
+.sp-note{padding:12px 16px;border-left:3px solid var(--accent);background:rgba(220,38,38,.07);border-radius:0 8px 8px 0;margin:10px 0 14px;font-size:15px;}
+.sp-champ{font-family:'Anton';font-size:26px;text-transform:uppercase;padding:18px;text-align:center;border-radius:12px;background:linear-gradient(135deg,#b91c1c,#dc2626);color:#fff;margin:14px 0;}
+.sp-empty{color:var(--muted);font-size:14px;padding:6px 0;}
+.sp-gap{margin-top:16px;}
+
+/* ---------- SCOREBOARD SPARRING ---------- */
+.sparing h4{font-family:'Oswald';letter-spacing:1.5px;text-transform:uppercase;font-size:14px;color:var(--gd);margin:0 0 8px;}
+.sc-hd{font-family:'Anton';font-size:24px;text-transform:uppercase;text-align:center;color:var(--text-heading);}
+.sc-meta{text-align:center;color:var(--muted);font-size:14px;margin:6px 0 16px;}
+.sc-badge{display:inline-block;padding:2px 10px;border-radius:12px;font-size:12px;font-weight:700;background:var(--surface);border:1px solid var(--border);margin-left:6px;}
+.sc-badge.live,.sc-badge.l{background:var(--accent);color:#fff;border-color:var(--accent);}
+.sc-badge.done,.sc-badge.d{background:var(--ok);color:#fff;border-color:var(--ok);}
+.sc-main{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center;padding:22px 16px;border:1px solid var(--border);border-radius:14px;background:var(--surface);}
+.sc-club{text-align:center;display:flex;flex-direction:column;align-items:center;gap:4px;}
+.sc-club.lead .sc-big{color:var(--ok);}
+.sc-big{font-family:'Anton';font-size:56px;line-height:1;color:var(--text-heading);}
+.sc-logo{width:64px;height:64px;object-fit:contain;border-radius:10px;}
+.sc-logo.ph{display:flex;align-items:center;justify-content:center;background:var(--accent);color:#fff;font-family:'Anton';font-size:28px;}
+.sc-mid{text-align:center;display:flex;flex-direction:column;gap:10px;font-size:14px;}
+.sc-mid small,.sc-club small{display:block;color:var(--muted);font-size:12px;}
+.sc-mid b{font-size:18px;color:var(--text-heading);}
+.sc-note{padding:12px 16px;border-left:3px solid var(--accent);background:rgba(220,38,38,.07);border-radius:0 8px 8px 0;margin:12px 0;}
+.sc-acts2{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0;}
+.sc-m{border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:12px;background:var(--surface);}
+.sc-mh{display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:14px;color:var(--muted);margin-bottom:10px;}
+.sc-mh b{color:var(--text-heading);font-family:'Oswald';letter-spacing:1px;}
+.sc-mb{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;}
+.sc-side{display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px;font-size:14px;}
+.sc-side .sc-logo{width:40px;height:40px;font-size:18px;}
+.sc-side small{color:var(--muted);}
+.sc-side.w b,.sc-side.w small{color:var(--ok);}
+.sc-sc{font-family:'Anton';font-size:30px;color:var(--text-heading);text-align:center;}
+.sc-sc input{width:64px;text-align:center;font-size:18px;padding:6px;}
+.sc-win{text-align:center;font-weight:700;color:var(--ok);margin-top:10px;}
+.sc-acts{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:12px;}
+.sparing .sc-acts button{padding:5px 10px;font-size:13px;}
+body.admin .sc-pub{display:none;}
+.sc-two{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.sc-aw{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px;}
+.sc-aw div{border:1px solid var(--border);border-radius:12px;padding:14px;background:var(--surface);text-align:center;}
+.sc-aw small{display:block;color:var(--muted);font-size:12px;}
+.sc-aw span{font-family:'Oswald';letter-spacing:2px;text-transform:uppercase;color:var(--gd);font-size:12px;}
+.sc-aw b{display:block;font-size:17px;margin:4px 0;color:var(--text-heading);}
+.sc-panel{margin-top:30px;padding:8px 20px 20px;border:1px dashed var(--accent);border-radius:14px;}
+.sc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.sc-grid label{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--muted);}
+.sparing details{border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin-bottom:8px;background:var(--surface);}
+.sparing summary{cursor:pointer;font-weight:600;}
+@media (max-width:700px){.sc-two,.sc-grid{grid-template-columns:1fr;}.sc-aw{grid-template-columns:1fr;}.sc-big{font-size:42px;}.sc-main{padding:16px 8px;gap:6px;}.sc-sc{font-size:22px;}.sc-sc input{width:52px;}}
+.sc-m.skip{opacity:.5;}
 </style>
 </head>
 <body class="no-scroll">
@@ -781,6 +867,7 @@ footer{margin-top:70px;}
     <img src="logo.png" alt="Logo PB Djarem" class="brand-logo">
   </div>
   <div class="nav-links" id="navLinks">
+    <a href="#sparing">Sparing &amp; Turnamen</a>
     <a href="#program">Program</a>
     <a href="#pelatih">FAQ</a>
     <a href="#gabung">Gabung</a>
@@ -820,7 +907,7 @@ footer{margin-top:70px;}
     <div class="banner-center">
       <h2 class="headline"><span>PB DJAREM</span> MALANG</h2>
       <p class="banner-tagline">Come play with us again</p>
-      <img src="fotokita.png" alt="Foto Bersama PB Djarem Malang" class="player-img">
+      <img src="fotobaru.png" alt="Foto Bersama PB Djarem Malang" class="player-img">
     </div>
 
     <!-- KANAN -->
@@ -891,11 +978,117 @@ footer{margin-top:70px;}
   </div>
 </header>
 
+<!-- SPARING & TURNAMEN -->
+<section class="sparing" id="sparing">
+  <div class="container">
+    <div class="sec-head reveal-on-scroll">
+      <span class="eyebrow">01 — Sparing &amp; Turnamen</span>
+      <h2>Catat Hasil, Pantau Klasemen</h2>
+      <p>Catat hasil sparing dan turnamen internal, klasemen terhitung otomatis. Poin turnamen: menang <b id="wp">3</b>, kalah 0.</p>
+    </div>
+
+    <div class="sp-top">
+      <div class="sp-tabs">
+        <button id="tabsp" class="on" onclick="PM.tab('sp')">Sparing</button>
+        <button id="tabtr" onclick="PM.tab('tr')">Internal Turnamen</button>
+      </div>
+      <button id="adminBtn" class="pri" onclick="PM.login()">Mode Admin</button>
+    </div>
+    <p class="sp-hint">Klik <b>Mode Admin</b> dan masukkan PIN untuk menambah peserta dan mengisi hasil pertandingan.</p>
+
+    <!-- SPARING -->
+    <div id="sp">
+      <div id="scBoard"></div>
+      <div class="sc-acts2">
+        <button onclick="SP.poster()">🖼️ Poster Hasil</button>
+        <button onclick="SP.wa()">💬 Bagikan WhatsApp</button>
+        <button onclick="SP.refresh()">🔄 Refresh</button>
+        <button class="adm" onclick="SP.arch()">📁 Arsipkan Event</button>
+        <button class="adm dng" onclick="SP.newEv()">Event Baru</button>
+      </div>
+
+      <h3>Hasil Pertandingan</h3>
+      <div id="scMatches"></div>
+
+      <h3>Statistik Pemain</h3>
+      <div id="scAwards"></div>
+      <div class="sc-two"><div><h4 id="scTH"></h4><div id="scStatH"></div></div><div><h4 id="scTA"></h4><div id="scStatA"></div></div></div>
+
+      <h3>Daftar Pemain</h3>
+      <div class="sc-two"><div><h4 id="scLH"></h4><div class="sp-chips" id="scHP"></div></div><div><h4 id="scLA"></h4><div class="sp-chips" id="scAP"></div></div></div>
+
+      <div class="adm sc-panel">
+        <h3>Pengaturan Event</h3>
+        <div class="sc-grid">
+          <label>Klub tuan rumah<input id="evH" onchange="SP.ev()"></label>
+          <label>Logo tuan rumah<input type="file" accept="image/*" onchange="SP.logo('hl',this)"></label>
+          <label>Klub tamu<input id="evA" placeholder="mis. PB eMeM" onchange="SP.ev()"></label>
+          <label>Logo tamu<input type="file" accept="image/*" onchange="SP.logo('al',this)"></label>
+          <label>Tanggal<input type="date" id="evD" onchange="SP.ev()"></label>
+          <label>Lokasi / gedung<input id="evL" onchange="SP.ev()"></label>
+          <label>Jenis pertandingan<input id="evT" onchange="SP.ev()"></label>
+          <label>Status event<select id="evS" onchange="SP.ev()"><option>Belum Dimulai</option><option>Sedang Berlangsung (LIVE)</option><option>Selesai</option></select></label>
+        </div>
+        <h3>Tambah Pemain</h3>
+        <div class="sc-two">
+          <div class="sp-row"><input id="pH" placeholder="Pemain tuan rumah" onkeydown="if(event.key==='Enter')SP.addP('hp')"><button class="pri" onclick="SP.addP('hp')">Tambah</button></div>
+          <div class="sp-row"><input id="pA" placeholder="Pemain tamu" onkeydown="if(event.key==='Enter')SP.addP('ap')"><button class="pri" onclick="SP.addP('ap')">Tambah</button></div>
+        </div>
+        <h3>Tambah Partai</h3>
+        <div class="sp-row"><input id="mCourt" placeholder="Lapangan (mis. Lapangan 1)" style="width:190px"></div>
+        <div class="sp-row"><select id="mh1"></select><span class="sp-vs">&amp;</span><select id="mh2"></select><span class="sp-vs">vs</span><select id="ma1"></select><span class="sp-vs">&amp;</span><select id="ma2"></select><button class="pri" onclick="SP.addM()">Tambah Partai</button></div>
+      </div>
+
+      <h3>Riwayat Event</h3>
+      <div id="scHist"></div>
+    </div>
+
+    <!-- TURNAMEN -->
+    <div id="tr" hidden>
+      <div id="trBoard"></div>
+      <div class="sc-acts2">
+        <button onclick="PM.poster()">🖼️ Poster Hasil</button>
+        <button onclick="PM.wa()">💬 Bagikan WhatsApp</button>
+        <button onclick="PM.refresh()">🔄 Refresh</button>
+        <button class="adm" onclick="PM.arch()">📁 Arsipkan Turnamen</button>
+      </div>
+
+      <h3>Klasemen</h3>
+      <div id="trTable"></div>
+
+      <h3>Jadwal &amp; Riwayat Pertandingan</h3>
+      <div class="sp-row"><label>Lihat riwayat: <select id="fil" onchange="PM.setFil(this.value)"></select></label></div>
+      <div id="trMatches"></div>
+
+      <h3>Peserta</h3>
+      <div class="sp-chips" id="trTeams"></div>
+
+      <div class="adm sc-panel">
+        <h3>Pengaturan Turnamen</h3>
+        <div class="sc-grid">
+          <label>Nama turnamen<input id="trN" onchange="PM.ev()"></label>
+          <label>Tanggal<input type="date" id="trD" onchange="PM.ev()"></label>
+          <label>Lokasi / gedung<input id="trL" onchange="PM.ev()"></label>
+          <label>Eliminasi jika kalah ≥ (0 = tanpa eliminasi)<input id="lim" type="number" min="0" onchange="PM.ev()"></label>
+        </div>
+        <h3>Tambah Peserta</h3>
+        <div class="sp-row"><input id="trName" placeholder="Nama pemain / pasangan" onkeydown="if(event.key==='Enter')PM.add()"><button class="pri" onclick="PM.add()">Tambah</button></div>
+        <h3>Tambah Pertandingan</h3>
+        <div class="sp-row"><select id="tA"></select><span class="sp-vs">vs</span><select id="tB"></select><button class="pri" onclick="PM.addM()">Tambah Pertandingan</button></div>
+        <div class="sp-row"><button id="endBtn" onclick="PM.end()"></button><button class="dng" onclick="PM.reset()">Reset Turnamen</button></div>
+      </div>
+
+      <h3>Riwayat Turnamen</h3>
+      <div id="trHist"></div>
+    </div>
+  </div>
+</section>
+
 <!-- PROGRAM LATIHAN -->
 <section class="program" id="program">
   <div class="container">
     <div class="sec-head reveal-on-scroll">
-      <span class="eyebrow">01 — Latihan</span>
+      <span class="eyebrow">02 — Latihan</span>
       <h2>Seru Seruan, Berlatih &amp; Berkembang</h2>
       <p>
         Program latihan ini asyik banget buat tempat kamu seru-seruan sambil ningkatin skill, matengin teknik, dan nambah jam terbang tanding. Jadwalnya fleksibel dan pas banget sama gaya main kamu!
@@ -922,7 +1115,7 @@ footer{margin-top:70px;}
 <section class="faq" id="pelatih">
   <div class="container">
     <div class="sec-head reveal-on-scroll">
-      <span class="eyebrow">02 — FAQ</span>
+      <span class="eyebrow">03 — FAQ</span>
       <h2>FAQ Anak Mager Tapi PenGEN Jago Badminton</h2>
     </div>
 
@@ -991,7 +1184,7 @@ footer{margin-top:70px;}
 <section class="join" id="gabung">
   <div class="container">
     <div class="sec-head reveal-on-scroll">
-      <span class="eyebrow">03 &mdash; Cara Bergabung</span>
+      <span class="eyebrow">04 &mdash; Cara Bergabung</span>
       <h2>Bergabung Bersama Kami</h2>
       <p>
         Ingin menjadi bagian dari keluarga PB Djarem Malang?
@@ -1054,7 +1247,7 @@ footer{margin-top:70px;}
   <div class="container">
 
     <div class="sec-head reveal-on-scroll">
-      <span class="eyebrow">04 &mdash; Kontak &amp; Lokasi</span>
+      <span class="eyebrow">05 &mdash; Kontak &amp; Lokasi</span>
       <h2>Temukan Kami</h2>
       <p>
         Ingin bergabung, bermain bersama, atau mengikuti program latihan kami?
@@ -1334,6 +1527,296 @@ toggle.addEventListener('click', () => {
   });
 })();
 
+
+// ---- Internal Turnamen (liga) ----
+const PM=(()=>{
+  const WIN=3, PIN='djarem123', KEY='pbdjarem_turnamen_v2';
+  const blank=()=>({name:'Internal Turnamen PB Djarem',date:'',loc:'',teams:[],matches:[],limit:3,started:false,ended:false});
+  let D={tr:blank(),hist:[]}, fil='', admin=false;
+  try{const x=localStorage.getItem(KEY); if(x)D=JSON.parse(x)}catch(e){}
+  const $=id=>document.getElementById(id);
+  const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(D))}catch(e){} render()};
+  const fd=d=>d?new Date(d).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}):'';
+
+  function login(){
+    if(admin) admin=false;
+    else if(prompt('Masukkan PIN admin:')===PIN) admin=true;
+    else return alert('PIN salah');
+    document.body.classList.toggle('admin',admin);
+    $('adminBtn').textContent=admin?'Keluar Admin':'Mode Admin';
+  }
+  function tab(k){['sp','tr'].forEach(x=>{$(x).hidden=x!==k; $('tab'+x).classList.toggle('on',x===k)})}
+  function fill(){const T=D.tr; $('trN').value=T.name; $('trD').value=T.date; $('trL').value=T.loc; $('lim').value=T.limit}
+  function ev(){const T=D.tr; T.name=$('trN').value.trim()||'Internal Turnamen PB Djarem'; T.date=$('trD').value; T.loc=$('trL').value.trim(); T.limit=Math.max(0,+$('lim').value||0); save()}
+
+  function rank(T){
+    const r=T.teams.map(n=>({n,m:0,w:0,l:0,pf:0,pa:0}));
+    T.matches.forEach(x=>{
+      if(x.st!=='done') return;
+      const a=r.find(t=>t.n===x.a), b=r.find(t=>t.n===x.b); if(!a||!b) return;
+      a.m++; b.m++; a.pf+=x.hs; a.pa+=x.as; b.pf+=x.as; b.pa+=x.hs;
+      if(x.hs>x.as){a.w++; b.l++} else {b.w++; a.l++}
+    });
+    r.forEach(t=>{t.p=t.w*WIN; t.d=t.pf-t.pa; t.el=T.limit>0&&t.l>=T.limit});
+    r.sort((a,b)=>b.p-a.p||b.d-a.d||b.pf-a.pf||a.n.localeCompare(b.n));
+    r.forEach((t,i)=>t.rk=i+1);
+    return r;
+  }
+  function info(T){
+    const r=rank(T), el=n=>(r.find(t=>t.n===n)||{}).el, skip=m=>m.st!=='done'&&(el(m.a)||el(m.b));
+    const done=T.matches.filter(m=>m.st==='done').length, tot=T.matches.filter(m=>!skip(m)).length;
+    const live=T.matches.some(m=>m.st==='live'), fin=!!T.ended;
+    const champ=fin?(r.find(t=>!t.el)||{}).n:null;
+    return {r,skip,done,tot,fin,champ,status:fin?'Selesai':live?'LIVE':done?'Sedang Berlangsung':'Belum Dimulai'};
+  }
+  function add(){
+    const i=$('trName'), v=i.value.trim(); if(!v) return;
+    if(D.tr.teams.includes(v)) return alert('Nama sudah ada');
+    D.tr.teams.push(v); i.value=''; save();
+  }
+  function del(i){
+    const n=D.tr.teams[i];
+    if(D.tr.matches.some(m=>m.a===n||m.b===n)&&!confirm('Peserta ini punya pertandingan. Hapus peserta beserta pertandingannya?')) return;
+    D.tr.teams.splice(i,1); D.tr.matches=D.tr.matches.filter(m=>m.a!==n&&m.b!==n); save();
+  }
+  function addM(){
+    const a=$('tA').value, b=$('tB').value;
+    if(!a||!b||a===b) return alert('Pilih dua peserta yang berbeda');
+    if(D.tr.matches.some(m=>(m.a===a&&m.b===b)||(m.a===b&&m.b===a))&&!confirm('Pertandingan ini sudah ada. Tambahkan lagi?')) return;
+    D.tr.matches.push({id:Date.now(),a,b,hs:null,as:null,st:'wait'}); save();
+  }
+  function delM(id){D.tr.matches=D.tr.matches.filter(x=>x.id!==id); save()}
+  function end(){
+    const T=D.tr;
+    if(T.ended){ if(confirm('Buka kembali turnamen?')){T.ended=false; save()} return; }
+    const I=info(T);
+    if(!T.matches.length) return alert('Belum ada pertandingan.');
+    if(T.matches.some(m=>m.st!=='done'&&!I.skip(m))) return alert('Masih ada pertandingan yang belum selesai.');
+    if(confirm('Akhiri turnamen dan tetapkan juara?')){T.ended=true; save()}
+  }
+  function reset(){
+    if(!confirm('Hapus seluruh data turnamen yang sedang berjalan?')) return;
+    D.tr=blank(); save(); fill();
+  }
+  function sc(id,mode){
+    const m=D.tr.matches.find(x=>x.id===id), a=$('ths'+id).value, b=$('tas'+id).value;
+    if(mode==='live'){
+      m.st='live';
+      if(a!==''&&b!==''){m.hs=+a; m.as=+b} else if(m.hs==null){m.hs=0; m.as=0}
+    } else {
+      if(a===''||b==='') return alert('Isi kedua skor dulu');
+      m.hs=+a; m.as=+b;
+      if(mode==='done'){ if(m.hs===m.as) return alert('Skor tidak boleh seri'); m.st='done' }
+    }
+    save();
+  }
+  const setFil=v=>{fil=v; render()};
+
+  function mcard(m,skip){
+    const w=m.st==='done'?(m.hs>m.as?'a':'b'):'', has=m.hs!=null;
+    const st={wait:'Belum Dimulai',live:'LIVE',done:'Selesai'}[m.st];
+    return `<div class="sc-m${skip?' skip':''}"><div class="sc-mh"><b>PERTANDINGAN ${D.tr.matches.indexOf(m)+1}</b><span class="sc-badge ${m.st==='live'?'l':m.st==='done'?'d':''}">${st}</span>${skip?'<span>dilewati (tereliminasi)</span>':''}</div>
+    <div class="sc-mb"><div class="sc-side ${w==='a'?'w':''}"><b>${esc(m.a)}</b></div>
+    <div class="sc-sc"><span class="sc-pub">${has?m.hs:'-'} : ${has?m.as:'-'}</span><span class="adm"><input type="number" min="0" id="ths${m.id}" value="${has?m.hs:''}"> : <input type="number" min="0" id="tas${m.id}" value="${has?m.as:''}"></span></div>
+    <div class="sc-side ${w==='b'?'w':''}"><b>${esc(m.b)}</b></div></div>
+    ${w?`<div class="sc-win">${esc(w==='a'?m.a:m.b)} Menang</div>`:''}`+
+    (skip?'':`<div class="adm sc-acts"><button onclick="PM.sc(${m.id},'live')">Mulai LIVE</button><button onclick="PM.sc(${m.id},'upd')">Update Skor</button><button class="pri" onclick="PM.sc(${m.id},'done')">Lapor Skor</button><button class="dng" onclick="PM.delM(${m.id})">Hapus</button></div>`)+'</div>';
+  }
+  function table(I){
+    if(!I.r.length) return '<p class="sp-empty">Belum ada peserta.</p>';
+    return `<div class="sp-tw"><table><tr><th>#</th><th>Nama</th><th>Main</th><th>M</th><th>K</th><th>Poin</th><th>+/-</th><th>Status</th></tr>`+
+    I.r.map(t=>`<tr class="${t.el?'el':''}"><td>${t.rk}</td><td>${esc(t.n)}</td><td>${t.m}</td><td>${t.w}</td><td>${t.l}</td><td><b>${t.p}</b></td><td>${t.d>0?'+':''}${t.d}</td><td>${t.n===I.champ?'🏆 Juara':t.el?'Tereliminasi':'Lolos'}</td></tr>`).join('')+'</table></div>';
+  }
+  function render(){
+    $('wp').textContent=WIN;
+    const T=D.tr, I=info(T), ec=I.status==='LIVE'?'l':I.fin?'d':'';
+    $('trBoard').innerHTML=`<div class="sc-hd">${esc(T.name)}</div>
+    <div class="sc-meta">${[fd(T.date),T.loc].filter(Boolean).map(esc).join(' • ')}<span class="sc-badge ${ec}">${I.status}</span></div>`+
+    (I.champ?`<div class="sp-champ">🏆 Juara: ${esc(I.champ)}</div>`:
+     `<div class="sc-note">${T.matches.length?`${I.done} dari ${I.tot} pertandingan selesai • ${T.teams.length} peserta`:'Belum ada pertandingan.'}</div>`);
+    $('trTable').innerHTML=table(I);
+    $('trTeams').innerHTML=T.teams.length?T.teams.map((n,i)=>`<span class="sp-chip">${esc(n)}<button class="adm" onclick="PM.del(${i})">✕</button></span>`).join(''):'<p class="sp-empty">Belum ada peserta.</p>';
+    const o='<option value="">Pilih…</option>'+T.teams.map(n=>`<option>${esc(n)}</option>`).join('');
+    $('tA').innerHTML=o; $('tB').innerHTML=o; $('endBtn').textContent=T.ended?'🔓 Buka Kembali Turnamen':'🏁 Akhiri Turnamen & Tetapkan Juara';
+    $('fil').innerHTML='<option value="">Semua pertandingan</option>'+T.teams.map(n=>`<option${n===fil?' selected':''}>${esc(n)}</option>`).join('');
+    let h='';
+    T.matches.filter(m=>!fil||m.a===fil||m.b===fil).forEach(m=>{h+=mcard(m,I.skip(m))});
+    $('trMatches').innerHTML=h||'<p class="sp-empty">Belum ada pertandingan.</p>';
+    $('trHist').innerHTML=D.hist.length?D.hist.map((H,i)=>{const J=info(H); return `<details><summary>${esc(H.name)} — ${esc(fd(H.date)||'Tanpa tanggal')}${J.champ?' — 🏆 '+esc(J.champ):''}</summary>`+
+      J.r.map(t=>`<div>${t.rk}. ${esc(t.n)} — ${t.w}M ${t.l}K • ${t.p} poin</div>`).join('')+
+      `<p class="adm sp-gap"><button class="dng" onclick="PM.delH(${i})">Hapus arsip</button></p></details>`}).join(''):'<p class="sp-empty">Belum ada turnamen yang diarsipkan.</p>';
+  }
+  function arch(){
+    if(!D.tr.matches.some(m=>m.st==='done')) return alert('Belum ada pertandingan selesai untuk diarsipkan.');
+    if(!confirm('Arsipkan turnamen ini ke Riwayat dan mulai yang baru?')) return;
+    D.hist.unshift(JSON.parse(JSON.stringify(D.tr))); D.tr=blank(); save(); fill();
+  }
+  const delH=i=>{if(confirm('Hapus arsip ini?')){D.hist.splice(i,1); save()}};
+  function wa(){
+    const T=D.tr, I=info(T);
+    let t=`*${T.name.toUpperCase()}*\n${[fd(T.date),T.loc].filter(Boolean).join(' • ')}\n${I.champ?'🏆 Juara: '+I.champ+'\n':''}\n*KLASEMEN*\n`;
+    I.r.forEach(r=>{t+=`${r.rk}. ${r.n} — ${r.w}M ${r.l}K • ${r.p} poin\n`});
+    window.open('https://wa.me/?text='+encodeURIComponent(t),'_blank');
+  }
+  function poster(){
+    const T=D.tr, I=info(T), H=360+I.r.length*62;
+    const cv=document.createElement('canvas'); cv.width=1080; cv.height=H; const x=cv.getContext('2d');
+    const g=x.createLinearGradient(0,0,1080,H); g.addColorStop(0,'#7f1d1d'); g.addColorStop(1,'#dc2626'); x.fillStyle=g; x.fillRect(0,0,1080,H);
+    x.fillStyle='#fff'; x.textAlign='center';
+    x.font='bold 50px sans-serif'; x.fillText(T.name.toUpperCase(),540,90);
+    x.font='28px sans-serif'; x.fillText([fd(T.date),T.loc].filter(Boolean).join(' • '),540,138);
+    if(I.champ){x.font='bold 54px sans-serif'; x.fillText('🏆 JUARA: '+I.champ,540,225)} else {x.font='32px sans-serif'; x.fillText('KLASEMEN SEMENTARA',540,225)}
+    x.font='bold 24px sans-serif'; x.textAlign='left'; x.fillText('#',90,300); x.fillText('NAMA',160,300); x.textAlign='right'; x.fillText('M-K',760,300); x.fillText('+/-',880,300); x.fillText('POIN',990,300);
+    x.font='28px sans-serif';
+    I.r.forEach((t,i)=>{const y=355+i*62; x.textAlign='left'; x.fillText(t.rk,90,y); x.fillText(t.n+(t.el?' (out)':''),160,y); x.textAlign='right'; x.fillText(t.w+'-'+t.l,760,y); x.fillText((t.d>0?'+':'')+t.d,880,y); x.font='bold 30px sans-serif'; x.fillText(t.p,990,y); x.font='28px sans-serif'});
+    const l=document.createElement('a'); l.href=cv.toDataURL('image/png'); l.download='hasil-turnamen.png'; l.click();
+  }
+  fill(); render();
+  return {login,tab,ev,add,del,addM,delM,end,reset,sc,setFil,arch,delH,wa,poster,refresh:render};
+})();
+
+// ---- Scoreboard Sparing ----
+const SP=(()=>{
+  const KEY='pbdjarem_sparing_v2';
+  const blank=()=>({ev:{home:'PB Djarem',away:'',hl:'',al:'',date:'',loc:'',type:'Friendly (Unrated)',status:'Belum Dimulai'},hp:[],ap:[],m:[]});
+  let D={cur:blank(),hist:[]};
+  try{const x=localStorage.getItem(KEY); if(x)D=JSON.parse(x)}catch(e){}
+  const $=id=>document.getElementById(id);
+  const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(D))}catch(e){alert('Penyimpanan penuh. Gunakan logo yang lebih kecil.')} render()};
+  const fd=d=>d?new Date(d).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}):'';
+  const lg=(src,n)=>src?`<img class="sc-logo" src="${src}" alt="">`:`<span class="sc-logo ph">${esc((n||'?')[0].toUpperCase())}</span>`;
+  const away=e=>e.away||'Klub Tamu';
+
+  function fill(){const e=D.cur.ev; $('evH').value=e.home; $('evA').value=e.away; $('evD').value=e.date; $('evL').value=e.loc; $('evT').value=e.type; $('evS').value=e.status}
+  function ev(){const e=D.cur.ev; e.home=$('evH').value.trim()||'Tuan Rumah'; e.away=$('evA').value.trim(); e.date=$('evD').value; e.loc=$('evL').value.trim(); e.type=$('evT').value.trim(); e.status=$('evS').value; save()}
+  function logo(side,inp){
+    const f=inp.files[0]; if(!f) return;
+    const r=new FileReader();
+    r.onload=()=>{const im=new Image(); im.onload=()=>{
+      const c=document.createElement('canvas'), k=Math.min(1,160/Math.max(im.width,im.height));
+      c.width=im.width*k; c.height=im.height*k; c.getContext('2d').drawImage(im,0,0,c.width,c.height);
+      D.cur.ev[side]=c.toDataURL('image/png'); save()}; im.src=r.result};
+    r.readAsDataURL(f);
+  }
+  function addP(side){
+    const i=$(side==='hp'?'pH':'pA'), v=i.value.trim(); if(!v) return;
+    if(D.cur[side].includes(v)) return alert('Nama sudah ada');
+    D.cur[side].push(v); i.value=''; save();
+  }
+  function delP(side,i){
+    const n=D.cur[side][i], k=side==='hp'?'h':'a';
+    if(D.cur.m.some(m=>m[k].includes(n))) return alert('Pemain ini dipakai di sebuah partai. Hapus partainya dulu.');
+    D.cur[side].splice(i,1); save();
+  }
+  function addM(){
+    const h=[$('mh1').value,$('mh2').value], a=[$('ma1').value,$('ma2').value];
+    if(h.includes('')||a.includes('')||h[0]===h[1]||a[0]===a[1]) return alert('Pilih 2 pemain berbeda untuk tiap pasangan');
+    D.cur.m.push({id:Date.now(),court:$('mCourt').value.trim()||'Lapangan '+(D.cur.m.length+1),h,a,hs:null,as:null,st:'wait'});
+    $('mCourt').value=''; save();
+  }
+  function delM(id){D.cur.m=D.cur.m.filter(x=>x.id!==id); save()}
+  function sc(id,mode){
+    const m=D.cur.m.find(x=>x.id===id), a=$('hs'+id).value, b=$('as'+id).value;
+    if(mode==='live'){
+      m.st='live';
+      if(a!==''&&b!==''){m.hs=+a;m.as=+b} else if(m.hs==null){m.hs=0;m.as=0}
+      if(D.cur.ev.status==='Belum Dimulai') D.cur.ev.status='Sedang Berlangsung (LIVE)';
+    } else {
+      if(a===''||b==='') return alert('Isi kedua skor dulu');
+      m.hs=+a; m.as=+b;
+      if(mode==='done'){ if(m.hs===m.as) return alert('Skor tidak boleh seri'); m.st='done' }
+    }
+    save(); fill();
+  }
+  function calc(c){
+    const d=c.m.filter(m=>m.st==='done'), S={hw:0,aw:0,hp:0,ap:0,n:d.length}, P={};
+    const add=(club,names,own,opp)=>names.forEach(n=>{const p=P[club+'|'+n]||(P[club+'|'+n]={n,club,m:0,w:0,l:0,pt:0,op:0}); p.m++; own>opp?p.w++:p.l++; p.pt+=own; p.op+=opp});
+    d.forEach(m=>{S.hp+=m.hs; S.ap+=m.as; m.hs>m.as?S.hw++:S.aw++; add('h',m.h,m.hs,m.as); add('a',m.a,m.as,m.hs)});
+    return {S,P:Object.values(P),d};
+  }
+  const lead=S=>S.hw!==S.aw?(S.hw>S.aw?'h':'a'):S.hp!==S.ap?(S.hp>S.ap?'h':'a'):'';
+
+  function mcard(m,i){
+    const e=D.cur.ev, w=m.st==='done'?(m.hs>m.as?'h':'a'):'', has=m.hs!=null;
+    const st={wait:'Belum Dimulai',live:'LIVE',done:'Selesai'}[m.st];
+    return `<div class="sc-m"><div class="sc-mh"><b>PARTAI ${i+1}</b><span class="sc-badge ${m.st==='live'?'l':m.st==='done'?'d':''}">${st}</span><span>${esc(m.court)}</span></div>
+    <div class="sc-mb"><div class="sc-side ${w==='h'?'w':''}">${lg(e.hl,e.home)}<b>${esc(e.home)}</b><small>${esc(m.h.join(' & '))}</small></div>
+    <div class="sc-sc"><span class="sc-pub">${has?m.hs:'-'} : ${has?m.as:'-'}</span><span class="adm"><input type="number" min="0" id="hs${m.id}" value="${has?m.hs:''}"> : <input type="number" min="0" id="as${m.id}" value="${has?m.as:''}"></span></div>
+    <div class="sc-side ${w==='a'?'w':''}">${lg(e.al,away(e))}<b>${esc(away(e))}</b><small>${esc(m.a.join(' & '))}</small></div></div>
+    ${w?`<div class="sc-win">${esc(w==='h'?e.home:away(e))} Menang</div>`:''}
+    <div class="adm sc-acts"><button onclick="SP.sc(${m.id},'live')">Mulai Partai LIVE</button><button onclick="SP.sc(${m.id},'upd')">Update Skor</button><button class="pri" onclick="SP.sc(${m.id},'done')">Lapor Skor</button><button class="dng" onclick="SP.delM(${m.id})">Hapus</button></div></div>`;
+  }
+  function statTable(P,club){
+    const r=P.filter(p=>p.club===club).sort((a,b)=>b.w-a.w||b.pt-a.pt);
+    if(!r.length) return '<p class="sp-empty">Belum ada data.</p>';
+    return `<div class="sp-tw"><table><tr><th>#</th><th>Pemain</th><th>Main</th><th>M</th><th>K</th><th>Poin</th></tr>`+
+      r.map((p,i)=>`<tr><td>${i+1}</td><td>${esc(p.n)}</td><td>${p.m}</td><td>${p.w}</td><td>${p.l}</td><td><b>${p.pt}</b></td></tr>`).join('')+'</table></div>';
+  }
+  function render(){
+    const c=D.cur, e=c.ev, {S,P,d}=calc(c), ld=lead(S), fin=e.status==='Selesai';
+    const pct=k=>S.n?Math.round(S[k]/S.n*100):0, ec=e.status.startsWith('Sedang')?'l':fin?'d':'';
+    $('scBoard').innerHTML=`<div class="sc-hd">Scoreboard Resmi Sparring</div>
+    <div class="sc-meta">${[fd(e.date),e.loc,e.type].filter(Boolean).map(esc).join(' • ')}<span class="sc-badge ${ec}">${esc(e.status)}</span></div>
+    <div class="sc-main"><div class="sc-club ${ld==='h'?'lead':''}">${lg(e.hl,e.home)}<b>${esc(e.home)}</b><span class="sc-big">${S.hw}</span><small>Menang • ${pct('hw')}%</small></div>
+    <div class="sc-mid"><div><small>Total partai selesai</small><b>${S.n} Partai</b></div><div><small>Total poin</small><b>${S.hp} - ${S.ap}</b></div><div><small>Selisih angka</small><b>${Math.abs(S.hp-S.ap)}</b></div></div>
+    <div class="sc-club ${ld==='a'?'lead':''}">${lg(e.al,away(e))}<b>${esc(away(e))}</b><span class="sc-big">${S.aw}</span><small>Menang • ${pct('aw')}%</small></div></div>
+    <div class="sc-note">${fin?'Hasil akhir':'Sementara'}: ${S.n?(ld?esc(ld==='h'?e.home:away(e))+' unggul':'Seri'):'belum ada partai selesai'}</div>`;
+    $('scMatches').innerHTML=c.m.length?c.m.map(mcard).join(''):'<p class="sp-empty">Belum ada partai.</p>';
+    // statistik
+    const pl=P.filter(p=>p.m), nm=p=>esc(p.n)+' <small>('+esc(p.club==='h'?e.home:away(e))+')</small>';
+    const mvp=[...pl].sort((a,b)=>b.w-a.w||(b.pt-b.op)-(a.pt-a.op))[0], car=[...pl].sort((a,b)=>b.pt-a.pt)[0], iw=[...pl].sort((a,b)=>a.op/a.m-b.op/b.m||b.w-a.w)[0];
+    $('scAwards').innerHTML=pl.length?`<div class="sc-aw"><div><span>MVP Event</span><b>${nm(mvp)}</b><small>${mvp.w} menang • selisih ${mvp.pt-mvp.op>0?'+':''}${mvp.pt-mvp.op}</small></div>
+    <div><span>The Carry</span><b>${nm(car)}</b><small>${car.pt} poin total</small></div>
+    <div><span>Iron Wall</span><b>${nm(iw)}</b><small>rata-rata poin lawan ${(iw.op/iw.m).toFixed(1)}</small></div></div>`:'<p class="sp-empty">Statistik muncul setelah ada partai selesai.</p>';
+    $('scTH').textContent=e.home; $('scTA').textContent=away(e); $('scLH').textContent=e.home; $('scLA').textContent=away(e);
+    $('scStatH').innerHTML=statTable(P,'h'); $('scStatA').innerHTML=statTable(P,'a');
+    const chips=(side)=>c[side].length?c[side].map((n,i)=>`<span class="sp-chip">${esc(n)}<button class="adm" onclick="SP.delP('${side}',${i})">✕</button></span>`).join(''):'<p class="sp-empty">Belum ada pemain.</p>';
+    $('scHP').innerHTML=chips('hp'); $('scAP').innerHTML=chips('ap');
+    const opt=l=>'<option value="">Pilih…</option>'+l.map(n=>`<option>${esc(n)}</option>`).join('');
+    [['mh1','hp'],['mh2','hp'],['ma1','ap'],['ma2','ap']].forEach(([id,k])=>$(id).innerHTML=opt(c[k]));
+    $('scHist').innerHTML=D.hist.length?D.hist.map((h,i)=>{const r=calc(h); return `<details><summary>${esc(fd(h.ev.date)||'Tanpa tanggal')} — ${esc(h.ev.home)} ${r.S.hw} - ${r.S.aw} ${esc(h.ev.away||'Klub Tamu')}</summary>
+      <p class="sp-empty">${esc(h.ev.loc||'')} • Total poin ${r.S.hp} - ${r.S.ap}</p>`+r.d.map((m,j)=>`<div>P${j+1}: ${esc(m.h.join(' & '))} <b>${m.hs}</b> - <b>${m.as}</b> ${esc(m.a.join(' & '))}</div>`).join('')+
+      `<p class="adm sp-gap"><button class="dng" onclick="SP.delH(${i})">Hapus arsip</button></p></details>`}).join(''):'<p class="sp-empty">Belum ada event yang diarsipkan.</p>';
+  }
+  function arch(){
+    if(!D.cur.m.some(m=>m.st==='done')) return alert('Belum ada partai selesai untuk diarsipkan.');
+    if(!confirm('Arsipkan event ini ke Riwayat dan mulai event baru?')) return;
+    const h=JSON.parse(JSON.stringify(D.cur)); h.ev.hl=''; h.ev.al=''; h.ev.status='Selesai'; D.hist.unshift(h);
+    newEv(true);
+  }
+  function newEv(skip){
+    if(skip!==true&&!confirm('Mulai event baru? Event yang sedang berjalan akan dihapus (arsipkan dulu jika perlu).')) return;
+    const o=D.cur, n=blank(); n.ev.home=o.ev.home; n.ev.hl=o.ev.hl; n.hp=[...o.hp]; D.cur=n; save(); fill();
+  }
+  const delH=i=>{if(confirm('Hapus arsip ini?')){D.hist.splice(i,1); save()}};
+  function wa(){
+    const c=D.cur, e=c.ev, {S,d}=calc(c);
+    let t=`*SCOREBOARD SPARRING*\n${e.home} ${S.hw} - ${S.aw} ${away(e)}\nTotal poin: ${S.hp} - ${S.ap}\n${[fd(e.date),e.loc].filter(Boolean).join(' • ')}\n\n`;
+    d.forEach((m,i)=>{t+=`P${i+1}: ${m.h.join(' & ')} (${m.hs}) vs ${m.a.join(' & ')} (${m.as})\n`});
+    window.open('https://wa.me/?text='+encodeURIComponent(t),'_blank');
+  }
+  async function poster(){
+    const c=D.cur, e=c.ev, {S,d}=calc(c), H=660+d.length*60;
+    const cv=document.createElement('canvas'); cv.width=1080; cv.height=H; const x=cv.getContext('2d');
+    const g=x.createLinearGradient(0,0,1080,H); g.addColorStop(0,'#7f1d1d'); g.addColorStop(1,'#dc2626'); x.fillStyle=g; x.fillRect(0,0,1080,H);
+    x.fillStyle='#fff'; x.textAlign='center';
+    x.font='bold 54px sans-serif'; x.fillText('HASIL SPARRING',540,90);
+    x.font='28px sans-serif'; x.fillText([fd(e.date),e.loc].filter(Boolean).join(' • '),540,138); x.fillText(e.type||'',540,176);
+    const L=u=>new Promise(r=>{if(!u) return r(null); const i=new Image(); i.onload=()=>r(i); i.onerror=()=>r(null); i.src=u});
+    const [a,b]=await Promise.all([L(e.hl),L(e.al)]);
+    [[a,270,e.home,S.hw],[b,810,away(e),S.aw]].forEach(([im,cx,n,w])=>{
+      if(im){const k=Math.min(160/im.width,160/im.height); x.drawImage(im,cx-im.width*k/2,210,im.width*k,im.height*k)}
+      x.font='bold 34px sans-serif'; x.fillText(n,cx,420); x.font='bold 120px sans-serif'; x.fillText(w,cx,540);
+    });
+    x.font='bold 40px sans-serif'; x.fillText('VS',540,300); x.font='28px sans-serif'; x.fillText('Total poin',540,470); x.font='bold 38px sans-serif'; x.fillText(S.hp+' - '+S.ap,540,520);
+    x.font='26px sans-serif'; d.forEach((m,i)=>x.fillText(`P${i+1}  ${m.h.join(' & ')}  ${m.hs} - ${m.as}  ${m.a.join(' & ')}`,540,620+i*60));
+    const l=document.createElement('a'); l.href=cv.toDataURL('image/png'); l.download='hasil-sparing.png'; l.click();
+  }
+  fill(); render();
+  return {ev,logo,addP,delP,addM,delM,sc,arch,newEv,delH,wa,poster,refresh:render};
+})();
 </script>
 </body>
 </html>
